@@ -23,7 +23,7 @@ export function FormInput<FormData extends FieldValues>({
   return (
     <FormControl isInvalid={isInvalid(fieldName)}>
       <Input
-        placeholder="Email"
+        placeholder={pHolderTxt}
         size="lg"
         minW="100%"
         {...register(fieldName)}

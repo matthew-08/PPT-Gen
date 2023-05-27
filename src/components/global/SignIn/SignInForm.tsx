@@ -1,19 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
-import {
-  Flex,
-  Input,
-  Text,
-  FormControl,
-  FormErrorMessage,
-  ModalFooter,
-  Button,
-} from '@chakra-ui/react';
+import { Flex, Text, ModalFooter, Button } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { KeyObject } from 'crypto';
 import { SignInFormSchema } from '../../../schemas/signin.schema';
 import { FormInput } from '../FormInput';
+import { generateFormInputs } from '../../../utils/generateFormInputs';
 
 export type FormData = {
   email: string;
@@ -21,7 +12,6 @@ export type FormData = {
 };
 
 function SignInForm() {
-  const check = true;
   const {
     register,
     handleSubmit,
@@ -34,22 +24,21 @@ function SignInForm() {
 
   const fieldHasError = (f: keyof FormData) => f in errors;
 
-  const generateFormInputs = (
-    info: {
-      placeholder: string;
-      fieldName: keyof FormData;
-    }[]
-  ) => {
-    return info.map((i) => {
-      return {
-        fieldName: i.fieldName,
-        register,
-        isInvalid: fieldHasError,
-        pHolderTxt: i.placeholder,
-        errorMsg: errors[i.fieldName]?.message,
-      };
-    });
-  };
+  const inputObjects = generateFormInputs<FormData>({
+    inputInfo: [
+      {
+        fieldName: 'email',
+        placeholder: 'Email',
+      },
+      {
+        fieldName: 'password',
+        placeholder: 'Password',
+      },
+    ],
+    errors,
+    isInvalid: fieldHasError,
+    register,
+  });
   return (
     <Flex
       flexDir="column"
@@ -58,27 +47,9 @@ function SignInForm() {
       minW="100%"
       onSubmit={handleSubmit(handleUserSubmit)}
     >
-      <FormControl isInvalid={fieldHasError('email')}>
-        <Input
-          placeholder="Email"
-          size="lg"
-          minW="100%"
-          {...register('email')}
-        />
-        <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
-      </FormControl>
-      <FormControl isInvalid={fieldHasError('password')}>
-        <Input placeholder="Password" size="lg" {...register('password')} />
-      </FormControl>
-      <FormInput<FormData>
-        fieldInfo={{
-          fieldName: 'email',
-          register,
-          isInvalid: fieldHasError,
-          pHolderTxt: 'TESTFIELD',
-          errorMsg: 'TEST ',
-        }}
-      />
+      {inputObjects.map((iObj) => (
+        <FormInput fieldInfo={iObj} key={iObj.fieldName} />
+      ))}
       <Text>
         Don't have an account?{' '}
         <Text as="span" color="blue.400">
