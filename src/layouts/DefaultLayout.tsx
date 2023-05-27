@@ -1,22 +1,12 @@
 import { Flex } from '@chakra-ui/react';
 import { ReactNode } from 'react';
+import Navbar from '../components/global/Navbar';
 
 function DefaultLayout({ children }: { children: ReactNode }) {
   return (
-    <Flex
-      as="main"
-      backgroundColor="gray.200"
-      minW="100%"
-      minH="100vh"
-      flexDir="column"
-    >
-      <Flex
-        as="section"
-        backgroundColor="gray.200"
-        px="10rem"
-        minH="100vh"
-        flexDir="column"
-      >
+    <Flex as="main" minW="100%" minH="100vh" flexDir="column">
+      <Navbar />
+      <Flex as="section" px="10rem" flexDir="column">
         {children}
       </Flex>
     </Flex>
