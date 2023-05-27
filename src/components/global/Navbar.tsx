@@ -1,11 +1,9 @@
-import React from 'react';
 import {
   Button,
   ButtonGroup,
   Flex,
   Heading,
   useDisclosure,
-  Slide,
 } from '@chakra-ui/react';
 import CustomList from './CustomList';
 import SignInModal from '../Forms/SignIn/SignIn';
@@ -29,6 +27,7 @@ function Navbar() {
       <Flex as="nav" align="center">
         <CustomList
           listItems={[
+            ['Home', '/register'],
             ['About', 'github.com'],
             ['Contact', 'github.com'],
           ]}

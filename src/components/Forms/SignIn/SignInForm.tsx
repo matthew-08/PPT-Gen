@@ -65,7 +65,24 @@ function SignInForm() {
           Sign up here.
         </Text>
       </Text>
-      <ModalFooter as={Flex} width="100%" flexDir="column" gap="0.4rem">
+      <ModalFooter
+        as={Flex}
+        width="100%"
+        flexDir="column"
+        gap="0.5rem"
+        padding="0"
+        paddingBottom="1rem"
+        mb="1rem"
+      >
+        <Button
+          variant="solid"
+          colorScheme="purple"
+          size="lg"
+          width="100%"
+          type="submit"
+        >
+          Sign In
+        </Button>
         <Button
           variant="outline"
           colorScheme="purple"
@@ -73,7 +90,7 @@ function SignInForm() {
           width="100%"
           type="submit"
         >
-          Sign In
+          Cancel
         </Button>
       </ModalFooter>
     </Flex>

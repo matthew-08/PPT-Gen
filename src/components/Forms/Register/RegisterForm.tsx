@@ -56,6 +56,12 @@ function RegisterForm() {
       {inputObjects.map((iObj) => (
         <FormInput<FormData> fieldInfo={iObj} key={iObj.fieldName} />
       ))}
+      <Text>
+        Already have an account?{' '}
+        <Text as="span" color="blue.400" cursor="pointer">
+          Sign in.
+        </Text>
+      </Text>
       <Button
         variant="solid"
         colorScheme="purple"

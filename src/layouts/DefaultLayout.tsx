@@ -5,7 +5,13 @@ import Footer from '../components/global/Footer';
 
 function DefaultLayout({ children }: { children: ReactNode }) {
   return (
-    <Flex as="main" minW="100%" minH="100vh" flexDir="column">
+    <Flex
+      as="main"
+      minW="100%"
+      minH="100vh"
+      flexDir="column"
+      background="blackAlpha.200"
+    >
       <Navbar />
       <Flex as="section" px="10rem" flexDir="column">
         {children}
