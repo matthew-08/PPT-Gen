@@ -39,9 +39,7 @@ function Navbar() {
           </Button>
         </ButtonGroup>
       </Flex>
-      <Slide direction="bottom" in={isOpen} style={{ zIndex: 10 }}>
-        <SignInModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
-      </Slide>
+      <SignInModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
     </Flex>
   );
 }
