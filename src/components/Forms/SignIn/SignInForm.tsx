@@ -2,6 +2,7 @@
 import { Flex, Text, ModalFooter, Button } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useNavigate } from 'react-router-dom';
 import { SignInFormSchema } from '../../../schemas/signin.schema';
 import { FormInput } from '../../global/FormInput';
 import { generateFormInputs } from '../../../utils/generateFormInputs';
@@ -11,11 +12,7 @@ export type FormData = {
   password: string;
 };
 
-type Props = {
-  toggleRegisterForm: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-function SignInForm({ toggleRegisterForm }: Props) {
+function SignInForm() {
   const {
     register,
     handleSubmit,
@@ -23,6 +20,8 @@ function SignInForm({ toggleRegisterForm }: Props) {
   } = useForm<FormData>({
     resolver: zodResolver(SignInFormSchema),
   });
+
+  const navigate = useNavigate();
 
   const handleUserSubmit = (data: FormData) => console.log(data);
 
@@ -44,7 +43,6 @@ function SignInForm({ toggleRegisterForm }: Props) {
     register,
   });
 
-  const handleSwitchForm = () => toggleRegisterForm(true);
   return (
     <Flex
       flexDir="column"
@@ -62,7 +60,7 @@ function SignInForm({ toggleRegisterForm }: Props) {
           as="span"
           color="blue.400"
           cursor="pointer"
-          onClick={handleSwitchForm}
+          onClick={() => navigate('/register')}
         >
           Sign up here.
         </Text>

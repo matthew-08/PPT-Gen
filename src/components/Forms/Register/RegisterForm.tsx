@@ -49,29 +49,23 @@ function RegisterForm() {
       flexDir="column"
       as="form"
       gap="1rem"
-      minW="100%"
+      minW="370px"
+      maxW="500px"
       onSubmit={handleSubmit(handleUserSubmit)}
     >
       {inputObjects.map((iObj) => (
         <FormInput<FormData> fieldInfo={iObj} key={iObj.fieldName} />
       ))}
-      <Text>
-        Don't have an account?{' '}
-        <Text as="span" color="blue.400" cursor="pointer">
-          Sign up here.
-        </Text>
-      </Text>
-      <ModalFooter as={Flex} width="100%" flexDir="column" gap="0.4rem">
-        <Button
-          variant="outline"
-          colorScheme="purple"
-          size="lg"
-          width="100%"
-          type="submit"
-        >
-          Sign In
-        </Button>
-      </ModalFooter>
+      <Button
+        variant="solid"
+        colorScheme="purple"
+        width="100%"
+        fontSize="1.2rem"
+        py="1.5rem"
+        type="submit"
+      >
+        Register
+      </Button>
     </Flex>
   );
 }

@@ -6,15 +6,9 @@ import {
   ModalBody,
   ModalContent,
   Modal,
-  ModalFooter,
   UseDisclosureReturn,
-  Slide,
-  Fade,
   Flex,
-  Text,
-  Input,
 } from '@chakra-ui/react';
-import { Sign } from 'crypto';
 import { useState } from 'react';
 import RegisterForm from '../Register/RegisterForm';
 import SignInForm from './SignInForm';
@@ -26,7 +20,6 @@ type Props = {
 };
 
 function SignInModal({ isOpen, onOpen, onClose }: Props) {
-  const [registerForm, setRegisterForm] = useState<boolean>(false);
   return (
     <Modal isOpen={isOpen} onClose={onClose} motionPreset="slideInBottom">
       <ModalOverlay />
@@ -39,11 +32,7 @@ function SignInModal({ isOpen, onOpen, onClose }: Props) {
           alignItems="center"
         >
           <ModalHeader fontSize="3rem">Sign In</ModalHeader>
-          {registerForm ? (
-            <RegisterForm />
-          ) : (
-            <SignInForm toggleRegisterForm={setRegisterForm} />
-          )}
+          <SignInForm />
         </ModalBody>
       </ModalContent>
     </Modal>
