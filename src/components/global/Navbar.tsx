@@ -8,7 +8,7 @@ import {
   Slide,
 } from '@chakra-ui/react';
 import CustomList from './CustomList';
-import SignInModal from './SignIn';
+import SignInModal from '../Forms/SignIn/SignIn';
 
 function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();

@@ -3,15 +3,16 @@ import { Flex, Text, ModalFooter, Button } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SignInFormSchema } from '../../../schemas/signin.schema';
-import { FormInput } from '../FormInput';
+import { FormInput } from '../../global/FormInput';
 import { generateFormInputs } from '../../../utils/generateFormInputs';
 
 export type FormData = {
   email: string;
   password: string;
+  confirmPassword: string;
 };
 
-function SignInForm() {
+function RegisterForm() {
   const {
     register,
     handleSubmit,
@@ -34,6 +35,10 @@ function SignInForm() {
         fieldName: 'password',
         placeholder: 'Password',
       },
+      {
+        fieldName: 'confirmPassword',
+        placeholder: 'Confirm Password',
+      },
     ],
     errors,
     isInvalid: fieldHasError,
@@ -48,11 +53,11 @@ function SignInForm() {
       onSubmit={handleSubmit(handleUserSubmit)}
     >
       {inputObjects.map((iObj) => (
-        <FormInput fieldInfo={iObj} key={iObj.fieldName} />
+        <FormInput<FormData> fieldInfo={iObj} key={iObj.fieldName} />
       ))}
       <Text>
         Don't have an account?{' '}
-        <Text as="span" color="blue.400">
+        <Text as="span" color="blue.400" cursor="pointer">
           Sign up here.
         </Text>
       </Text>
@@ -71,4 +76,4 @@ function SignInForm() {
   );
 }
 
-export default SignInForm;
+export default RegisterForm;
