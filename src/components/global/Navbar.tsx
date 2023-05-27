@@ -27,7 +27,7 @@ function Navbar() {
       <Flex as="nav" align="center">
         <CustomList
           listItems={[
-            ['Home', '/register'],
+            ['Home', '/'],
             ['About', 'github.com'],
             ['Contact', 'github.com'],
           ]}
