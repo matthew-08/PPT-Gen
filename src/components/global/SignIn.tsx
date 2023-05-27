@@ -14,6 +14,7 @@ import {
   Text,
   Input,
 } from '@chakra-ui/react';
+import SignInForm from './SignIn/SignInForm';
 
 type Props = {
   [K in keyof UseDisclosureReturn as K extends 'isOpen' | 'onOpen' | 'onClose'
@@ -34,26 +35,8 @@ function SignInModal({ isOpen, onOpen, onClose }: Props) {
           alignItems="center"
         >
           <ModalHeader fontSize="3rem">Sign In</ModalHeader>
-          <Flex flexDir="column" gap="1rem" minW="100%">
-            <Input placeholder="Email" size="lg" minW="100%" />
-            <Input placeholder="Password" size="lg" />
-            <Text>
-              Don't have an account?{' '}
-              <Text as="span" color="blue.400">
-                Sign up here.
-              </Text>
-            </Text>
-          </Flex>
+          <SignInForm />
         </ModalBody>
-
-        <ModalFooter as={Flex} width="100%" flexDir="column" gap="0.4rem">
-          <Button colorScheme="purple" onClick={onClose} size="lg" width="100%">
-            Test Account
-          </Button>
-          <Button variant="outline" colorScheme="purple" size="lg" width="100%">
-            Sign In
-          </Button>
-        </ModalFooter>
       </ModalContent>
     </Modal>
   );
