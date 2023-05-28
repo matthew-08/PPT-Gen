@@ -6,7 +6,8 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import CustomList from './CustomList';
-import SignInModal from '../Forms/SignIn/SignIn';
+import SlotModal from './SlotModal';
+import SignInForm from '../Forms/SignIn/SignInForm';
 
 function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -38,7 +39,12 @@ function Navbar() {
           </Button>
         </ButtonGroup>
       </Flex>
-      <SignInModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
+      <SlotModal
+        disclosureState={{ isOpen, onClose, onOpen }}
+        modalHeader="Sign In"
+      >
+        <SignInForm />
+      </SlotModal>
     </Flex>
   );
 }
