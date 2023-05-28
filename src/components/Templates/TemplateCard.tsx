@@ -9,7 +9,6 @@ function TemplateCard() {
       border="2px"
       borderColor="green.400"
       minH="175px"
-      minW="270px"
     >
       <Text>Placeholder</Text>
     </Flex>
