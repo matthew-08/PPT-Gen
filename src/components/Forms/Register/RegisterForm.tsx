@@ -1,9 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Flex, Text, Button } from '@chakra-ui/react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { FormInput } from '../FormInput';
-import { generateFormInputs } from '../../../utils/generateFormInputs';
 import { RegisterFormSchema } from '../../../schemas/register.schema';
 import useCustomForm from '../../../hooks/useCustomForm';
 

@@ -19,6 +19,7 @@ const generateFormInputs = <FormData extends FieldValues>(
   return data.inputInfo.map((i) => {
     return {
       fieldName: i.fieldName,
+      inputType: i.inputType,
       register,
       isInvalid,
       pHolderTxt: i.placeholder,
@@ -26,5 +27,7 @@ const generateFormInputs = <FormData extends FieldValues>(
     };
   });
 };
+
+export type FieldProps = ReturnType<typeof generateFormInputs>[number];
 
 export { generateFormInputs };
