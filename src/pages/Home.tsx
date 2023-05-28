@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import {
   Divider,
   Grid,
@@ -6,6 +7,7 @@ import {
   Flex,
   useMediaQuery,
   Input,
+  Text,
 } from '@chakra-ui/react';
 import React from 'react';
 import TemplateCard from '../components/Templates/TemplateCard';
@@ -32,9 +34,36 @@ function Home() {
         <TemplateCard />
         <TemplateCard />
       </SimpleGrid>
-      <Flex>
+      <Flex flexDir="column" mt="2rem">
         {columns.map((c, i) => {
-          return <Input key={i} />;
+          return (
+            <Flex key={i} align="center" gap="1rem" px="30rem" mb="2rem">
+              <Text minW="10rem" fontSize="2rem">
+                Slide {i + 1}
+              </Text>
+              <Input
+                key={i}
+                placeholder="Question"
+                maxW="300px"
+                padding="1.5rem"
+                background="white"
+              />
+              <Input
+                key={i}
+                placeholder="Answer"
+                maxW="300px"
+                padding="1.5rem"
+                background="white"
+              />
+              <Input
+                key={i}
+                placeholder="Additional"
+                maxW="300px"
+                padding="1.5rem"
+                background="white"
+              />
+            </Flex>
+          );
         })}
       </Flex>
     </DefaultLayout>
