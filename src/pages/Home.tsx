@@ -10,20 +10,25 @@ import {
   Text,
   Button,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import InputController from '../components/Templates/InputController';
 import TemplateCard from '../components/Templates/TemplateCard';
 import DefaultLayout from '../layouts/DefaultLayout';
 import genTemplateState from '../utils/genTemplateState';
 
-type FieldOptions = 'question' | 'answer' | 'additional';
+export type FieldOptions = 'question' | 'answer' | 'additional';
 
 export type Template = {
   templateId: number;
   templateFields: readonly FieldOptions[];
   inputState: {
-    [key in FieldOptions]: string;
+    question: string;
+    answer?: string;
+    additional?: string;
   }[];
 };
+
+export type InputState = Template['inputState'][number];
 
 const exTemplates: Template[] = [
   {
@@ -33,7 +38,7 @@ const exTemplates: Template[] = [
   },
   {
     templateId: 2,
-    templateFields: ['question'],
+    templateFields: ['question', 'additional', 'answer'],
     inputState: genTemplateState(28, ['question', 'additional', 'answer']),
   },
 ];
@@ -42,8 +47,28 @@ function Home() {
   const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
   const [templates, setTemplates] = useState<Template[]>(exTemplates);
   const [selectedTemplate, setSelectedTemplate] = useState<Template>(
-    exTemplates[0]
+    exTemplates[1]
   );
+
+  const handleSelectTemplate = (template: Template) => {
+    const { templateId: id } = template;
+    setSelectedTemplate(
+      templates.find((t) => t.templateId === id) || templates[0]
+    );
+  };
+
+  const handleWriteField = (
+    templateId: number,
+    field: FieldOptions,
+    state: string
+  ) => {
+    const template = selectedTemplate.inputState[templateId];
+    template[field] = state;
+  };
+
+  useEffect(() => {
+    console.log(selectedTemplate);
+  }, [selectedTemplate]);
 
   return (
     <DefaultLayout>
@@ -57,7 +82,13 @@ function Home() {
         px={['1rem', '3rem', '3rem', '20rem']}
       >
         {templates.map((template, index) => {
-          return <TemplateCard key={index} />;
+          return (
+            <TemplateCard
+              key={index}
+              template={template}
+              handleSelectTemplate={handleSelectTemplate}
+            />
+          );
         })}
       </SimpleGrid>
       <Flex flexDir="column" mt="2rem">
@@ -71,6 +102,7 @@ function Home() {
         <Button m="auto" colorScheme="purple" size="lg" mb="1rem">
           Auto Fill
         </Button>
+        <InputController template={selectedTemplate} />
       </Flex>
     </DefaultLayout>
   );

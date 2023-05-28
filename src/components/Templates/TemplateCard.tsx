@@ -4,10 +4,10 @@ import { Template } from '../../pages/Home';
 
 type Props = {
   template: Template;
-  handleSelectTemplate: (template: Template) => void
+  handleSelectTemplate: (template: Template) => void;
 };
 
-function TemplateCard({ template }: Props) {
+function TemplateCard({ template, handleSelectTemplate }: Props) {
   return (
     <Flex
       justify="center"
@@ -15,8 +15,8 @@ function TemplateCard({ template }: Props) {
       border="2px"
       borderColor="green.400"
       minH="175px"
-      cursor={'pointer'}
-      onClick=
+      cursor="pointer"
+      onClick={() => handleSelectTemplate(template)}
     >
       <Text>Placeholder</Text>
     </Flex>
