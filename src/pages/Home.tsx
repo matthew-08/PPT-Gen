@@ -8,6 +8,7 @@ import {
   useMediaQuery,
   Input,
   Text,
+  Button,
 } from '@chakra-ui/react';
 import React from 'react';
 import TemplateCard from '../components/Templates/TemplateCard';
@@ -35,6 +36,16 @@ function Home() {
         <TemplateCard />
       </SimpleGrid>
       <Flex flexDir="column" mt="2rem">
+        <Text m="auto" fontSize="2rem" mb="1rem">
+          Type the content for each text field of the template:
+        </Text>
+        <Text m="auto" maxW="60ch" textAlign="center" mb="0.5rem">
+          *If you'd like to demo the functionality, click the auto-fill button
+          below and then click submit at the bottom of the page.
+        </Text>
+        <Button m="auto" colorScheme="purple" size="lg" mb="1rem">
+          Auto Fill
+        </Button>
         {columns.map((c, i) => {
           return (
             <Flex key={i} align="center" gap="1rem" px="30rem" mb="2rem">
@@ -43,6 +54,7 @@ function Home() {
               </Text>
               <Input
                 key={i}
+                fontSize="1.5rem"
                 placeholder="Question"
                 maxW="300px"
                 padding="1.5rem"
@@ -50,6 +62,7 @@ function Home() {
               />
               <Input
                 key={i}
+                fontSize="1.5rem"
                 placeholder="Answer"
                 maxW="300px"
                 padding="1.5rem"
@@ -57,6 +70,7 @@ function Home() {
               />
               <Input
                 key={i}
+                fontSize="1.5rem"
                 placeholder="Additional"
                 maxW="300px"
                 padding="1.5rem"
