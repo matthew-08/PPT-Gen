@@ -10,14 +10,40 @@ import {
   Text,
   Button,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useState } from 'react';
 import TemplateCard from '../components/Templates/TemplateCard';
 import DefaultLayout from '../layouts/DefaultLayout';
+import genTemplateState from '../utils/genTemplateState';
+
+type FieldOptions = 'question' | 'answer' | 'additional';
+
+export type Template = {
+  templateId: number;
+  templateFields: readonly FieldOptions[];
+  inputState: {
+    [key in FieldOptions]: string;
+  }[];
+};
+
+const exTemplates: Template[] = [
+  {
+    templateId: 1,
+    templateFields: ['question'],
+    inputState: genTemplateState(28, ['question']),
+  },
+  {
+    templateId: 2,
+    templateFields: ['question'],
+    inputState: genTemplateState(28, ['question', 'additional', 'answer']),
+  },
+];
 
 function Home() {
   const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
-
-  const columns = Array(28).fill(1);
+  const [templates, setTemplates] = useState<Template[]>(exTemplates);
+  const [selectedTemplate, setSelectedTemplate] = useState<Template>(
+    exTemplates[0]
+  );
 
   return (
     <DefaultLayout>
@@ -30,10 +56,9 @@ function Home() {
         spacing={1}
         px={['1rem', '3rem', '3rem', '20rem']}
       >
-        <TemplateCard />
-        <TemplateCard />
-        <TemplateCard />
-        <TemplateCard />
+        {templates.map((template, index) => {
+          return <TemplateCard key={index} />;
+        })}
       </SimpleGrid>
       <Flex flexDir="column" mt="2rem">
         <Text m="auto" fontSize="2rem" mb="1rem">
@@ -46,39 +71,6 @@ function Home() {
         <Button m="auto" colorScheme="purple" size="lg" mb="1rem">
           Auto Fill
         </Button>
-        {columns.map((c, i) => {
-          return (
-            <Flex key={i} align="center" gap="1rem" px="30rem" mb="2rem">
-              <Text minW="10rem" fontSize="2rem">
-                Slide {i + 1}
-              </Text>
-              <Input
-                key={i}
-                fontSize="1.5rem"
-                placeholder="Question"
-                maxW="300px"
-                padding="1.5rem"
-                background="white"
-              />
-              <Input
-                key={i}
-                fontSize="1.5rem"
-                placeholder="Answer"
-                maxW="300px"
-                padding="1.5rem"
-                background="white"
-              />
-              <Input
-                key={i}
-                fontSize="1.5rem"
-                placeholder="Additional"
-                maxW="300px"
-                padding="1.5rem"
-                background="white"
-              />
-            </Flex>
-          );
-        })}
       </Flex>
     </DefaultLayout>
   );
