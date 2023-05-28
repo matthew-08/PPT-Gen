@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { Flex, Text, ModalFooter, Button } from '@chakra-ui/react';
+import { Flex, Text, Button } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { SignInFormSchema } from '../../../schemas/signin.schema';
 import { FormInput } from '../../global/FormInput';
 import { generateFormInputs } from '../../../utils/generateFormInputs';
+import { RegisterFormSchema } from '../../../schemas/register.schema';
 
 export type FormData = {
   email: string;
@@ -18,7 +18,7 @@ function RegisterForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: zodResolver(SignInFormSchema),
+    resolver: zodResolver(RegisterFormSchema),
   });
 
   const handleUserSubmit = (data: FormData) => console.log(data);
@@ -49,7 +49,7 @@ function RegisterForm() {
       flexDir="column"
       as="form"
       gap="1rem"
-      minW="370px"
+      minW="500px"
       maxW="500px"
       onSubmit={handleSubmit(handleUserSubmit)}
     >
