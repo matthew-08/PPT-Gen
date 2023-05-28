@@ -1,11 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Flex, Text, ModalFooter, Button } from '@chakra-ui/react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router-dom';
 import { SignInFormSchema } from '../../../schemas/signin.schema';
-import { generateFormInputs } from '../../../utils/generateFormInputs';
 import { FormInput } from '../FormInput';
+import useCustomForm from '../../../hooks/useCustomForm';
 
 export type FormData = {
   email: string;
@@ -13,35 +11,24 @@ export type FormData = {
 };
 
 function SignInForm() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>({
-    resolver: zodResolver(SignInFormSchema),
-  });
-
-  const navigate = useNavigate();
-
-  const handleUserSubmit = (data: FormData) => console.log(data);
-
-  const fieldHasError = (f: keyof FormData) => f in errors;
-
-  const inputObjects = generateFormInputs<FormData>({
-    inputInfo: [
+  const { handleSubmit, inputObjects } = useCustomForm(
+    [
       {
         fieldName: 'email',
         placeholder: 'Email',
+        inputType: 'text',
       },
       {
         fieldName: 'password',
         placeholder: 'Password',
+        inputType: 'password',
       },
     ],
-    errors,
-    isInvalid: fieldHasError,
-    register,
-  });
+    SignInFormSchema
+  );
+  const navigate = useNavigate();
+
+  const handleUserSubmit = (data: FormData) => console.log(data);
 
   return (
     <Flex

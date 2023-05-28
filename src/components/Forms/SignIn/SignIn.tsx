@@ -9,8 +9,6 @@ import {
   UseDisclosureReturn,
   Flex,
 } from '@chakra-ui/react';
-import { useState } from 'react';
-import RegisterForm from '../Register/RegisterForm';
 import SignInForm from './SignInForm';
 
 type Props = {
