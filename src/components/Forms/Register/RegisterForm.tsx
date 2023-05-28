@@ -2,9 +2,10 @@
 import { Flex, Text, Button } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { FormInput } from '../../global/FormInput';
+import { FormInput } from '../FormInput';
 import { generateFormInputs } from '../../../utils/generateFormInputs';
 import { RegisterFormSchema } from '../../../schemas/register.schema';
+import useCustomForm from '../../../hooks/useCustomForm';
 
 export type FormData = {
   email: string;
@@ -13,37 +14,29 @@ export type FormData = {
 };
 
 function RegisterForm() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>({
-    resolver: zodResolver(RegisterFormSchema),
-  });
-
-  const handleUserSubmit = (data: FormData) => console.log(data);
-
-  const fieldHasError = (f: keyof FormData) => f in errors;
-
-  const inputObjects = generateFormInputs<FormData>({
-    inputInfo: [
+  const { handleSubmit, inputObjects } = useCustomForm<FormData>(
+    [
       {
         fieldName: 'email',
         placeholder: 'Email',
+        inputType: 'text',
       },
       {
         fieldName: 'password',
         placeholder: 'Password',
+        inputType: 'password',
       },
       {
         fieldName: 'confirmPassword',
         placeholder: 'Confirm Password',
+        inputType: 'password',
       },
     ],
-    errors,
-    isInvalid: fieldHasError,
-    register,
-  });
+    RegisterFormSchema
+  );
+
+  const handleUserSubmit = (data: FormData) => console.log(data);
+
   return (
     <Flex
       flexDir="column"

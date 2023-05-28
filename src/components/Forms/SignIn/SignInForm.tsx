@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router-dom';
 import { SignInFormSchema } from '../../../schemas/signin.schema';
-import { FormInput } from '../../global/FormInput';
 import { generateFormInputs } from '../../../utils/generateFormInputs';
+import { FormInput } from '../FormInput';
 
 export type FormData = {
   email: string;
