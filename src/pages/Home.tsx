@@ -30,8 +30,15 @@ function Home() {
 
   return (
     <DefaultLayout>
-      <Heading mx="auto" color="black" mb="1rem" textAlign="center" mt="10">
-        Choose a template
+      <Heading
+        mx="auto"
+        color="black"
+        mb="1rem"
+        textAlign="center"
+        mt="10"
+        fontSize="2.8rem"
+      >
+        Choose a template:
       </Heading>
       <TCardContainer />
       <Flex flexDir="column" mt="2rem" align="center">

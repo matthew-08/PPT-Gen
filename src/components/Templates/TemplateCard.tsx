@@ -2,6 +2,8 @@ import React from 'react';
 import { Flex, Text, Image } from '@chakra-ui/react';
 import { Oval } from 'react-loader-spinner';
 import { Template } from '../../types';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { onSelectTemplate } from '../../features/templateSlice';
 
 type Props = {
   template: Template;
@@ -9,6 +11,13 @@ type Props = {
 };
 
 function TemplateCard({ template, loading }: Props) {
+  const dispatch = useAppDispatch();
+  const isSelectedTemplate = useAppSelector(
+    (state) => state.templateReducer.selectedTemplate === template.templateId
+  );
+  const handleClick = () => {
+    return dispatch(onSelectTemplate(template.templateId));
+  };
   return (
     <Flex
       justify="center"
@@ -19,6 +28,8 @@ function TemplateCard({ template, loading }: Props) {
       py="0.5rem"
       maxW="300px"
       px="0.5rem"
+      backgroundColor={isSelectedTemplate ? 'purple.100' : ''}
+      onClick={handleClick}
       minH="175px"
       cursor="pointer"
       className="template-card"

@@ -1,12 +1,6 @@
 /* eslint-disable no-param-reassign */
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import {
-  FieldOptions,
-  SlideState,
-  Template,
-  TemplateServerResponse,
-  TemplateState,
-} from '../types';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { SlideState, TemplateState } from '../types';
 import { formatTemplateGet } from '../utils/formatResponse';
 
 export const fetchAllTemplates = createAsyncThunk(
@@ -29,25 +23,34 @@ interface TemplateSliceState {
   loading: boolean;
   templates: TemplateState;
   dummySlides: null | SlideState[];
+  selectedTemplate: number;
 }
 
 const initialState: TemplateSliceState = {
   loading: true,
   templates: Array(4).fill({}),
   dummySlides,
+  selectedTemplate: 1,
 };
 
 const templateSlice = createSlice({
   initialState,
   name: 'template',
-  reducers: {},
+  reducers: {
+    onSelectTemplate(state, { payload, type }: PayloadAction<number>) {
+      console.log('test');
+      state.selectedTemplate = payload;
+      console.log(state);
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchAllTemplates.fulfilled, (state, action) => {
       state.templates = action.payload;
       state.loading = false;
-      console.log(state);
     });
   },
 });
+
+export const { onSelectTemplate } = templateSlice.actions;
 
 export default templateSlice.reducer;
