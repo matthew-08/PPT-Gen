@@ -11,24 +11,10 @@ import {
   Button,
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
-import InputController from '../components/Templates/InputController';
-import TemplateCard from '../components/Templates/TemplateCard';
 import DefaultLayout from '../layouts/DefaultLayout';
 import genTemplateState from '../utils/genTemplateState';
-
-export type FieldOptions = 'question' | 'answer' | 'additional';
-
-export type Template = {
-  templateId: number;
-  templateFields: readonly FieldOptions[];
-  inputState: {
-    question: string;
-    answer?: string;
-    additional?: string;
-  }[];
-};
-
-export type InputState = Template['inputState'][number];
+import { FieldOptions, Template, InputState } from '../types';
+import TemplateCard from '../components/Templates/TemplateCard';
 
 const exTemplates: Template[] = [
   {
@@ -104,10 +90,6 @@ function Home() {
         <Button m="auto" colorScheme="purple" size="lg" mb="1rem">
           Auto Fill
         </Button>
-        <InputController
-          template={selectedTemplate}
-          handleWriteToField={handleWriteField}
-        />
       </Flex>
     </DefaultLayout>
   );

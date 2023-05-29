@@ -1,6 +1,6 @@
 import React from 'react';
 import { Flex, Text } from '@chakra-ui/react';
-import { Template } from '../../pages/Home';
+import { Template } from '../../types';
 
 type Props = {
   template: Template;
