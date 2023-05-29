@@ -7,10 +7,9 @@ import RowInput from './RowInput';
 type Props = {
   slide: SlideState;
   slideIndex: number;
-  handleSubmit: (slide: SlideState) => void;
 };
 
-function SlideRow({ slide, slideIndex, handleSubmit }: Props) {
+function SlideRow({ slide, slideIndex }: Props) {
   const [slideState, updateSlideState] = useState<Props['slide']>(slide);
 
   const fields = objectKeys(slide);

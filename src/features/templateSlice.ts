@@ -30,7 +30,7 @@ const initialState: TemplateSliceState = {
   loading: true,
   templates: Array(4).fill({}),
   dummySlides,
-  selectedTemplate: 1,
+  selectedTemplate: 4,
 };
 
 const templateSlice = createSlice({
@@ -38,9 +38,7 @@ const templateSlice = createSlice({
   name: 'template',
   reducers: {
     onSelectTemplate(state, { payload, type }: PayloadAction<number>) {
-      console.log('test');
       state.selectedTemplate = payload;
-      console.log(state);
     },
   },
   extraReducers: (builder) => {

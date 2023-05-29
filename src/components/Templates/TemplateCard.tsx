@@ -28,7 +28,7 @@ function TemplateCard({ template, loading }: Props) {
       py="0.5rem"
       maxW="300px"
       px="0.5rem"
-      backgroundColor={isSelectedTemplate ? 'purple.100' : ''}
+      backgroundColor={isSelectedTemplate ? 'purple.500' : ''}
       onClick={handleClick}
       minH="175px"
       cursor="pointer"
