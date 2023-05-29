@@ -1,17 +1,17 @@
+/* eslint-disable react/no-array-index-key */
 import { Flex } from '@chakra-ui/react';
-import React from 'react';
 import { Template } from '../../types';
-import objectKeys from '../../utils/objectKeys';
 import SlideRow from './SlideRow/SlideRow';
 
-function SlidesController({
-  slideState,
-  templateFields,
-  slideIndex,
-}: Template) {
+type Props = {
+  template: Template;
+};
+
+function SlidesController({ template }: Props) {
+  const { slideState, templateFields } = template;
   return (
     <Flex flexDir="column">
-      {slideState.map((slide) => {
+      {slideState.map((slide, slideIndex) => {
         return (
           <SlideRow slide={slide} slideIndex={slideIndex} key={slideIndex} />
         );

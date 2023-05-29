@@ -1,7 +1,7 @@
 export type FieldOptions = 'question' | 'answer' | 'additional';
 
 export type Template = {
-  slideIndex: number;
+  templateId: number;
   templateFields: readonly FieldOptions[];
   slideState: {
     question: string;

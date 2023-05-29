@@ -13,18 +13,18 @@ import {
 import React, { useEffect, useState } from 'react';
 import DefaultLayout from '../layouts/DefaultLayout';
 import genTemplateState from '../utils/genTemplateState';
-import { FieldOptions, Template, SlideState } from '../types';
+import { FieldOptions, Template } from '../types';
 import TemplateCard from '../components/Templates/TemplateCard';
 import SlidesController from '../components/Templates/SlidesController';
 
 const exTemplates: Template[] = [
   {
-    slideIndex: 1,
+    templateId: 1,
     templateFields: ['question'],
     slideState: genTemplateState(28, ['question']),
   },
   {
-    slideIndex: 2,
+    templateId: 2,
     templateFields: ['question', 'additional', 'answer'],
     slideState: genTemplateState(28, ['question', 'additional', 'answer']),
   },
@@ -38,9 +38,9 @@ function Home() {
   );
 
   const handleSelectTemplate = (template: Template) => {
-    const { slideIndex: id } = template;
+    const { templateId: id } = template;
     setSelectedTemplate(
-      templates.find((t) => t.slideIndex === id) || templates[0]
+      templates.find((t) => t.templateId === id) || templates[0]
     );
   };
 
@@ -87,7 +87,7 @@ function Home() {
           Auto Fill
         </Button>
       </Flex>
-      <SlidesController />
+      <SlidesController template={selectedTemplate} />
     </DefaultLayout>
   );
 }
