@@ -43,11 +43,9 @@ const templateSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchAllTemplates.fulfilled, (state, action) => {
-      state = {
-        dummySlides: null,
-        loading: false,
-        templates: action.payload,
-      };
+      state.templates = action.payload;
+      state.loading = false;
+      console.log(state);
     });
   },
 });

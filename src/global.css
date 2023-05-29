@@ -74,3 +74,7 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
 }
+
+.template-card {
+  transition: transform 300ms ease-in-out, box-shadow 500ms ease-in-out;
+}
