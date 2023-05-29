@@ -18,68 +18,22 @@ import TemplateCard from '../components/Templates/TemplateCard';
 import SlidesController from '../components/Templates/SlidesController';
 import { useAppDispatch } from '../store/hooks';
 import { fetchAllTemplates } from '../features/templateSlice';
-
-const exTemplates: Template[] = [
-  {
-    templateId: 1,
-    templateFields: ['question'],
-    slideState: genTemplateState(28, ['question']),
-  },
-  {
-    templateId: 2,
-    templateFields: ['question', 'additional', 'answer'],
-    slideState: genTemplateState(28, ['question', 'additional', 'answer']),
-  },
-];
+import TCardContainer from '../components/Templates/TCardContainer';
 
 function Home() {
   const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
-  const [templates, setTemplates] = useState<Template[]>(exTemplates);
-  const [selectedTemplate, setSelectedTemplate] = useState<Template>(
-    exTemplates[1]
-  );
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchAllTemplates());
   });
 
-  const handleSelectTemplate = (template: Template) => {
-    const { templateId: id } = template;
-    setSelectedTemplate(
-      templates.find((t) => t.templateId === id) || templates[0]
-    );
-  };
-
-  const handleSubmit = (slideState: SlideState[]) => {
-    console.log(slideState);
-  };
-
-  useEffect(() => {
-    console.log(selectedTemplate);
-  }, [selectedTemplate]);
-
   return (
     <DefaultLayout>
       <Heading mx="auto" color="black" mb="1rem" textAlign="center" mt="10">
         Choose a template
       </Heading>
-      <SimpleGrid
-        mt="10"
-        minChildWidth="300px"
-        spacing={1}
-        px={['1rem', '3rem', '3rem', '20rem']}
-      >
-        {templates.map((template, index) => {
-          return (
-            <TemplateCard
-              key={index}
-              template={template}
-              handleSelectTemplate={handleSelectTemplate}
-            />
-          );
-        })}
-      </SimpleGrid>
+      <TCardContainer />
       <Flex flexDir="column" mt="2rem" align="center">
         <Text m="auto" fontSize="2rem" mb="1rem">
           Type the content for each text field of the template:
@@ -92,7 +46,6 @@ function Home() {
           Auto Fill
         </Button>
       </Flex>
-      <SlidesController template={selectedTemplate} />
     </DefaultLayout>
   );
 }
