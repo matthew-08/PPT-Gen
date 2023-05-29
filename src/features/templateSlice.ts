@@ -36,7 +36,6 @@ const initialState: TemplateSliceState = {
 type SlideInputChangePayload = {
   slideIndex: number;
   field: FieldOptions;
-  templateId: number;
   input: string;
 };
 
@@ -51,7 +50,8 @@ const templateSlice = createSlice({
       state,
       { payload }: PayloadAction<SlideInputChangePayload>
     ) {
-      const { field, input, slideIndex, templateId } = payload;
+      const { field, input, slideIndex } = payload;
+      const templateId = state.selectedTemplate;
       const template = state.templates.find(
         (t) => t.templateId === templateId
       ) as Template;

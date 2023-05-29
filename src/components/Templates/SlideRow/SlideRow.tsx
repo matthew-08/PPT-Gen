@@ -1,5 +1,7 @@
 import { Flex, Input, Text } from '@chakra-ui/react';
 import React, { useState } from 'react';
+import { onSlideInputChange } from '../../../features/templateSlice';
+import { useAppDispatch } from '../../../store/hooks';
 import { FieldOptions, SlideState } from '../../../types';
 import objectKeys from '../../../utils/objectKeys';
 import RowInput from './RowInput';
@@ -11,6 +13,7 @@ type Props = {
 
 function SlideRow({ slide, slideIndex }: Props) {
   const [slideState, updateSlideState] = useState<Props['slide']>(slide);
+  const dispatch = useAppDispatch();
 
   const fields = objectKeys(slide);
 
@@ -19,6 +22,13 @@ function SlideRow({ slide, slideIndex }: Props) {
       ...slideState,
       [field]: value,
     });
+    dispatch(
+      onSlideInputChange({
+        input: value,
+        field,
+        slideIndex,
+      })
+    );
   };
 
   return (
