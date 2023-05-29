@@ -53,6 +53,7 @@ function Home() {
           Auto Fill
         </Button>
       </Flex>
+      <SlidesController />
     </DefaultLayout>
   );
 }
