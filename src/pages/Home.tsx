@@ -13,9 +13,11 @@ import {
 import React, { useEffect, useState } from 'react';
 import DefaultLayout from '../layouts/DefaultLayout';
 import genTemplateState from '../utils/genTemplateState';
-import { FieldOptions, Template } from '../types';
+import { FieldOptions, SlideState, Template } from '../types';
 import TemplateCard from '../components/Templates/TemplateCard';
 import SlidesController from '../components/Templates/SlidesController';
+import { useAppDispatch } from '../store/hooks';
+import { fetchAllTemplates } from '../features/templateSlice';
 
 const exTemplates: Template[] = [
   {
@@ -36,6 +38,11 @@ function Home() {
   const [selectedTemplate, setSelectedTemplate] = useState<Template>(
     exTemplates[1]
   );
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchAllTemplates());
+  });
 
   const handleSelectTemplate = (template: Template) => {
     const { templateId: id } = template;
@@ -44,11 +51,9 @@ function Home() {
     );
   };
 
-  const handleWriteField = (
-    templateId: number,
-    field: FieldOptions,
-    state: string
-  ) => {};
+  const handleSubmit = (slideState: SlideState[]) => {
+    console.log(slideState);
+  };
 
   useEffect(() => {
     console.log(selectedTemplate);

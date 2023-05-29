@@ -1,4 +1,9 @@
-const genTemplateState = (templateLength: number, templateFields: string[]) => {
+import { FieldOptions, SlideState, Template, TemplateState } from '../types';
+
+const genTemplateState = (
+  templateLength: number,
+  templateFields: FieldOptions[]
+) => {
   const fieldObject = templateFields.reduce(
     (acc: { [key: string]: string }, fieldName) => {
       acc[fieldName] = '';
@@ -6,7 +11,7 @@ const genTemplateState = (templateLength: number, templateFields: string[]) => {
     },
     {}
   );
-  return Array(templateLength).fill(fieldObject);
+  return Array(templateLength).fill(fieldObject) as SlideState[];
 };
 
 export default genTemplateState;
