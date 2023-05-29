@@ -5,15 +5,16 @@ import objectKeys from '../../utils/objectKeys';
 import SlideRow from './SlideRow/SlideRow';
 
 function SlidesController({
-  inputState,
+  slideState,
   templateFields,
-  templateId,
+  slideIndex,
 }: Template) {
-  const fields = objectKeys(templateFields);
   return (
     <Flex flexDir="column">
-      {fields.map((field) => {
-        <SlideRow />;
+      {slideState.map((slide) => {
+        return (
+          <SlideRow slide={slide} slideIndex={slideIndex} key={slideIndex} />
+        );
       })}
     </Flex>
   );

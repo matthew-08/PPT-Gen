@@ -19,12 +19,12 @@ import SlidesController from '../components/Templates/SlidesController';
 
 const exTemplates: Template[] = [
   {
-    templateId: 1,
+    slideIndex: 1,
     templateFields: ['question'],
     slideState: genTemplateState(28, ['question']),
   },
   {
-    templateId: 2,
+    slideIndex: 2,
     templateFields: ['question', 'additional', 'answer'],
     slideState: genTemplateState(28, ['question', 'additional', 'answer']),
   },
@@ -38,9 +38,9 @@ function Home() {
   );
 
   const handleSelectTemplate = (template: Template) => {
-    const { templateId: id } = template;
+    const { slideIndex: id } = template;
     setSelectedTemplate(
-      templates.find((t) => t.templateId === id) || templates[0]
+      templates.find((t) => t.slideIndex === id) || templates[0]
     );
   };
 
@@ -48,12 +48,7 @@ function Home() {
     templateId: number,
     field: FieldOptions,
     state: string
-  ) => {
-    const updatedInputState = [...selectedTemplate.slideState];
-    const find = updatedInputState[templateId];
-    const update: InputState = { ...find, [field]: state };
-    setSelectedTemplate({ ...selectedTemplate, slideState: updatedInputState });
-  };
+  ) => {};
 
   useEffect(() => {
     console.log(selectedTemplate);
