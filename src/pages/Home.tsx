@@ -13,19 +13,20 @@ import {
 import React, { useEffect, useState } from 'react';
 import DefaultLayout from '../layouts/DefaultLayout';
 import genTemplateState from '../utils/genTemplateState';
-import { FieldOptions, Template, InputState } from '../types';
+import { FieldOptions, Template, SlideState } from '../types';
 import TemplateCard from '../components/Templates/TemplateCard';
+import SlidesController from '../components/Templates/SlidesController';
 
 const exTemplates: Template[] = [
   {
     templateId: 1,
     templateFields: ['question'],
-    inputState: genTemplateState(28, ['question']),
+    slideState: genTemplateState(28, ['question']),
   },
   {
     templateId: 2,
     templateFields: ['question', 'additional', 'answer'],
-    inputState: genTemplateState(28, ['question', 'additional', 'answer']),
+    slideState: genTemplateState(28, ['question', 'additional', 'answer']),
   },
 ];
 
@@ -48,10 +49,10 @@ function Home() {
     field: FieldOptions,
     state: string
   ) => {
-    const updatedInputState = [...selectedTemplate.inputState];
+    const updatedInputState = [...selectedTemplate.slideState];
     const find = updatedInputState[templateId];
     const update: InputState = { ...find, [field]: state };
-    setSelectedTemplate({ ...selectedTemplate, inputState: updatedInputState });
+    setSelectedTemplate({ ...selectedTemplate, slideState: updatedInputState });
   };
 
   useEffect(() => {
@@ -91,6 +92,7 @@ function Home() {
           Auto Fill
         </Button>
       </Flex>
+      <SlidesController />
     </DefaultLayout>
   );
 }
