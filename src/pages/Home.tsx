@@ -62,8 +62,10 @@ function Home() {
     field: FieldOptions,
     state: string
   ) => {
-    const template = selectedTemplate.inputState[templateId];
-    template[field] = state;
+    const updatedInputState = [...selectedTemplate.inputState];
+    const find = updatedInputState[templateId];
+    const update: InputState = { ...find, [field]: state };
+    setSelectedTemplate({ ...selectedTemplate, inputState: updatedInputState });
   };
 
   useEffect(() => {
@@ -91,7 +93,7 @@ function Home() {
           );
         })}
       </SimpleGrid>
-      <Flex flexDir="column" mt="2rem">
+      <Flex flexDir="column" mt="2rem" align="center">
         <Text m="auto" fontSize="2rem" mb="1rem">
           Type the content for each text field of the template:
         </Text>
@@ -102,7 +104,10 @@ function Home() {
         <Button m="auto" colorScheme="purple" size="lg" mb="1rem">
           Auto Fill
         </Button>
-        <InputController template={selectedTemplate} />
+        <InputController
+          template={selectedTemplate}
+          handleWriteToField={handleWriteField}
+        />
       </Flex>
     </DefaultLayout>
   );
