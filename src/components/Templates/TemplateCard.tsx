@@ -5,12 +5,14 @@ import { Template } from '../../types';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { onSelectTemplate } from '../../features/templateSlice';
 
+type TCardInfo = Omit<Template, 'slides' | 'slideAmount'>;
+
 type Props = {
-  template: Template;
+  tCardInfo: TCardInfo;
   loading: boolean;
 };
 
-function TemplateCard({ template, loading }: Props) {
+function TemplateCard({ tCardInfo: template, loading }: Props) {
   const dispatch = useAppDispatch();
   const isSelectedTemplate = useAppSelector(
     (state) => state.templateReducer.selectedTemplate === template.templateId

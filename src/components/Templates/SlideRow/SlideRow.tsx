@@ -13,24 +13,11 @@ type Props = {
 };
 
 export const SlideRow = memo(function SlideRow({ slide, slideIndex }: Props) {
-  const [slideState, updateSlideState] = useState<Props['slide']>(slide);
-  const dispatch = useAppDispatch();
-
   const fields = objectKeys(slide);
 
-  const handleInputChange = (value: string, field: FieldOptions) => {
-    updateSlideState({
-      ...slideState,
-      [field]: value,
-    });
-    dispatch(
-      onSlideInputChange({
-        field,
-        slideIndex,
-        input: value,
-      })
-    );
-  };
+  useEffect(() => {
+    console.log('Slide row re-render');
+  }, []);
 
   return (
     <Flex>

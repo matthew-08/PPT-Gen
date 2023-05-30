@@ -12,14 +12,12 @@ import SlideRow from './SlideRow/SlideRow';
 function SlidesController() {
   const { selectedTemplate } = useSelectedTemplate();
 
-  useEffect(() => {
-    console.log(selectedTemplate);
-  }, [selectedTemplate]);
+  useEffect(() => {}, [selectedTemplate]);
 
   return (
     <Flex flexDir="column">
       {selectedTemplate?.slides.map((slide, index) => {
-        return <SlideRow slide={slide} slideIndex={index} key={uuid()} />;
+        return <SlideRow slide={slide} slideIndex={index} key={index} />;
       })}
     </Flex>
   );

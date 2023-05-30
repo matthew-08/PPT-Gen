@@ -55,8 +55,10 @@ const templateSlice = createSlice({
       const template = state.templates.find(
         (t) => t.templateId === templateId
       ) as Template;
+      const before = template.slides;
       template.slides[slideIndex][field] = input;
-      console.log(template.slides);
+      const after = template.slides;
+      console.log(before === after);
     },
   },
   extraReducers: (builder) => {

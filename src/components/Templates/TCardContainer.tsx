@@ -1,16 +1,14 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useEffect } from 'react';
+import { useEffect, memo } from 'react';
 import { SimpleGrid } from '@chakra-ui/react';
 import TemplateCard from './TemplateCard';
-import { useAppSelector } from '../../store/hooks';
+import useTCardInfo from '../../hooks/UseTCardInfo';
 
-function TCardContainer() {
-  const { templates, loading } = useAppSelector(
-    (state) => state.templateReducer
-  );
+const TCardContainer = memo(function TCardContainer() {
+  const { tCardInfo } = useTCardInfo();
   useEffect(() => {
-    console.log(templates);
-  }, [templates]);
+    console.log('t card re-render');
+  }, []);
   return (
     <SimpleGrid
       mt="10"
@@ -18,13 +16,17 @@ function TCardContainer() {
       spacing={1}
       px={['1rem', '3rem', '3rem', '25rem']}
     >
-      {templates.map((template, index) => {
+      {tCardInfo.map((template, index) => {
         return (
-          <TemplateCard key={index} template={template} loading={loading} />
+          <TemplateCard
+            key={template.templateId}
+            tCardInfo={template}
+            loading={template.loading}
+          />
         );
       })}
     </SimpleGrid>
   );
-}
+});
 
 export default TCardContainer;
