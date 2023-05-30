@@ -1,7 +1,8 @@
 import { Flex, Input, Text } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import React, { useState, memo, useEffect } from 'react';
 import { onSlideInputChange } from '../../../features/templateSlice';
-import { useAppDispatch } from '../../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { FieldOptions, SlideState } from '../../../types';
 import objectKeys from '../../../utils/objectKeys';
 import RowInput from './RowInput';
@@ -11,7 +12,7 @@ type Props = {
   slideIndex: number;
 };
 
-function SlideRow({ slide, slideIndex }: Props) {
+export const SlideRow = memo(function SlideRow({ slide, slideIndex }: Props) {
   const [slideState, updateSlideState] = useState<Props['slide']>(slide);
   const dispatch = useAppDispatch();
 
@@ -24,9 +25,9 @@ function SlideRow({ slide, slideIndex }: Props) {
     });
     dispatch(
       onSlideInputChange({
-        input: value,
         field,
         slideIndex,
+        input: value,
       })
     );
   };
@@ -35,16 +36,10 @@ function SlideRow({ slide, slideIndex }: Props) {
     <Flex>
       <Text>Slide {slideIndex + 1}</Text>
       {fields.map((field) => {
-        return (
-          <RowInput
-            field={field}
-            key={field}
-            handleInputChange={handleInputChange}
-          />
-        );
+        return <RowInput slideIndex={slideIndex} field={field} key={field} />;
       })}
     </Flex>
   );
-}
+});
 
 export default SlideRow;

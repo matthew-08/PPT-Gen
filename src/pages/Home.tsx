@@ -19,6 +19,7 @@ import SlidesController from '../components/Templates/SlidesController';
 import { useAppDispatch } from '../store/hooks';
 import { fetchAllTemplates } from '../features/templateSlice';
 import TCardContainer from '../components/Templates/TCardContainer';
+import useSelectedTemplate from '../hooks/useSelectedTemplate';
 
 function Home() {
   const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAppSelector } from '../store/hooks';
+import { Template } from '../types';
 
 const useSelectedTemplate = () => {
   const selectedTemplateId = useAppSelector(
@@ -11,7 +12,7 @@ const useSelectedTemplate = () => {
       (t) => t.templateId === selectedTemplateId
     )
   );
-  return { selectedTemplate };
+  return { selectedTemplate } as { selectedTemplate: Template };
 };
 
 export default useSelectedTemplate;
