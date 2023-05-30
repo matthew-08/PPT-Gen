@@ -15,7 +15,8 @@ type Props = {
 function TemplateCard({ tCardInfo: template, loading }: Props) {
   const dispatch = useAppDispatch();
   const isSelectedTemplate = useAppSelector(
-    (state) => state.templateReducer.selectedTemplate === template.templateId
+    (state) =>
+      state.templateReducer.selectedTemplate.templateId === template.templateId
   );
   const handleClick = () => {
     return dispatch(onSelectTemplate(template.templateId));

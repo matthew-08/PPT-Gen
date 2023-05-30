@@ -23,14 +23,21 @@ interface TemplateSliceState {
   loading: boolean;
   templates: TemplateState;
   dummySlides: null | SlideState[];
-  selectedTemplate: number;
+  selectedTemplate: Template;
 }
 
 const initialState: TemplateSliceState = {
   loading: true,
   templates: Array(4).fill({}),
   dummySlides,
-  selectedTemplate: 4,
+  selectedTemplate: {
+    loading: true,
+    name: '',
+    slideAmount: 28,
+    slides: dummySlides,
+    templateId: 500,
+    templateImg: '',
+  },
 };
 
 type SlideInputChangePayload = {
@@ -44,21 +51,24 @@ const templateSlice = createSlice({
   name: 'template',
   reducers: {
     onSelectTemplate(state, { payload, type }: PayloadAction<number>) {
-      state.selectedTemplate = payload;
+      const selectedTemplate = state.templates.find(
+        (t) => t.templateId === payload
+      ) as Template;
+      state.selectedTemplate = selectedTemplate;
     },
     onSlideInputChange(
       state,
       { payload }: PayloadAction<SlideInputChangePayload>
     ) {
       const { field, input, slideIndex } = payload;
-      const templateId = state.selectedTemplate;
-      const template = state.templates.find(
-        (t) => t.templateId === templateId
+      const selectedTemplate = state.templates.find(
+        (t) => t.templateId === state.selectedTemplate.templateId
       ) as Template;
-      const before = template.slides;
-      template.slides[slideIndex][field] = input;
-      const after = template.slides;
-      console.log(before === after);
+      selectedTemplate.slides[slideIndex][field] = input;
+      state.selectedTemplate.slides[slideIndex][field] = input;
+    },
+    onGetState(state, test) {
+      return state;
     },
   },
   extraReducers: (builder) => {
@@ -69,6 +79,7 @@ const templateSlice = createSlice({
   },
 });
 
-export const { onSelectTemplate, onSlideInputChange } = templateSlice.actions;
+export const { onSelectTemplate, onSlideInputChange, onGetState } =
+  templateSlice.actions;
 
 export default templateSlice.reducer;

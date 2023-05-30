@@ -1,4 +1,4 @@
-import { Flex, Input, Text } from '@chakra-ui/react';
+import { Flex, Input, Text, useMediaQuery } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import React, { useState, memo, useEffect } from 'react';
 import { onSlideInputChange } from '../../../features/templateSlice';
@@ -14,13 +14,19 @@ type Props = {
 
 export const SlideRow = memo(function SlideRow({ slide, slideIndex }: Props) {
   const fields = objectKeys(slide);
-
+  const [isSmallerThan800] = useMediaQuery('(max-width: 800px)');
   useEffect(() => {
     console.log('Slide row re-render');
   }, []);
 
   return (
-    <Flex>
+    <Flex
+      align="center"
+      fontSize="2rem"
+      mb="2rem"
+      gap={isSmallerThan800 ? '1rem' : ''}
+      flexDir={isSmallerThan800 ? 'column' : 'row'}
+    >
       <Text>Slide {slideIndex + 1}</Text>
       {fields.map((field) => {
         return <RowInput slideIndex={slideIndex} field={field} key={field} />;

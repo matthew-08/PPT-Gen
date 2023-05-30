@@ -1,6 +1,4 @@
 import { Heading, Flex, Text, ScaleFade, Divider } from '@chakra-ui/react';
-import React from 'react';
-import { Slide } from '@chakra-ui/transition';
 import RegisterForm from '../components/Forms/Register/RegisterForm';
 import DefaultLayout from '../layouts/DefaultLayout';
 

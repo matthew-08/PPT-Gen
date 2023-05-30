@@ -1,7 +1,8 @@
 /* eslint-disable react/no-array-index-key */
-import { useEffect, memo } from 'react';
-import { SimpleGrid } from '@chakra-ui/react';
+import React, { useEffect, memo } from 'react';
+import { Flex, SimpleGrid } from '@chakra-ui/react';
 import TemplateCard from './TemplateCard';
+import { useAppSelector } from '../../store/hooks';
 import useTCardInfo from '../../hooks/UseTCardInfo';
 
 const TCardContainer = memo(function TCardContainer() {
@@ -10,12 +11,7 @@ const TCardContainer = memo(function TCardContainer() {
     console.log('t card re-render');
   }, []);
   return (
-    <SimpleGrid
-      mt="10"
-      minChildWidth="275px"
-      spacing={1}
-      px={['1rem', '3rem', '3rem', '25rem']}
-    >
+    <Flex mt="10" gap="1rem" flexWrap="wrap" align="center" justify="center">
       {tCardInfo.map((template, index) => {
         return (
           <TemplateCard
@@ -25,7 +21,7 @@ const TCardContainer = memo(function TCardContainer() {
           />
         );
       })}
-    </SimpleGrid>
+    </Flex>
   );
 });
 

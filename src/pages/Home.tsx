@@ -1,25 +1,11 @@
 /* eslint-disable react/no-array-index-key */
-import {
-  Divider,
-  Grid,
-  Heading,
-  SimpleGrid,
-  Flex,
-  useMediaQuery,
-  Input,
-  Text,
-  Button,
-} from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import { Heading, Flex, useMediaQuery, Text, Button } from '@chakra-ui/react';
+import { useEffect } from 'react';
 import DefaultLayout from '../layouts/DefaultLayout';
-import genTemplateState from '../utils/genTemplateState';
-import { FieldOptions, SlideState, Template } from '../types';
-import TemplateCard from '../components/Templates/TemplateCard';
 import SlidesController from '../components/Templates/SlidesController';
 import { useAppDispatch } from '../store/hooks';
 import { fetchAllTemplates } from '../features/templateSlice';
 import TCardContainer from '../components/Templates/TCardContainer';
-import useSelectedTemplate from '../hooks/useSelectedTemplate';
 
 function Home() {
   const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
@@ -41,7 +27,9 @@ function Home() {
       >
         Choose a template:
       </Heading>
-      <TCardContainer />
+      <Flex flexDir="column" minW="100%">
+        <TCardContainer />
+      </Flex>
       <Flex flexDir="column" mt="2rem" align="center">
         <Text m="auto" fontSize="2rem" mb="1rem">
           Type the content for each text field of the template:

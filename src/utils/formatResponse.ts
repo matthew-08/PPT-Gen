@@ -1,7 +1,5 @@
 import { TemplateServerResponse, TemplateState } from '../types';
-import { generateFormInputs } from './generateFormInputs';
 import genTemplateState from './genTemplateState';
-import objectKeys from './objectKeys';
 
 export const formatTemplateGet = (
   res: TemplateServerResponse

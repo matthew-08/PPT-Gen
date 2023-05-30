@@ -1,4 +1,5 @@
 import { Input } from '@chakra-ui/react';
+import { useEffect } from 'react';
 import useFieldInput from '../../../hooks/useFieldInput';
 import useSelectedTemplate from '../../../hooks/useSelectedTemplate';
 import { FieldOptions } from '../../../types';
@@ -15,8 +16,13 @@ function RowInput({ field, slideIndex }: Props) {
   });
   return (
     <Input
+      ml="1rem"
+      maxW="300px"
+      fontSize="1.4rem"
+      padding="1.5rem"
+      background="white"
       value={inputValue}
-      placeholder={field}
+      placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
       onChange={(e) => handleInputChange(e.target.value)}
     />
   );

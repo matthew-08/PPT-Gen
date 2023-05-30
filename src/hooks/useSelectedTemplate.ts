@@ -1,5 +1,6 @@
-import React from 'react';
-import { useAppSelector } from '../store/hooks';
+import React, { useEffect } from 'react';
+import { onGetState } from '../features/templateSlice';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { Template } from '../types';
 
 const useSelectedTemplate = () => {
@@ -7,11 +8,15 @@ const useSelectedTemplate = () => {
     (state) => state.templateReducer.selectedTemplate
   );
 
-  const selectedTemplate = useAppSelector((state) =>
-    state.templateReducer.templates.find(
-      (t) => t.templateId === selectedTemplateId
-    )
+  const selectedTemplate = useAppSelector(
+    (state) => state.templateReducer.selectedTemplate
   );
+
+  const test = useAppSelector((state) => state);
+  useEffect(() => {
+    console.log(test);
+  }, [test]);
+
   return { selectedTemplate } as { selectedTemplate: Template };
 };
 
