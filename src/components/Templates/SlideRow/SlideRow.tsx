@@ -27,7 +27,9 @@ export const SlideRow = memo(function SlideRow({ slide, slideIndex }: Props) {
       gap={isSmallerThan800 ? '1rem' : ''}
       flexDir={isSmallerThan800 ? 'column' : 'row'}
     >
-      <Text>Slide {slideIndex + 1}</Text>
+      <Text fontSize="1.8rem" textAlign="center" minW="8rem">
+        Slide {slideIndex + 1}
+      </Text>
       {fields.map((field) => {
         return <RowInput slideIndex={slideIndex} field={field} key={field} />;
       })}
