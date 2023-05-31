@@ -1,4 +1,4 @@
-import { TemplateServerResponse, TemplateState } from '../types';
+import { FieldOptions, TemplateServerResponse, TemplateState } from '../types';
 import genTemplateState from './genTemplateState';
 
 export const formatTemplateGet = (
@@ -17,7 +17,7 @@ export const formatTemplateGet = (
         templateImg,
         slideAmount,
         loading: false,
-        slides: genTemplateState(slideAmount, fields),
+        slideFields: [...fields],
         templateId,
         name,
       };

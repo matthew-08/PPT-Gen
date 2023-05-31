@@ -6,14 +6,14 @@ import useSelectedTemplate from '../../hooks/useSelectedTemplate';
 import SlideRow from './SlideRow/SlideRow';
 
 function SlidesController() {
-  const { selectedTemplate } = useSelectedTemplate();
+  const { selectedTemplate, slides } = useSelectedTemplate();
   useEffect(() => {
     console.log('slides controller render');
   }, []);
 
   return (
     <Flex flexDir="column" m="auto" padding="1rem" maxH="800px" overflow="auto">
-      {selectedTemplate?.slides.map((slide, index) => {
+      {slides.map((slide, index) => {
         return <SlideRow slide={slide} slideIndex={index} key={index} />;
       })}
     </Flex>

@@ -34,7 +34,7 @@ const initialState: TemplateSliceState = {
     loading: true,
     name: '',
     slideAmount: 28,
-    slides: dummySlides,
+    slideFields: ['question', 'additional', 'answer'],
     templateId: 500,
     templateImg: '',
   },
@@ -59,14 +59,7 @@ const templateSlice = createSlice({
     onSlideInputChange(
       state,
       { payload }: PayloadAction<SlideInputChangePayload>
-    ) {
-      const { field, input, slideIndex } = payload;
-      const selectedTemplate = state.templates.find(
-        (t) => t.templateId === state.selectedTemplate.templateId
-      ) as Template;
-      selectedTemplate.slides[slideIndex][field] = input;
-      state.selectedTemplate.slides[slideIndex][field] = input;
-    },
+    ) {},
     onGetState(state, test) {
       return state;
     },

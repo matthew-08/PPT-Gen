@@ -6,6 +6,8 @@ export type SlideState = {
   additional?: string;
 };
 
+export type SlideFields = FieldOptions[];
+
 export type UserState = {
   userId: number;
 };
@@ -13,7 +15,7 @@ export type UserState = {
 export type Template = {
   templateId: number;
   slideAmount: number;
-  slides: SlideState[];
+  slideFields: FieldOptions[];
   loading: boolean;
   name: string;
   templateImg: string;
