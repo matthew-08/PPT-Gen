@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SlideFields, SlideState, FieldOptions } from '../types';
 
 type SlideRowState = {
@@ -21,7 +21,7 @@ const useSlideRow = (slideFields: SlideFields, slideIndex: number) => {
       [field]: value,
     });
   };
-  return { handleChange, formObj };
+  return { handleChange, form };
 };
 
 export default useSlideRow;

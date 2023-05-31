@@ -1,6 +1,4 @@
-import React, { useEffect } from 'react';
-import { onGetState } from '../features/templateSlice';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { useAppSelector } from '../store/hooks';
 import { FieldOptions, Template } from '../types';
 
 const useSelectedTemplate = () => {

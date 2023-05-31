@@ -1,5 +1,4 @@
-import { FieldOptions, TemplateServerResponse, TemplateState } from '../types';
-import genTemplateState from './genTemplateState';
+import { TemplateServerResponse, TemplateState } from '../types';
 
 export const formatTemplateGet = (
   res: TemplateServerResponse

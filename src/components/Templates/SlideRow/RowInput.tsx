@@ -1,7 +1,5 @@
 import { Input } from '@chakra-ui/react';
-import { useEffect, memo } from 'react';
-import useFieldInput from '../../../hooks/useFieldInput';
-import useSelectedTemplate from '../../../hooks/useSelectedTemplate';
+import { memo } from 'react';
 import { FieldOptions } from '../../../types';
 
 type Props = {

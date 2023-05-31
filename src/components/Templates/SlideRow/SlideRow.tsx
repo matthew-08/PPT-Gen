@@ -12,7 +12,7 @@ type Props = {
 
 export const SlideRow = memo(function SlideRow({ slide, slideIndex }: Props) {
   const [isSmallerThan800] = useMediaQuery('(max-width: 800px)');
-  const { handleChange, formObj: slideForm } = useSlideRow(slide, slideIndex);
+  const { handleChange, form: slideForm } = useSlideRow(slide, slideIndex);
 
   return (
     <Flex
