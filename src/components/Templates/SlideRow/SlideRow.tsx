@@ -1,8 +1,7 @@
-import { Flex, Input, Text, useMediaQuery } from '@chakra-ui/react';
+/* eslint-disable react/no-array-index-key */
+import { Flex, Input, Slide, Text, useMediaQuery } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
-import React, { useState, memo, useEffect } from 'react';
-import { onSlideInputChange } from '../../../features/templateSlice';
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { useState, memo, useEffect } from 'react';
 import { FieldOptions, SlideState } from '../../../types';
 import objectKeys from '../../../utils/objectKeys';
 import RowInput from './RowInput';
@@ -14,10 +13,21 @@ type Props = {
 
 export const SlideRow = memo(function SlideRow({ slide, slideIndex }: Props) {
   const fields = objectKeys(slide);
+  const formObj = fields.reduce((acc: { [key: string]: string }, k) => {
+    acc[k] = '';
+    return acc;
+  }, {});
   const [isSmallerThan800] = useMediaQuery('(max-width: 800px)');
+  const [form, setForm] = useState(formObj);
   useEffect(() => {
     console.log('Slide row re-render');
   }, []);
+  const handleChange = (field: FieldOptions, value: string) => {
+    setForm({
+      ...form,
+      [field]: value,
+    });
+  };
 
   return (
     <Flex
@@ -30,8 +40,16 @@ export const SlideRow = memo(function SlideRow({ slide, slideIndex }: Props) {
       <Text fontSize="1.8rem" textAlign="center" minW="8rem">
         Slide {slideIndex + 1}
       </Text>
-      {fields.map((field) => {
-        return <RowInput slideIndex={slideIndex} field={field} key={field} />;
+      {fields.map((field, index) => {
+        return (
+          <RowInput
+            slideIndex={slideIndex}
+            field={field}
+            handleChange={handleChange}
+            key={index}
+            value={form[field]}
+          />
+        );
       })}
     </Flex>
   );

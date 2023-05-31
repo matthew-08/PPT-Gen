@@ -1,5 +1,5 @@
 import { Input } from '@chakra-ui/react';
-import { useEffect } from 'react';
+import { useEffect, memo } from 'react';
 import useFieldInput from '../../../hooks/useFieldInput';
 import useSelectedTemplate from '../../../hooks/useSelectedTemplate';
 import { FieldOptions } from '../../../types';
@@ -7,13 +7,16 @@ import { FieldOptions } from '../../../types';
 type Props = {
   field: FieldOptions;
   slideIndex: number;
+  handleChange: (field: FieldOptions, value: string) => void;
+  value: string;
 };
 
-function RowInput({ field, slideIndex }: Props) {
-  const { handleInputChange, inputValue } = useFieldInput({
-    fieldOption: field,
-    slideIndex,
-  });
+const RowInput = memo(function RowInput({
+  field,
+  slideIndex,
+  handleChange,
+  value,
+}: Props) {
   return (
     <Input
       ml="1rem"
@@ -21,11 +24,11 @@ function RowInput({ field, slideIndex }: Props) {
       fontSize="1.4rem"
       padding="1.5rem"
       background="white"
-      value={inputValue}
+      value={value}
       placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
-      onChange={(e) => handleInputChange(e.target.value)}
+      onChange={(e) => handleChange(field, e.target.value)}
     />
   );
-}
+});
 
 export default RowInput;

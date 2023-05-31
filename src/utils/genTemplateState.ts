@@ -1,3 +1,4 @@
+import { v4 as uuid } from 'uuid';
 import { FieldOptions, SlideState, Template, TemplateState } from '../types';
 
 const genTemplateState = (

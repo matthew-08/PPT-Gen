@@ -30,7 +30,7 @@ function Home() {
       <Flex flexDir="column" minW="100%">
         <TCardContainer />
       </Flex>
-      <Flex flexDir="column" mt="2rem" align="center">
+      <Flex flexDir="column" mt="2rem" align="center" textAlign="center">
         <Text m="auto" fontSize="2rem" mb="1rem">
           Type the content for each text field of the template:
         </Text>

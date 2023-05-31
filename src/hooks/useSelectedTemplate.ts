@@ -12,11 +12,6 @@ const useSelectedTemplate = () => {
     (state) => state.templateReducer.selectedTemplate
   );
 
-  const test = useAppSelector((state) => state);
-  useEffect(() => {
-    console.log(test);
-  }, [test]);
-
   return { selectedTemplate } as { selectedTemplate: Template };
 };
 
