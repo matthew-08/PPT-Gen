@@ -13,15 +13,15 @@ const useSlideRow = (slideFields: SlideFields, slideIndex: number) => {
     return acc;
   }, {} as SlideRowState);
 
-  const [form, setForm] = useState(formObj);
+  const [slideForm, setSlideForm] = useState(formObj);
 
   const handleChange = (field: FieldOptions, value: string) => {
-    setForm({
-      ...form,
+    setSlideForm({
+      ...slideForm,
       [field]: value,
     });
   };
-  return { handleChange, form };
+  return { handleChange, slideForm };
 };
 
 export default useSlideRow;
