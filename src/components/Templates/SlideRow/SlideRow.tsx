@@ -1,9 +1,9 @@
 /* eslint-disable react/no-array-index-key */
 import { Flex, Text, useMediaQuery } from '@chakra-ui/react';
-import { memo } from 'react';
-import useSlideRow from '../../../hooks/useSlideRow';
+import { memo, useEffect } from 'react';
 import { SlideFields } from '../../../types';
 import RowInput from './RowInput';
+import useSlideRow from '../../../hooks/useSlideRow';
 
 type Props = {
   slide: SlideFields;
@@ -12,12 +12,17 @@ type Props = {
 
 export const SlideRow = memo(function SlideRow({ slide, slideIndex }: Props) {
   const [isSmallerThan800] = useMediaQuery('(max-width: 800px)');
-  const { handleChange, slideForm } = useSlideRow(slide, slideIndex);
+  const { handleChange, slideForm, hookForm } = useSlideRow(slide, slideIndex);
+
+  useEffect(() => {
+    console.log(hookForm);
+  }, [hookForm]);
 
   return (
     <Flex
       align="center"
       fontSize="2rem"
+      as="form"
       mb="2rem"
       gap={isSmallerThan800 ? '1rem' : ''}
       flexDir={isSmallerThan800 ? 'column' : 'row'}
@@ -30,9 +35,10 @@ export const SlideRow = memo(function SlideRow({ slide, slideIndex }: Props) {
           <RowInput
             slideIndex={slideIndex}
             field={field}
+            hookForm={hookForm}
             handleChange={handleChange}
             key={index}
-            value={slideForm[field] as string}
+            value={slideForm[field] as string} // Assert as string because useSlideRow handles validation
           />
         );
       })}

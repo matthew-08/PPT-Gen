@@ -1,11 +1,10 @@
-import React from 'react';
-import { Flex, Text, Image } from '@chakra-ui/react';
+import { Flex, Image } from '@chakra-ui/react';
 import { Oval } from 'react-loader-spinner';
 import { Template } from '../../types';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { onSelectTemplate } from '../../features/templateSlice';
 
-type TCardInfo = Omit<Template, 'slides' | 'slideAmount'>;
+type TCardInfo = Omit<Template, 'slideFields' | 'slideAmount' | ''>;
 
 type Props = {
   tCardInfo: TCardInfo;
@@ -14,6 +13,7 @@ type Props = {
 
 function TemplateCard({ tCardInfo: template, loading }: Props) {
   const dispatch = useAppDispatch();
+
   const isSelectedTemplate = useAppSelector(
     (state) =>
       state.templateReducer.selectedTemplate.templateId === template.templateId
@@ -21,6 +21,7 @@ function TemplateCard({ tCardInfo: template, loading }: Props) {
   const handleClick = () => {
     return dispatch(onSelectTemplate(template.templateId));
   };
+
   return (
     <Flex
       justify="center"

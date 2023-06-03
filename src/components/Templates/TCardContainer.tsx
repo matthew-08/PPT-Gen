@@ -1,21 +1,18 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useEffect, memo } from 'react';
-import { Flex, SimpleGrid } from '@chakra-ui/react';
+import { memo } from 'react';
+import { Flex } from '@chakra-ui/react';
+import { v4 as uuid } from 'uuid';
 import TemplateCard from './TemplateCard';
-import { useAppSelector } from '../../store/hooks';
 import useTCardInfo from '../../hooks/UseTCardInfo';
 
 const TCardContainer = memo(function TCardContainer() {
   const { tCardInfo } = useTCardInfo();
-  useEffect(() => {
-    console.log('t card re-render');
-  }, []);
   return (
     <Flex mt="10" gap="1rem" flexWrap="wrap" align="center" justify="center">
       {tCardInfo.map((template, index) => {
         return (
           <TemplateCard
-            key={template.templateId}
+            key={uuid()}
             tCardInfo={template}
             loading={template.loading}
           />

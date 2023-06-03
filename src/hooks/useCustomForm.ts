@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { HTMLInputTypeAttribute } from 'react';
+import { HTMLInputTypeAttribute, useEffect } from 'react';
 import { ZodSchema } from 'zod';
 import { generateFormInputs } from '../utils/generateFormInputs';
 

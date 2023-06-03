@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useAppSelector } from '../store/hooks';
 import { FieldOptions, Template } from '../types';
 
@@ -12,6 +13,7 @@ const useSelectedTemplate = () => {
   return { selectedTemplate, slides } as {
     selectedTemplate: Template;
     slides: FieldOptions[][];
+    submitStatus: boolean;
   };
 };
 

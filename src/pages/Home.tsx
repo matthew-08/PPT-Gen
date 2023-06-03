@@ -1,11 +1,20 @@
 /* eslint-disable react/no-array-index-key */
-import { Heading, Flex, useMediaQuery, Text, Button } from '@chakra-ui/react';
+import {
+  Heading,
+  Flex,
+  useMediaQuery,
+  Text,
+  Button,
+  useDisclosure,
+} from '@chakra-ui/react';
 import { useEffect } from 'react';
 import DefaultLayout from '../layouts/DefaultLayout';
 import SlidesController from '../components/Templates/SlidesController';
 import { useAppDispatch } from '../store/hooks';
 import { fetchAllTemplates } from '../features/templateSlice';
 import TCardContainer from '../components/Templates/TCardContainer';
+import useSubmit from '../hooks/useSubmit';
+import DownloadModal from '../components/Modal/DownloadModal';
 
 function Home() {
   const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
@@ -13,7 +22,8 @@ function Home() {
 
   useEffect(() => {
     dispatch(fetchAllTemplates());
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <DefaultLayout>
@@ -43,6 +53,7 @@ function Home() {
         </Button>
       </Flex>
       <SlidesController />
+      <DownloadModal />
     </DefaultLayout>
   );
 }

@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import templateReducer from '../features/templateSlice';
+import submitReducer from '../features/submitSlice';
 
 export const store = configureStore({
   reducer: {
     templateReducer,
+    submitReducer,
   },
 });
 
