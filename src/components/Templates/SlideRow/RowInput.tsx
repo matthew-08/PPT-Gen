@@ -1,25 +1,17 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { FormControl, FormErrorMessage, Input } from '@chakra-ui/react';
-import { memo, useEffect, useState } from 'react';
+import { Input } from '@chakra-ui/react';
+import { memo, useEffect } from 'react';
 import { HookForm } from '../../../hooks/useSlideRow';
-import useSubmit from '../../../hooks/useSubmit';
 import { FieldOptions } from '../../../types';
 
 type Props = {
   field: FieldOptions;
   slideIndex: number;
-  handleChange: (field: FieldOptions, value: string) => void;
-  value: string;
   hookForm: HookForm;
+  disabled: boolean;
 };
 
-const RowInput = memo(function RowInput({
-  field,
-  slideIndex,
-  hookForm,
-  handleChange,
-  value,
-}: Props) {
+const RowInput = memo(function RowInput({ field, hookForm }: Props) {
   const { errors, register } = hookForm;
   const isInvalid = field in errors;
   useEffect(() => {

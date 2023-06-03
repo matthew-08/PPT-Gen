@@ -8,14 +8,16 @@ type SlideRowSubmission = (SlideRowState | false)[];
 type SubmitState = {
   submitStatus: boolean;
   slideRows: SlideRowState[];
+  autoFillStatus: boolean;
 };
 
 const initialState: SubmitState = {
   submitStatus: false,
   slideRows: [],
+  autoFillStatus: false,
 };
 
-const submitSlice = createSlice({
+const appFormStatus = createSlice({
   initialState,
   name: 'submit',
   reducers: {
@@ -24,11 +26,16 @@ const submitSlice = createSlice({
     },
     onSubmit(state, { payload }: PayloadAction<SlideRowSubmission>) {
       if (!payload) {
+        console.log(payload);
       }
+    },
+    onChangeAutoFillStatus(state, { payload }: PayloadAction<boolean>) {
+      state.autoFillStatus = payload;
     },
   },
 });
 
-export default submitSlice.reducer;
+export default appFormStatus.reducer;
 
-export const { onChangeSubmitStatus } = submitSlice.actions;
+export const { onChangeSubmitStatus, onChangeAutoFillStatus } =
+  appFormStatus.actions;

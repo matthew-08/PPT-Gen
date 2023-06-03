@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useAppSelector } from '../store/hooks';
 import { FieldOptions, Template } from '../types';
 

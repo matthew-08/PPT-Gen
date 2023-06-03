@@ -1,19 +1,36 @@
 /* eslint-disable react/no-array-index-key */
-import { Flex, Button } from '@chakra-ui/react';
-import { useEffect, useLayoutEffect, useRef } from 'react';
-import { v4 as uuid } from 'uuid';
+import { Flex, Button, Text } from '@chakra-ui/react';
+import { useRef } from 'react';
 import useSelectedTemplate from '../../hooks/useSelectedTemplate';
-import useSubmit from '../../hooks/useSubmit';
+import useAppFormStatus from '../../hooks/useAppFormStatus';
 // eslint-disable-next-line import/no-named-as-default
 import SlideRow from './SlideRow/SlideRow';
 
 function SlidesController() {
-  const { selectedTemplate, slides } = useSelectedTemplate();
-  const { handleSetSubmitStatus, submitStatus } = useSubmit();
+  const { slides } = useSelectedTemplate();
+  const { handleSetSubmitStatus, handleSetAutoFillStatus } = useAppFormStatus();
   const containerRef = useRef(null);
 
   return (
     <>
+      <Flex flexDir="column" mt="2rem" align="center" textAlign="center">
+        <Text m="auto" fontSize="2rem" mb="1rem">
+          Type the content for each text field of the template:
+        </Text>
+        <Text m="auto" maxW="60ch" textAlign="center" mb="0.5rem">
+          *If you'd like to demo the functionality, click the auto-fill button
+          below and then click submit at the bottom of the page.
+        </Text>
+        <Button
+          m="auto"
+          colorScheme="purple"
+          size="lg"
+          mb="1rem"
+          onClick={() => handleSetAutoFillStatus(true)}
+        >
+          Auto Fill
+        </Button>
+      </Flex>
       <Flex
         flexDir="column"
         m="auto"

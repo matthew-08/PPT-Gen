@@ -12,7 +12,7 @@ type Props = {
 
 export const SlideRow = memo(function SlideRow({ slide, slideIndex }: Props) {
   const [isSmallerThan800] = useMediaQuery('(max-width: 800px)');
-  const { handleChange, slideForm, hookForm } = useSlideRow(slide, slideIndex);
+  const { hookForm, disabled } = useSlideRow(slide, slideIndex);
 
   useEffect(() => {
     console.log(hookForm);
@@ -22,8 +22,8 @@ export const SlideRow = memo(function SlideRow({ slide, slideIndex }: Props) {
     <Flex
       align="center"
       fontSize="2rem"
-      as="form"
       mb="2rem"
+      key={slideIndex}
       gap={isSmallerThan800 ? '1rem' : ''}
       flexDir={isSmallerThan800 ? 'column' : 'row'}
     >
@@ -33,12 +33,11 @@ export const SlideRow = memo(function SlideRow({ slide, slideIndex }: Props) {
       {slide.map((field, index) => {
         return (
           <RowInput
+            disabled={disabled}
             slideIndex={slideIndex}
             field={field}
             hookForm={hookForm}
-            handleChange={handleChange}
             key={index}
-            value={slideForm[field] as string} // Assert as string because useSlideRow handles validation
           />
         );
       })}

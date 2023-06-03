@@ -1,9 +1,7 @@
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useState } from 'react';
 import { FieldErrors, useForm, UseFormRegister } from 'react-hook-form';
-import SlideRowSchema from '../schemas/slideRow.schema';
-import { SlideFields, FieldOptions, SlideRowState } from '../types';
-import useSubmit from './useSubmit';
+import { SlideFields, SlideRowState } from '../types';
+import useAppFormStatus from './useAppFormStatus';
 
 export type HookForm = {
   register: UseFormRegister<SlideRowState>;
@@ -11,43 +9,41 @@ export type HookForm = {
 };
 
 const useSlideRow = (slideFields: SlideFields, slideIndex: number) => {
-  const { submitStatus, handleSetSubmitStatus } = useSubmit();
-  const formObj: SlideRowState = slideFields.reduce((acc: SlideRowState, k) => {
-    acc[k] = '';
-    return acc;
-  }, {} as SlideRowState);
-  const [slideForm, setSlideForm] = useState(formObj);
-
+  const { submitStatus, autoFillStatus } = useAppFormStatus();
+  const [disabled, setDisabled] = useState<boolean>(true);
   const {
     handleSubmit: hFormSubmit,
     register,
-    getFieldState,
+    setValue,
     formState: { errors },
   } = useForm<SlideRowState>();
-
   const hookForm = {
     register,
     errors,
   };
 
-  const handleSubmit = () => {
+  const handleAutoFill = () => {
+    slideFields.map((slide) => {
+      return setValue(slide, `${slide} - ${slideIndex + 1}`);
+    });
+  };
+
+  const handleSubmit = async () => {
+    setDisabled(true);
     const onvalid = () => console.log('valid');
-    hFormSubmit(onvalid)();
+    hFormSubmit(onvalid);
   };
   useEffect(() => {
     if (submitStatus) {
       handleSubmit();
     }
+    if (autoFillStatus) {
+      handleAutoFill();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [submitStatus]);
+  }, [submitStatus, autoFillStatus]);
 
-  const handleChange = (field: FieldOptions, value: string) => {
-    setSlideForm({
-      ...slideForm,
-      [field]: value,
-    });
-  };
-  return { handleChange, slideForm, hookForm };
+  return { hookForm, disabled, handleAutoFill };
 };
 
 export default useSlideRow;
