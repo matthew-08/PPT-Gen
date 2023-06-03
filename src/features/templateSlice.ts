@@ -1,6 +1,12 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { FieldOptions, SlideState, Template, TemplateState } from '../types';
+import {
+  FieldOptions,
+  SlideState,
+  Template,
+  TemplateState,
+  AddSlidePayload,
+} from '../types';
 import { formatTemplateGet } from '../utils/formatResponse';
 
 export const fetchAllTemplates = createAsyncThunk(
@@ -19,10 +25,15 @@ const dummySlides = Array<SlideState>(30).fill({
   answer: '',
 });
 
+type SubmittedSlides = {
+  [slideIndex: number]: SlideState;
+};
+
 interface TemplateSliceState {
   loading: boolean;
   templates: TemplateState;
   dummySlides: null | SlideState[];
+  submittedSlides: SubmittedSlides;
   selectedTemplate: Template;
 }
 
@@ -38,6 +49,7 @@ const initialState: TemplateSliceState = {
     templateId: 500,
     templateImg: '',
   },
+  submittedSlides: {},
 };
 
 type SlideInputChangePayload = {
@@ -63,6 +75,16 @@ const templateSlice = createSlice({
     onGetState(state, test) {
       return state;
     },
+    onAddSlide(state, { payload }: PayloadAction<AddSlidePayload>) {
+      const { slideIndex, slideState } = payload;
+      state.submittedSlides[slideIndex] = slideState;
+      const keys = Object.keys(state.submittedSlides);
+      if (keys.length === state.selectedTemplate.slideAmount) {
+        console.log('VALID SUBMIT');
+      } else {
+        console.log('INVALID SUBMIT');
+      }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAllTemplates.fulfilled, (state, action) => {
@@ -72,7 +94,7 @@ const templateSlice = createSlice({
   },
 });
 
-export const { onSelectTemplate, onSlideInputChange, onGetState } =
+export const { onSelectTemplate, onSlideInputChange, onGetState, onAddSlide } =
   templateSlice.actions;
 
 export default templateSlice.reducer;

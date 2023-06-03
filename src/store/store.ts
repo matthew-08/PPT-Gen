@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import templateReducer from '../features/templateSlice';
-import appFormStatusReducer from '../features/appFormStatus';
+import appFormStatusReducer from '../features/appFormSlice';
 
 export const store = configureStore({
   reducer: {

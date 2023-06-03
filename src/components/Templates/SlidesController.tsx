@@ -2,13 +2,13 @@
 import { Flex, Button, Text } from '@chakra-ui/react';
 import { useRef } from 'react';
 import useSelectedTemplate from '../../hooks/useSelectedTemplate';
-import useAppFormStatus from '../../hooks/useAppFormStatus';
+import useAppForm from '../../hooks/useAppForm';
 // eslint-disable-next-line import/no-named-as-default
 import SlideRow from './SlideRow/SlideRow';
 
 function SlidesController() {
   const { slides } = useSelectedTemplate();
-  const { handleSetSubmitStatus, handleSetAutoFillStatus } = useAppFormStatus();
+  const { handleSetSubmitStatus, handleSetAutoFillStatus } = useAppForm();
   const containerRef = useRef(null);
 
   return (

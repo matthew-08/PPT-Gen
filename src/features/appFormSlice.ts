@@ -1,41 +1,42 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-import { SlideRowState } from '../types';
-
-type SlideRowSubmission = (SlideRowState | false)[];
+import { onSelectTemplate } from './templateSlice';
+import { SlideRowState, SlideState } from '../types';
 
 type SubmitState = {
   submitStatus: boolean;
-  slideRows: SlideRowState[];
+  slideRows: SlideState[];
   autoFillStatus: boolean;
+  selectedTemplate: number;
 };
 
 const initialState: SubmitState = {
   submitStatus: false,
   slideRows: [],
   autoFillStatus: false,
+  selectedTemplate: 1,
 };
 
-const appFormStatus = createSlice({
+const appFormSlice = createSlice({
   initialState,
   name: 'submit',
   reducers: {
     onChangeSubmitStatus(state, { payload, type }: PayloadAction<boolean>) {
       state.submitStatus = payload;
     },
-    onSubmit(state, { payload }: PayloadAction<SlideRowSubmission>) {
-      if (!payload) {
-        console.log(payload);
-      }
-    },
+    onSubmit(state) {},
     onChangeAutoFillStatus(state, { payload }: PayloadAction<boolean>) {
       state.autoFillStatus = payload;
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(onSelectTemplate, (state, action) => {
+      state.selectedTemplate = action.payload;
+    });
+  },
 });
 
-export default appFormStatus.reducer;
+export default appFormSlice.reducer;
 
 export const { onChangeSubmitStatus, onChangeAutoFillStatus } =
-  appFormStatus.actions;
+  appFormSlice.actions;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { FieldErrors, useForm, UseFormRegister } from 'react-hook-form';
-import { SlideFields, SlideRowState } from '../types';
-import useAppFormStatus from './useAppFormStatus';
+import { SlideFields, SlideRowState, SlideState } from '../types';
+import useAppFormStatus from './useAppForm';
 
 export type HookForm = {
   register: UseFormRegister<SlideRowState>;
@@ -9,7 +9,8 @@ export type HookForm = {
 };
 
 const useSlideRow = (slideFields: SlideFields, slideIndex: number) => {
-  const { submitStatus, autoFillStatus } = useAppFormStatus();
+  const { submitStatus, autoFillStatus, handleSubmitSlide } =
+    useAppFormStatus();
   const [disabled, setDisabled] = useState<boolean>(true);
   const {
     handleSubmit: hFormSubmit,
@@ -30,8 +31,12 @@ const useSlideRow = (slideFields: SlideFields, slideIndex: number) => {
 
   const handleSubmit = async () => {
     setDisabled(true);
-    const onvalid = () => console.log('valid');
-    hFormSubmit(onvalid);
+    const onValid = (slideState: SlideState) =>
+      handleSubmitSlide({
+        slideState,
+        slideIndex,
+      });
+    hFormSubmit(onValid)();
   };
   useEffect(() => {
     if (submitStatus) {

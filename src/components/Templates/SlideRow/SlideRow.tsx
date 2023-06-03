@@ -14,10 +14,6 @@ export const SlideRow = memo(function SlideRow({ slide, slideIndex }: Props) {
   const [isSmallerThan800] = useMediaQuery('(max-width: 800px)');
   const { hookForm, disabled } = useSlideRow(slide, slideIndex);
 
-  useEffect(() => {
-    console.log(hookForm);
-  }, [hookForm]);
-
   return (
     <Flex
       align="center"

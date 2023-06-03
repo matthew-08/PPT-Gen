@@ -9,6 +9,11 @@ export type SlideState = {
   additional?: string;
 };
 
+export type AddSlidePayload = {
+  slideIndex: number;
+  slideState: SlideState;
+};
+
 export type SlideRowState = {
   [K in FieldOptions as K extends 'question' ? never : K]?: string;
 } & {
