@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Input } from '@chakra-ui/react';
-import { memo, useEffect } from 'react';
+import { memo } from 'react';
 import { HookForm } from '../../../hooks/useSlideRow';
 import { FieldOptions } from '../../../types';
 
@@ -14,9 +14,7 @@ type Props = {
 const RowInput = memo(function RowInput({ field, hookForm }: Props) {
   const { errors, register } = hookForm;
   const isInvalid = field in errors;
-  useEffect(() => {
-    console.log('ROW INPUT RERENDER');
-  }, []);
+
   return (
     <Input
       ml="1rem"

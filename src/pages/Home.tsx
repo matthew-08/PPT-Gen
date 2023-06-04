@@ -1,11 +1,14 @@
 /* eslint-disable react/no-array-index-key */
-import { Heading, Flex, useMediaQuery } from '@chakra-ui/react';
+import { Heading, Flex } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import DefaultLayout from '../layouts/DefaultLayout';
 import SlidesController from '../components/Templates/SlidesController';
 import { useAppDispatch } from '../store/hooks';
 import { fetchAllTemplates } from '../features/templateSlice';
 import TCardContainer from '../components/Templates/TCardContainer';
+import useDownloadPpt from '../hooks/useDownloadPpt';
+import SlotModal from '../components/global/SlotModal';
+import DownloadModal from '../components/Modal/DownloadModal';
 
 function Home() {
   const dispatch = useAppDispatch();
@@ -31,6 +34,7 @@ function Home() {
         <TCardContainer />
       </Flex>
       <SlidesController />
+      <DownloadModal />
     </DefaultLayout>
   );
 }

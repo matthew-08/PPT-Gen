@@ -9,7 +9,6 @@ import SlideRow from './SlideRow/SlideRow';
 function SlidesController() {
   const { slides } = useSelectedTemplate();
   const { handleSetSubmitStatus, handleSetAutoFillStatus } = useAppForm();
-  const containerRef = useRef(null);
 
   return (
     <>
@@ -34,7 +33,6 @@ function SlidesController() {
       <Flex
         flexDir="column"
         m="auto"
-        ref={containerRef}
         padding="1rem"
         maxH="800px"
         overflow="auto"

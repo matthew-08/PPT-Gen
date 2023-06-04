@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import { Flex, Text, useMediaQuery } from '@chakra-ui/react';
-import { memo, useEffect } from 'react';
+import { memo } from 'react';
 import { SlideFields } from '../../../types';
 import RowInput from './RowInput';
 import useSlideRow from '../../../hooks/useSlideRow';

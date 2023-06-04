@@ -7,14 +7,14 @@ type SubmitState = {
   submitStatus: boolean;
   slideRows: SlideState[];
   autoFillStatus: boolean;
-  selectedTemplate: number;
+  clearFieldsStatus: boolean;
 };
 
 const initialState: SubmitState = {
   submitStatus: false,
   slideRows: [],
   autoFillStatus: false,
-  selectedTemplate: 1,
+  clearFieldsStatus: false,
 };
 
 const appFormSlice = createSlice({
@@ -29,11 +29,7 @@ const appFormSlice = createSlice({
       state.autoFillStatus = payload;
     },
   },
-  extraReducers: (builder) => {
-    builder.addCase(onSelectTemplate, (state, action) => {
-      state.selectedTemplate = action.payload;
-    });
-  },
+  extraReducers: (builder) => {},
 });
 
 export default appFormSlice.reducer;

@@ -33,6 +33,7 @@ export type Template = {
   loading: boolean;
   name: string;
   templateImg: string;
+  validSubmit: boolean;
 };
 
 export type TemplateState = Template[];

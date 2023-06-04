@@ -1,19 +1,16 @@
 import React from 'react';
 import { Text } from '@chakra-ui/react';
+import { Grid } from 'react-loader-spinner';
 import SlotModal from '../global/SlotModal';
 import { SlotModalProps } from '../../types';
+import useDownloadPpt from '../../hooks/useDownloadPpt';
 
-type Props = {
-  slotModalProps: SlotModalProps;
-};
+function DownloadModal() {
+  const { disclosureState, downloadStatus } = useDownloadPpt();
 
-function DownloadModal({ slotModalProps }: Props) {
   return (
-    <SlotModal
-      disclosureState={slotModalProps.disclosureState}
-      modalHeader="Download"
-    >
-      <Text>Error</Text>
+    <SlotModal modalHeader="Download" disclosureState={disclosureState}>
+      <Grid />
     </SlotModal>
   );
 }

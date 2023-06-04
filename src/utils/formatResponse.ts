@@ -15,6 +15,7 @@ export const formatTemplateGet = (
       return {
         templateImg,
         slideAmount,
+        validSubmit: false,
         loading: false,
         slideFields: [...fields],
         templateId,

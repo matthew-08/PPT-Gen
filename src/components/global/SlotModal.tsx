@@ -20,7 +20,7 @@ type Props = {
   children: ReactNode;
 };
 
-function SignInModal({ disclosureState, modalHeader, children }: Props) {
+function SlotModal({ disclosureState, modalHeader, children }: Props) {
   const { isOpen, onClose, onOpen } = disclosureState;
   return (
     <Modal isOpen={isOpen} onClose={onClose} motionPreset="slideInBottom">
@@ -41,4 +41,4 @@ function SignInModal({ disclosureState, modalHeader, children }: Props) {
   );
 }
 
-export default SignInModal;
+export default SlotModal;

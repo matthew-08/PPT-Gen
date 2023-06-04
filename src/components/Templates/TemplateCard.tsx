@@ -4,7 +4,7 @@ import { Template } from '../../types';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { onSelectTemplate } from '../../features/templateSlice';
 
-type TCardInfo = Omit<Template, 'slideFields' | 'slideAmount' | ''>;
+type TCardInfo = Omit<Template, 'slideFields' | 'slideAmount' | 'validSubmit'>;
 
 type Props = {
   tCardInfo: TCardInfo;

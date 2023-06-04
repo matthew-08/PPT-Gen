@@ -31,6 +31,8 @@ const useAppFormStatus = () => {
     }
   };
 
+  const handleClearAllSlides = () => {};
+
   return {
     submitStatus,
     handleSetSubmitStatus,

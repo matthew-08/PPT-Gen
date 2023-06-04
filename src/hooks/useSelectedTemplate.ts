@@ -7,13 +7,9 @@ const useSelectedTemplate = () => {
   );
   const { slideAmount, slideFields } = selectedTemplate;
 
-  const slides = Array(slideAmount).fill(slideFields);
+  const slides = Array(slideAmount).fill(slideFields) as FieldOptions[][];
 
-  return { selectedTemplate, slides } as {
-    selectedTemplate: Template;
-    slides: FieldOptions[][];
-    submitStatus: boolean;
-  };
+  return { selectedTemplate, slides };
 };
 
 export default useSelectedTemplate;

@@ -46,8 +46,9 @@ const initialState: TemplateSliceState = {
     name: '',
     slideAmount: 28,
     slideFields: ['question', 'additional', 'answer'],
-    templateId: 500,
+    templateId: 4,
     templateImg: '',
+    validSubmit: false,
   },
   submittedSlides: {},
 };
@@ -80,7 +81,7 @@ const templateSlice = createSlice({
       state.submittedSlides[slideIndex] = slideState;
       const keys = Object.keys(state.submittedSlides);
       if (keys.length === state.selectedTemplate.slideAmount) {
-        console.log('VALID SUBMIT');
+        state.selectedTemplate.validSubmit = true;
       } else {
         console.log('INVALID SUBMIT');
       }
