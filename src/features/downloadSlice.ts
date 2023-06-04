@@ -1,11 +1,10 @@
+/* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { SlideState } from '../types';
 
 export const attemptDownload = createAsyncThunk(
   'download/attempt',
   async (data: { templateInput: SlideState[]; templateId: number }) => {
-    console.log('INSIDE ATTEMPT DOWNLOAD');
-    console.log(data.templateId);
     const response = await fetch('http://localhost:3005/api/template', {
       method: 'POST',
       headers: {
@@ -15,9 +14,8 @@ export const attemptDownload = createAsyncThunk(
     });
     const buffer = await response.arrayBuffer();
     const ok = new Blob([buffer]);
-    console.log(ok);
-    const testing = URL.createObjectURL(ok);
-    console.log(testing);
+    const downloadURL = URL.createObjectURL(ok);
+    return downloadURL;
   }
 );
 
@@ -28,6 +26,7 @@ type DownloadSlice = {
     failed: boolean;
     cancelled: boolean;
   };
+  url: string;
 };
 
 const initialState: DownloadSlice = {
@@ -37,11 +36,24 @@ const initialState: DownloadSlice = {
     failed: false,
     cancelled: false,
   },
+  url: '',
 };
 const downloadSlice = createSlice({
   name: 'download',
   reducers: {},
   initialState,
+  extraReducers: (builder) => {
+    builder.addCase(attemptDownload.pending, (state) => {
+      state.downloadStatus.started = true;
+    });
+    builder.addCase(attemptDownload.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.downloadStatus.completed = true;
+        state.downloadStatus.started = false;
+        state.url = action.payload;
+      }
+    });
+  },
 });
 
 export default downloadSlice.reducer;

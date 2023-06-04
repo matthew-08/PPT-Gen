@@ -23,7 +23,12 @@ type Props = {
 function SlotModal({ disclosureState, modalHeader, children }: Props) {
   const { isOpen, onClose, onOpen } = disclosureState;
   return (
-    <Modal isOpen={isOpen} onClose={onClose} motionPreset="slideInBottom">
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      closeOnOverlayClick={false}
+      motionPreset="slideInBottom"
+    >
       <ModalOverlay />
       <ModalContent borderRadius="20px">
         <ModalCloseButton />

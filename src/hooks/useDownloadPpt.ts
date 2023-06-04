@@ -18,11 +18,12 @@ const useDownloadPpt = () => {
   );
   const { selectedTemplate } = useSelectedTemplate();
 
-  const { downloadStatus } = useAppSelector((state) => state.downloadReducer);
+  const { downloadStatus, url } = useAppSelector(
+    (state) => state.downloadReducer
+  );
 
   const handleDowload = async () => {
     const arrayOfSlides = Object.values(slideState);
-    console.log('dispatch');
     dispatch(
       attemptDownload({
         templateId: selectedTemplate.templateId,
@@ -42,6 +43,7 @@ const useDownloadPpt = () => {
   return {
     disclosureState,
     downloadStatus,
+    url,
   };
 };
 
