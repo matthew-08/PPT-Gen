@@ -1,8 +1,8 @@
 import { useAppSelector } from '../store/hooks';
 
-const useTCardInfo = () => {
+const useTemplateCard = () => {
   const templates = useAppSelector((state) => state.templateReducer.templates);
-  const tCardInfo = templates.map(
+  const templateCards = templates.map(
     ({ loading, name, templateId, templateImg }) => {
       return {
         name,
@@ -12,7 +12,7 @@ const useTCardInfo = () => {
       };
     }
   );
-  return { tCardInfo };
+  return { templateCards };
 };
 
-export default useTCardInfo;
+export default useTemplateCard;

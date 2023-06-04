@@ -3,18 +3,18 @@ import { memo } from 'react';
 import { Flex } from '@chakra-ui/react';
 import { v4 as uuid } from 'uuid';
 import TemplateCard from './TemplateCard';
-import useTCardInfo from '../../hooks/UseTCardInfo';
+import useTemplateCard from '../../hooks/useTemplateCard';
 
 const TCardContainer = memo(function TCardContainer() {
-  const { tCardInfo } = useTCardInfo();
+  const { templateCards } = useTemplateCard();
   return (
     <Flex mt="10" gap="1rem" flexWrap="wrap" align="center" justify="center">
-      {tCardInfo.map((template, index) => {
+      {templateCards.map((tCard) => {
         return (
           <TemplateCard
             key={uuid()}
-            tCardInfo={template}
-            loading={template.loading}
+            tCardInfo={tCard}
+            loading={tCard.loading}
           />
         );
       })}

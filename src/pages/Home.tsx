@@ -1,12 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import {
-  Heading,
-  Flex,
-  useMediaQuery,
-  Text,
-  Button,
-  useDisclosure,
-} from '@chakra-ui/react';
+import { Heading, Flex, useMediaQuery } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import DefaultLayout from '../layouts/DefaultLayout';
 import SlidesController from '../components/Templates/SlidesController';
@@ -15,7 +8,6 @@ import { fetchAllTemplates } from '../features/templateSlice';
 import TCardContainer from '../components/Templates/TCardContainer';
 
 function Home() {
-  const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
   const dispatch = useAppDispatch();
 
   useEffect(() => {
