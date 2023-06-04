@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useDisclosure } from '@chakra-ui/react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { attemptDownload } from '../features/downloadSlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
@@ -8,16 +8,16 @@ import useSelectedTemplate from './useSelectedTemplate';
 
 const useDownloadPpt = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [pptName, setPptName] = useState<false | string>('');
+
   const dispatch = useAppDispatch();
   const validSumbit = useAppSelector(
     (state) => state.templateReducer.selectedTemplate.validSubmit
   );
-
   const slideState = useAppSelector(
     (state) => state.templateReducer.submittedSlides
   );
   const { selectedTemplate } = useSelectedTemplate();
-
   const { downloadStatus, url } = useAppSelector(
     (state) => state.downloadReducer
   );
@@ -31,10 +31,12 @@ const useDownloadPpt = () => {
       })
     );
   };
+  const handleSetName = (name: string) => {
+    setPptName(name);
+  };
   useEffect(() => {
     if (validSumbit) {
       onOpen();
-      handleDowload();
     }
   }, [validSumbit, onOpen]);
 
@@ -44,6 +46,8 @@ const useDownloadPpt = () => {
     disclosureState,
     downloadStatus,
     url,
+    handleSetName,
+    pptName,
   };
 };
 
