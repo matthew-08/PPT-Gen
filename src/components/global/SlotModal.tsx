@@ -27,17 +27,16 @@ type Props = {
 
 function SlotModal({ disclosureState, modalHeader, children, options }: Props) {
   const { isOpen, onClose, onOpen } = disclosureState;
-  const {} = options;
   return (
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      closeOnOverlayClick={false}
+      closeOnOverlayClick={options?.disableOverlayClick || true}
       motionPreset="slideInBottom"
     >
       <ModalOverlay />
       <ModalContent borderRadius="20px">
-        <ModalCloseButton disabled={} />
+        <ModalCloseButton disabled={options?.disableCloseButton || false} />
         <ModalBody
           as={Flex}
           flexDir="column"

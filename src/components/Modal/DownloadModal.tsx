@@ -1,9 +1,9 @@
 import { Flex } from '@chakra-ui/react';
 import SlotModal from '../global/SlotModal';
 import useDownloadPpt from '../../hooks/useDownloadPpt';
-import PptName from './DownloadModal/PptName';
 import PreparingPpt from './DownloadModal/PreparingPpt';
 import DownloadComplete from './DownloadModal/DownloadComplete';
+import PptName from './DownloadModal/PptName';
 
 function DownloadModal() {
   const { disclosureState, downloadStatus, url, pptName, handlers } =
@@ -11,10 +11,7 @@ function DownloadModal() {
 
   let modalContent;
   if (!downloadStatus.started) {
-    modalContent = <PreparingPpt />;
-    {
-      /* <PptName handlers={handlers} pptName={pptName} />; */
-    }
+    modalContent = <PptName handlers={handlers} pptName={pptName} />;
   }
   if (downloadStatus.started && pptName) {
     modalContent = <PreparingPpt />;
@@ -24,7 +21,14 @@ function DownloadModal() {
   }
 
   return (
-    <SlotModal modalHeader="Download" disclosureState={disclosureState}>
+    <SlotModal
+      modalHeader="Download"
+      disclosureState={disclosureState}
+      options={{
+        disableCloseButton: !!downloadStatus.started,
+        disableOverlayClick: true,
+      }}
+    >
       <Flex flexDir="column">{modalContent}</Flex>
     </SlotModal>
   );
