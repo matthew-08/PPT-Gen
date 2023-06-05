@@ -36,8 +36,8 @@ function Navbar() {
             <CustomList
               listItems={[
                 ['Home', '/'],
-                ['About', 'github.com'],
-                ['Contact', 'github.com'],
+                ['About', '/about'],
+                ['Contact', '/contact'],
               ]}
             />
             <ButtonGroup>
