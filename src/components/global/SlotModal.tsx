@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import {
   ModalOverlay,
   ModalHeader,
@@ -18,10 +19,15 @@ type Props = {
   };
   modalHeader: string;
   children: ReactNode;
+  options?: {
+    disableOverlayClick: boolean;
+    disableCloseButton: boolean;
+  };
 };
 
-function SlotModal({ disclosureState, modalHeader, children }: Props) {
+function SlotModal({ disclosureState, modalHeader, children, options }: Props) {
   const { isOpen, onClose, onOpen } = disclosureState;
+  const {} = options;
   return (
     <Modal
       isOpen={isOpen}
@@ -31,7 +37,7 @@ function SlotModal({ disclosureState, modalHeader, children }: Props) {
     >
       <ModalOverlay />
       <ModalContent borderRadius="20px">
-        <ModalCloseButton />
+        <ModalCloseButton disabled={} />
         <ModalBody
           as={Flex}
           flexDir="column"

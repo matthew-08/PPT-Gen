@@ -11,7 +11,10 @@ function DownloadModal() {
 
   let modalContent;
   if (!downloadStatus.started) {
-    modalContent = <PptName handlers={handlers} pptName={pptName} />;
+    modalContent = <PreparingPpt />;
+    {
+      /* <PptName handlers={handlers} pptName={pptName} />; */
+    }
   }
   if (downloadStatus.started && pptName) {
     modalContent = <PreparingPpt />;

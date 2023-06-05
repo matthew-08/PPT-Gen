@@ -1,7 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { onSelectTemplate } from './templateSlice';
-import { SlideRowState, SlideState } from '../types';
+import { SlideState } from '../types';
 
 type SubmitState = {
   submitStatus: boolean;
