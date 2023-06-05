@@ -1,26 +1,28 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+/* eslint-disable no-param-reassign */
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RejectedActionFromAsyncThunk } from '@reduxjs/toolkit/dist/matchers';
 import { CreateSessionInput } from '../types';
 import apiFetch from '../utils/apiFetch';
 
 export const attemptCreateSession = createAsyncThunk(
   'template/createSession',
-  async (data: CreateSessionInput) => {
-    await apiFetch({
+  async (data: CreateSessionInput, { rejectWithValue }) => {
+    const res = await apiFetch({
       method: 'POST',
       data,
       route: '/api/session',
-    })
-      .then((res) => res.json())
-      .then((r) => console.log(r))
-      .catch((r) => console.log(r));
+    }).then((r) => r.json());
+    if (res.message) {
+      return rejectWithValue(res.message);
+    }
   }
 );
 
 type AuthState = {
   id: number | null;
   authStatus: {
-    loggedIn: false;
-    loading: false;
+    loggedIn: boolean;
+    loading: boolean;
     error: null | string;
   };
 };
@@ -41,6 +43,12 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(attemptCreateSession.pending, (state) => {
       state.authStatus.loading = true;
+    });
+    builder.addCase(attemptCreateSession.rejected, (state, action) => {
+      console.log(action);
+      const { authStatus } = state;
+      authStatus.loading = false;
+      console.log(action.payload);
     });
   },
 });
