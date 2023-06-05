@@ -3,6 +3,7 @@ import { Flex, Text, Button } from '@chakra-ui/react';
 import { FormInput } from '../FormInput';
 import { RegisterFormSchema } from '../../../schemas/register.schema';
 import useCustomForm from '../../../hooks/useCustomForm';
+import useRegister from '../../../hooks/useRegister';
 
 export type FormData = {
   email: string;
@@ -11,6 +12,7 @@ export type FormData = {
 };
 
 function RegisterForm() {
+  const { handleAttemptRegister } = useRegister();
   const { handleSubmit, inputObjects } = useCustomForm<FormData>(
     [
       {
@@ -59,6 +61,7 @@ function RegisterForm() {
         fontSize="1.2rem"
         py="1.5rem"
         type="submit"
+        onClick={() => handleAttemptRegister()}
       >
         Register
       </Button>
