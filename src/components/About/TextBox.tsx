@@ -12,6 +12,7 @@ function TextBox({ children }: Props) {
       fontSize="1.2rem"
       textAlign="left"
       fontFamily="sans-serif"
+      padding={['1rem', '0rem']}
       mb="1rem"
     >
       {children}

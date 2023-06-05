@@ -1,8 +1,8 @@
-import { Flex, Heading, Text } from '@chakra-ui/react';
-import React from 'react';
+import { Flex, Heading, Text, Image } from '@chakra-ui/react';
 import DefaultLayout from '../layouts/DefaultLayout';
 import AboutHeader from '../components/About/AboutHeader';
 import TextBox from '../components/About/TextBox';
+import { APP_IMAGES } from '../utils/images';
 
 function About() {
   return (
@@ -10,11 +10,12 @@ function About() {
       <Flex
         mt="1rem"
         mx="auto"
-        maxW="1000px"
+        maxW={['365px', '500px', '720px', '1000px']}
         pt="1rem"
+        py="1rem"
         flexDir="column"
         backgroundColor="white"
-        px="8rem"
+        px={['0.5rem', '2rem']}
         borderRadius="10px"
       >
         <AboutHeader heading="What is this application?" />
@@ -36,8 +37,21 @@ function About() {
           Each PowerPoint template has a limited set of fields per slide:
           Question, Additional Information, and Answer. The user provides their
           input for the respective slides and upon submit, the inputs are sent
-          to a Node.JS server for validation and potential submission.
+          to a Node.JS server for validation and potential generation. The
+          majority of the work for this application is done on the backend and
+          exposed via a REST API.
         </TextBox>
+        <Text mb="0.5rem">Application flow:</Text>
+        <Image src={APP_IMAGES.appDiagram} mb="2rem" />
+        <Text m="auto">
+          Feel free to checkout the{' '}
+          <Text as="span" color="blue.400">
+            <a href="https://github.com/matthew-08/PPT-Gen">
+              github repository
+            </a>
+          </Text>{' '}
+          for a more detailed breakdown of this application.
+        </Text>
       </Flex>
     </DefaultLayout>
   );
