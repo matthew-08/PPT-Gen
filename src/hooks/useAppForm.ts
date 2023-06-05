@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../store/hooks';
 import {
   onChangeAutoFillStatus,
+  onChangeClearStatus,
   onChangeSubmitStatus,
 } from '../features/appFormSlice';
 import { AddSlidePayload, SlideState } from '../types';
@@ -9,7 +10,7 @@ import { onAddSlide } from '../features/templateSlice';
 
 const useAppFormStatus = () => {
   const dispatch = useDispatch();
-  const { submitStatus, autoFillStatus } = useAppSelector(
+  const { submitStatus, autoFillStatus, clearFieldsStatus } = useAppSelector(
     (state) => state.appFormStatusReducer
   );
 
@@ -31,7 +32,9 @@ const useAppFormStatus = () => {
     }
   };
 
-  const handleClearAllSlides = () => {};
+  const handleClearAllSlides = () => {
+    dispatch(onChangeClearStatus(true));
+  };
 
   const handlers = {
     handleAddSlide,
@@ -43,6 +46,7 @@ const useAppFormStatus = () => {
   return {
     submitStatus,
     autoFillStatus,
+    clearFieldsStatus,
     handlers,
   };
 };

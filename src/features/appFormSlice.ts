@@ -25,7 +25,13 @@ const appFormSlice = createSlice({
     },
     onSubmit(state) {},
     onChangeAutoFillStatus(state, { payload }: PayloadAction<boolean>) {
+      state.clearFieldsStatus = false;
       state.autoFillStatus = payload;
+    },
+    onChangeClearStatus(state, { payload }: PayloadAction<boolean>) {
+      state.clearFieldsStatus = payload;
+      state.autoFillStatus = false;
+      console.log(state.autoFillStatus);
     },
   },
   extraReducers: (builder) => {},
@@ -33,5 +39,8 @@ const appFormSlice = createSlice({
 
 export default appFormSlice.reducer;
 
-export const { onChangeSubmitStatus, onChangeAutoFillStatus } =
-  appFormSlice.actions;
+export const {
+  onChangeSubmitStatus,
+  onChangeAutoFillStatus,
+  onChangeClearStatus,
+} = appFormSlice.actions;

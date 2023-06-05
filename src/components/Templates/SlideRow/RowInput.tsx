@@ -8,7 +8,6 @@ type Props = {
   field: FieldOptions;
   slideIndex: number;
   hookForm: HookForm;
-  disabled: boolean;
 };
 
 const RowInput = memo(function RowInput({ field, hookForm }: Props) {

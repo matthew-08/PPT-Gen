@@ -14,49 +14,71 @@ export type HookForm = {
 };
 
 const useSlideRow = (slideFields: SlideFields, slideIndex: number) => {
-  const { submitStatus, autoFillStatus, handlers } = useAppFormStatus();
-  const [disabled, setDisabled] = useState<boolean>(true);
+  const { submitStatus, autoFillStatus, clearFieldsStatus, handlers } =
+    useAppFormStatus();
 
   const {
     handleSubmit: hFormSubmit,
     register,
     setValue,
+    resetField,
+    getValues,
+    reset,
     formState: { errors },
-  } = useForm<SlideRowState>();
+  } = useForm<SlideRowState>({
+    shouldFocusError: false,
+  });
   const hookForm = {
     register,
     errors,
   };
 
   const handleAutoFill = () => {
+    console.log('mapping slideFields');
+    console.log(slideFields);
     slideFields.map((slide) => {
       return setValue(slide, `${slide} - ${slideIndex + 1}`);
     });
   };
 
   const handleSubmit = async () => {
-    setDisabled(true);
     const onValid = (slideState: SlideState) =>
-      handleSubmitSlide({
+      handlers.handleSubmitSlide({
         slideState,
         slideIndex,
       });
     const onInvalid = () => {
-      handleSetSubmitStatus(false);
+      handlers.handleSetSubmitStatus(false);
     };
     hFormSubmit(onValid, onInvalid)();
+  };
+  const handleClearFields = () => {
+    reset(
+      {
+        additional: '',
+        answer: '',
+        question: '',
+      },
+      {
+        keepErrors: true,
+      }
+    );
   };
   useEffect(() => {
     if (submitStatus) {
       handleSubmit();
     }
     if (autoFillStatus) {
+      console.log('auto fill');
       handleAutoFill();
     }
+    if (clearFieldsStatus) {
+      handleClearFields();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [submitStatus, autoFillStatus]);
+  }, [submitStatus, autoFillStatus, clearFieldsStatus]);
 
-  return { hookForm, disabled, handleAutoFill };
+  return { hookForm, handleAutoFill };
 };
 
 export default useSlideRow;

@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/require-default-props */
-import React, { HTMLInputTypeAttribute } from 'react';
+import React, { HTMLInputTypeAttribute, useEffect } from 'react';
 import { FieldValues, UseFormRegister, Path } from 'react-hook-form';
 import { FormControl, FormErrorMessage, Input } from '@chakra-ui/react';
 
@@ -22,6 +22,9 @@ export function FormInput<FormData extends FieldValues>({
 }: Props<FormData>) {
   const { fieldName, isInvalid, pHolderTxt, register, errorMsg, inputType } =
     fieldInfo;
+  useEffect(() => {
+    console.log('input re-render');
+  }, []);
   return (
     <FormControl isInvalid={isInvalid(fieldName)}>
       <Input

@@ -58,7 +58,7 @@ function SlidesController() {
           fontSize="1.5rem"
           colorScheme="red"
           leftIcon={<DeleteIcon />}
-          onClick={() => handlers.handleSetSubmitStatus(true)}
+          onClick={() => handlers.handleClearAllSlides()}
         >
           Clear
         </Button>
