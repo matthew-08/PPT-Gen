@@ -1,4 +1,4 @@
-import React from 'react';
+import { Flex } from '@chakra-ui/react';
 import SlotModal from '../global/SlotModal';
 import useDownloadPpt from '../../hooks/useDownloadPpt';
 import PptName from './DownloadModal/PptName';
