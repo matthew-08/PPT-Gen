@@ -8,9 +8,8 @@ import genRandomName from '../utils/genRandonName';
 
 const useDownloadPpt = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [pptName, setPptName] = useState<false | string>('');
-
   const dispatch = useAppDispatch();
+  const [pptName, setPptName] = useState<false | string>('');
   const validSumbit = useAppSelector(
     (state) => state.templateReducer.selectedTemplate.validSubmit
   );
@@ -18,6 +17,7 @@ const useDownloadPpt = () => {
     (state) => state.templateReducer.submittedSlides
   );
   const { selectedTemplate } = useSelectedTemplate();
+
   const { downloadStatus, url } = useAppSelector(
     (state) => state.downloadReducer
   );
@@ -39,13 +39,18 @@ const useDownloadPpt = () => {
     const rName = genRandomName();
     setPptName(rName);
   };
+
+  const handleClose = () => {
+    console.log('closing');
+    onClose();
+  };
   useEffect(() => {
     if (validSumbit) {
       onOpen();
     }
   }, [validSumbit, onOpen]);
 
-  const disclosureState = { isOpen, onOpen, onClose };
+  const disclosureState = { isOpen, onOpen, onClose: handleClose };
   const handlers = {
     handleSetName,
     handleRandomName,

@@ -41,7 +41,7 @@ function About() {
           majority of the work for this application is done on the backend and
           exposed via a REST API.
         </TextBox>
-        <Text mb="0.5rem">Application flow:</Text>
+        <Text mb="0.5rem">Data flow:</Text>
         <Image src={APP_IMAGES.appDiagram} mb="2rem" />
         <Text m="auto">
           Feel free to checkout the{' '}

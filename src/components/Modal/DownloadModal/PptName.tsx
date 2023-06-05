@@ -26,12 +26,7 @@ function PptName({ handlers, pptName }: Props) {
         placeholder="Template name..."
         mb="1rem"
       />
-      <Button
-        mb="0.5rem"
-        size="lg"
-        colorScheme="blackAlpha"
-        onClick={handleRandomName}
-      >
+      <Button mb="0.5rem" size="lg" onClick={handleRandomName}>
         Random Name
       </Button>
       <Button
