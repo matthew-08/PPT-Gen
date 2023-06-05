@@ -55,3 +55,8 @@ export type SlotModalProps = {
   modalHeader: string;
   children: ReactNode;
 };
+
+export type CreateSessionInput = {
+  email: string;
+  password: string;
+};

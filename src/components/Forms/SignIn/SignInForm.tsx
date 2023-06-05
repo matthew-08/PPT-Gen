@@ -1,10 +1,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Flex, Text, ModalFooter, Button } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { SignInFormSchema } from '../../../schemas/signin.schema';
 import { FormInput } from '../FormInput';
 import useCustomForm from '../../../hooks/useCustomForm';
+import { attemptCreateSession } from '../../../features/authSlice';
+import { useAppDispatch } from '../../../store/hooks';
 
 export type FormData = {
   email: string;
@@ -12,6 +14,7 @@ export type FormData = {
 };
 
 function SignInForm() {
+  const dispatch = useAppDispatch();
   const { handleSubmit, inputObjects } = useCustomForm(
     [
       {
@@ -29,7 +32,8 @@ function SignInForm() {
   );
   const navigate = useNavigate();
 
-  const handleUserSubmit = (data: FormData) => console.log(data);
+  const handleUserSubmit = (data: FormData) =>
+    dispatch(attemptCreateSession(data));
 
   return (
     <Flex

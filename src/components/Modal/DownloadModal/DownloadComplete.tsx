@@ -1,3 +1,4 @@
+import { DownloadIcon } from '@chakra-ui/icons';
 import { Text, Button } from '@chakra-ui/react';
 
 type Props = {
@@ -19,6 +20,7 @@ function DownloadComplete({ name, url }: Props) {
         download={`${name}.pptx`}
         padding="1.7rem"
         colorScheme="purple"
+        leftIcon={<DownloadIcon />}
         _hover={{
           color: 'white',
         }}

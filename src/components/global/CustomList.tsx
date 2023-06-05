@@ -15,8 +15,9 @@ function CustomList({ listItems }: Props) {
           onClick={() => navigate(href)}
           key={name}
           cursor="pointer"
+          className="list-item"
           _hover={{
-            color: '#CBD5E0',
+            color: 'white',
           }}
         >
           {' '}
