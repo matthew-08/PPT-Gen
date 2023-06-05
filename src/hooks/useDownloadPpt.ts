@@ -5,6 +5,7 @@ import { attemptDownload } from '../features/downloadSlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import useSelectedTemplate from './useSelectedTemplate';
 import genRandomName from '../utils/genRandonName';
+import useAppFormStatus from './useAppForm';
 
 const useDownloadPpt = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -21,6 +22,7 @@ const useDownloadPpt = () => {
   const { downloadStatus, url } = useAppSelector(
     (state) => state.downloadReducer
   );
+  const { handleSetSubmitStatus } = useAppFormStatus();
 
   const handleDownload = async () => {
     const arrayOfSlides = Object.values(slideState);
@@ -41,6 +43,7 @@ const useDownloadPpt = () => {
   };
 
   const handleClose = () => {
+    handleSetSubmitStatus(false);
     console.log('closing');
     onClose();
   };

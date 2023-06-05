@@ -8,6 +8,7 @@ import {
   AddSlidePayload,
 } from '../types';
 import { formatTemplateGet } from '../utils/formatResponse';
+import { onChangeSubmitStatus } from './appFormSlice';
 
 export const fetchAllTemplates = createAsyncThunk(
   'template/allTemplates',
@@ -91,6 +92,11 @@ const templateSlice = createSlice({
     builder.addCase(fetchAllTemplates.fulfilled, (state, action) => {
       state.templates = action.payload;
       state.loading = false;
+    });
+    builder.addCase(onChangeSubmitStatus, (state, action) => {
+      if (action.payload === false) {
+        state.selectedTemplate.validSubmit = false;
+      }
     });
   },
 });
