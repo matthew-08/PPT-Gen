@@ -1,28 +1,36 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { CreateSessionInput } from '../types';
+import apiFetch from '../utils/apiFetch';
 
 export const attemptCreateSession = createAsyncThunk(
   'template/createSession',
   async (data: CreateSessionInput) => {
-    await fetch('http://localhost:3005/api/session', {
-      body: JSON.stringify(data),
+    await apiFetch({
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      data,
+      route: '/api/session',
     })
       .then((res) => res.json())
-      .then((r) => console.log(r));
+      .then((r) => console.log(r))
+      .catch((r) => console.log(r));
   }
 );
 
 type AuthState = {
-  loggedIn: boolean;
   id: number | null;
+  authStatus: {
+    loggedIn: false;
+    loading: false;
+    error: null | string;
+  };
 };
 
 const initialState: AuthState = {
-  loggedIn: false,
+  authStatus: {
+    loggedIn: false,
+    loading: false,
+    error: null,
+  },
   id: null,
 };
 
@@ -30,6 +38,11 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(attemptCreateSession.pending, (state) => {
+      state.authStatus.loading = true;
+    });
+  },
 });
 
 export default authSlice.reducer;

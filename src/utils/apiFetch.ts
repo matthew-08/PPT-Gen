@@ -16,6 +16,7 @@ const apiFetch = async ({ method, route, data }: Input) => {
       ...(isPost && { 'Content-Type': 'application/json' }),
       Authorization: getToken() || '',
     },
+    method,
   };
   return fetch(`http://localhost:3005${route}`, options);
 };
