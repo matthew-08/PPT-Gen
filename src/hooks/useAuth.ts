@@ -6,12 +6,13 @@ import { CreateSessionInput } from '../types';
 const useAuth = () => {
   const { authStatus, id } = useAppSelector((state) => state.authReducer);
   const dispatch = useAppDispatch();
-  const [error, setError] = useState<null | string>(null);
+  const [error, setError] = useState<boolean>(false);
 
   const handleCreateSession = (data: CreateSessionInput) => {
     return dispatch(attemptCreateSession(data)).then((r) => {
+      console.log(r.payload);
       if (r.meta.requestStatus === 'rejected') {
-        setError(error);
+        setError(true);
       }
     });
   };
@@ -24,7 +25,7 @@ const useAuth = () => {
     id,
   };
 
-  return { userInfo, handleCreateSession };
+  return { userInfo, handleCreateSession, error, setError };
 };
 
 export default useAuth;

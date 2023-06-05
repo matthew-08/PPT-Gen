@@ -17,6 +17,7 @@ const useCustomForm = <FormData extends Record<any, any>>(
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(zodSchema),
@@ -30,7 +31,7 @@ const useCustomForm = <FormData extends Record<any, any>>(
     register,
   });
 
-  return { inputObjects, handleSubmit };
+  return { inputObjects, handleSubmit, setError };
 };
 
 export default useCustomForm;

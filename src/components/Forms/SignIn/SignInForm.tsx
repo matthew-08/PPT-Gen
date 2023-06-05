@@ -1,12 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Flex, Text, ModalFooter, Button } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import { SignInFormSchema } from '../../../schemas/signin.schema';
 import { FormInput } from '../FormInput';
 import useCustomForm from '../../../hooks/useCustomForm';
-import { attemptCreateSession } from '../../../features/authSlice';
-import { useAppDispatch } from '../../../store/hooks';
+import useAuth from '../../../hooks/useAuth';
 
 export type FormData = {
   email: string;
@@ -14,8 +13,13 @@ export type FormData = {
 };
 
 function SignInForm() {
-  const dispatch = useAppDispatch();
-  const { handleSubmit, inputObjects } = useCustomForm(
+  const {
+    userInfo,
+    handleCreateSession,
+    error,
+    setError: handleSetError,
+  } = useAuth();
+  const { handleSubmit, inputObjects, setError } = useCustomForm(
     [
       {
         fieldName: 'email',
@@ -32,8 +36,19 @@ function SignInForm() {
   );
   const navigate = useNavigate();
 
-  const handleUserSubmit = (data: FormData) =>
-    dispatch(attemptCreateSession(data));
+  useEffect(() => {
+    if (error) {
+      inputObjects.map(({ fieldName }) =>
+        setError(fieldName, {
+          message: 'Invalid email or password',
+        })
+      );
+      handleSetError(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [error]);
+
+  const handleUserSubmit = (data: FormData) => handleCreateSession(data);
 
   return (
     <Flex
