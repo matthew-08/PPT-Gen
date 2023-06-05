@@ -17,4 +17,6 @@ const RegisterFormSchema = z
     { message: 'Passwords do not match' }
   );
 
+export type UserRegisterInput = z.infer<typeof RegisterFormSchema>;
+
 export { RegisterFormSchema };

@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RejectedActionFromAsyncThunk } from '@reduxjs/toolkit/dist/matchers';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { CreateSessionInput } from '../types';
 import apiFetch from '../utils/apiFetch';
+import { UserRegisterInput } from '../schemas/register.schema';
 
 export const attemptCreateSession = createAsyncThunk(
   'template/createSession',
@@ -15,6 +15,19 @@ export const attemptCreateSession = createAsyncThunk(
     if (res.message) {
       return rejectWithValue(res.message);
     }
+  }
+);
+
+export const attemptCreateUser = createAsyncThunk(
+  'template/createUser',
+  async (data: UserRegisterInput) => {
+    const res = await apiFetch({
+      method: 'POST',
+      route: '/api/user',
+      data,
+    }).then((r) => {
+      console.log(r);
+    });
   }
 );
 

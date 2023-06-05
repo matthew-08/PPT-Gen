@@ -2,6 +2,7 @@
 import { Flex, Text, ModalFooter, Button } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { EmailIcon } from '@chakra-ui/icons';
 import { SignInFormSchema } from '../../../schemas/signin.schema';
 import { FormInput } from '../FormInput';
 import useCustomForm from '../../../hooks/useCustomForm';
@@ -13,12 +14,7 @@ export type FormData = {
 };
 
 function SignInForm() {
-  const {
-    userInfo,
-    handleCreateSession,
-    error,
-    setError: handleSetError,
-  } = useAuth();
+  const { userInfo, handleCreateSession, errorState } = useAuth();
   const { handleSubmit, inputObjects, setError } = useCustomForm(
     [
       {
@@ -37,16 +33,16 @@ function SignInForm() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (error) {
+    if (errorState.error) {
       inputObjects.map(({ fieldName }) =>
         setError(fieldName, {
           message: 'Invalid email or password',
         })
       );
-      handleSetError(false);
+      errorState.handleSetErrorState(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [error]);
+  }, [errorState.error]);
 
   const handleUserSubmit = (data: FormData) => handleCreateSession(data);
 

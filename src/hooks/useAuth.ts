@@ -24,9 +24,10 @@ const useAuth = () => {
   };
   const errorState = {
     error,
+    handleSetErrorState,
   };
 
-  return { userInfo, handleCreateSession, error, setError };
+  return { userInfo, handleCreateSession, errorState };
 };
 
 export default useAuth;

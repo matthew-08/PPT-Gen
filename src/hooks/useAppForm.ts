@@ -5,7 +5,7 @@ import {
   onChangeClearStatus,
   onChangeSubmitStatus,
 } from '../features/appFormSlice';
-import { AddSlidePayload, SlideState } from '../types';
+import { AddSlidePayload } from '../types';
 import { onAddSlide } from '../features/templateSlice';
 
 const useAppFormStatus = () => {
