@@ -4,6 +4,7 @@ import { Grid } from 'react-loader-spinner';
 import SlotModal from '../global/SlotModal';
 import useDownloadPpt from '../../hooks/useDownloadPpt';
 import PptName from './DownloadModal/PptName';
+import PreparingPpt from './DownloadModal/PreparingPpt';
 
 function DownloadModal() {
   const {
@@ -15,7 +16,7 @@ function DownloadModal() {
     handleDowload,
   } = useDownloadPpt();
 
-  let modalContent;
+  let modalContent: JSX.Element;
   if (!downloadStatus.started) {
     modalContent = (
       <PptName
@@ -26,39 +27,31 @@ function DownloadModal() {
     );
   }
   if (pptName && downloadStatus.started) {
-    modalContent = (
+    modalContent = <PreparingPpt />;
+  }
+  if (downloadStatus.completed) {
+    modalContent = downloadStatus.completed && (
       <>
-        <Grid color="#553C9A" width={400} />
-        <Text mt="1rem">Preparing your template...</Text>
-        <Button ml="auto" mt="1rem" size="lg">
-          Cancel
+        <Text textAlign="center" fontSize="1.4rem">
+          Your template is complete! Click below to download.
+        </Text>
+        <Button
+          mt="1.5rem"
+          mb="1rem"
+          as="a"
+          href={url}
+          download="TEMP23t3.pptx"
+          padding="1.7rem"
+          colorScheme="purple"
+          _hover={{
+            color: 'white',
+          }}
+          fontSize="1.5rem"
+        >
+          Download
         </Button>
       </>
     );
-    if (downloadStatus.completed) {
-      modalContent = downloadStatus.completed && (
-        <>
-          <Text textAlign="center" fontSize="1.4rem">
-            Your template is complete! Click below to download.
-          </Text>
-          <Button
-            mt="1.5rem"
-            mb="1rem"
-            as="a"
-            href={url}
-            download="TEMP23t3.pptx"
-            padding="1.7rem"
-            colorScheme="purple"
-            _hover={{
-              color: 'white',
-            }}
-            fontSize="1.5rem"
-          >
-            Download
-          </Button>
-        </>
-      );
-    }
   }
 
   return (
