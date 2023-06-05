@@ -10,19 +10,20 @@ const useAuth = () => {
 
   const handleCreateSession = (data: CreateSessionInput) => {
     return dispatch(attemptCreateSession(data)).then((r) => {
-      console.log(r.payload);
       if (r.meta.requestStatus === 'rejected') {
         setError(true);
       }
     });
   };
-
-  useEffect(() => {
-    console.log(error);
-  }, [error]);
+  const handleSetErrorState = (b: boolean) => {
+    return setError(b);
+  };
   const userInfo = {
     authStatus,
     id,
+  };
+  const errorState = {
+    error,
   };
 
   return { userInfo, handleCreateSession, error, setError };
