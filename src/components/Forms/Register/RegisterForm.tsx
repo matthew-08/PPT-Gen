@@ -34,7 +34,7 @@ function RegisterForm() {
     RegisterFormSchema
   );
 
-  const handleUserSubmit = (data: FormData) => console.log(data);
+  const handleUserSubmit = (data: FormData) => handleAttemptRegister(data);
 
   return (
     <Flex
@@ -61,7 +61,6 @@ function RegisterForm() {
         fontSize="1.2rem"
         py="1.5rem"
         type="submit"
-        onClick={() => handleAttemptRegister()}
       >
         Register
       </Button>

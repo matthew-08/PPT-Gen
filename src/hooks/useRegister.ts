@@ -7,6 +7,7 @@ const useRegister = () => {
   const dispatch = useAppDispatch();
 
   const handleAttemptRegister = (data: UserRegisterInput) => {
+    console.log('register handler');
     dispatch(attemptCreateUser(data));
   };
 

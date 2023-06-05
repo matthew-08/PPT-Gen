@@ -20,14 +20,17 @@ export const attemptCreateSession = createAsyncThunk(
 
 export const attemptCreateUser = createAsyncThunk(
   'template/createUser',
-  async (data: UserRegisterInput) => {
+  async (data: UserRegisterInput, {rejectWithValue}) => {
+    console.log('in thunk');
     const res = await apiFetch({
       method: 'POST',
       route: '/api/user',
       data,
-    }).then((r) => {
-      console.log(r);
     });
+    if (!res.ok) {
+      const json = await res.json();
+      return rejectWithValue(json.message)
+    }
   }
 );
 
