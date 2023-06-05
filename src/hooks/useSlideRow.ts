@@ -14,12 +14,7 @@ export type HookForm = {
 };
 
 const useSlideRow = (slideFields: SlideFields, slideIndex: number) => {
-  const {
-    submitStatus,
-    autoFillStatus,
-    handleSubmitSlide,
-    handleSetSubmitStatus,
-  } = useAppFormStatus();
+  const { submitStatus, autoFillStatus, handlers } = useAppFormStatus();
   const [disabled, setDisabled] = useState<boolean>(true);
 
   const {

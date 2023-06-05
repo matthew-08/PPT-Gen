@@ -22,7 +22,9 @@ const useDownloadPpt = () => {
   const { downloadStatus, url } = useAppSelector(
     (state) => state.downloadReducer
   );
-  const { handleSetSubmitStatus } = useAppFormStatus();
+  const {
+    handlers: { handleSetSubmitStatus },
+  } = useAppFormStatus();
 
   const handleDownload = async () => {
     const arrayOfSlides = Object.values(slideState);

@@ -33,13 +33,17 @@ const useAppFormStatus = () => {
 
   const handleClearAllSlides = () => {};
 
+  const handlers = {
+    handleAddSlide,
+    handleClearAllSlides,
+    handleSetAutoFillStatus,
+    handleSubmitSlide,
+    handleSetSubmitStatus,
+  };
   return {
     submitStatus,
-    handleSetSubmitStatus,
-    handleSetAutoFillStatus,
     autoFillStatus,
-    handleSubmitSlide,
-    handleClearAllSlides,
+    handlers,
   };
 };
 

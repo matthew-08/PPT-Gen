@@ -8,7 +8,7 @@ import SlideRow from './SlideRow/SlideRow';
 
 function SlidesController() {
   const { slides } = useSelectedTemplate();
-  const { handleSetSubmitStatus, handleSetAutoFillStatus } = useAppForm();
+  const { handlers } = useAppForm();
 
   return (
     <>
@@ -25,7 +25,7 @@ function SlidesController() {
           colorScheme="purple"
           size="lg"
           mb="1rem"
-          onClick={() => handleSetAutoFillStatus(true)}
+          onClick={() => handlers.handleSetAutoFillStatus(true)}
         >
           Auto Fill
         </Button>
@@ -48,7 +48,7 @@ function SlidesController() {
           fontSize="1.5rem"
           leftIcon={<DownloadIcon />}
           colorScheme="green"
-          onClick={() => handleSetSubmitStatus(true)}
+          onClick={() => handlers.handleSetSubmitStatus(true)}
         >
           Submit
         </Button>
@@ -58,7 +58,7 @@ function SlidesController() {
           fontSize="1.5rem"
           colorScheme="red"
           leftIcon={<DeleteIcon />}
-          onClick={() => handleSetSubmitStatus(true)}
+          onClick={() => handlers.handleSetSubmitStatus(true)}
         >
           Clear
         </Button>
