@@ -22,7 +22,7 @@ const useDownloadPpt = () => {
     (state) => state.downloadReducer
   );
 
-  const handleDowload = async () => {
+  const handleDownload = async () => {
     const arrayOfSlides = Object.values(slideState);
     dispatch(
       attemptDownload({
@@ -36,7 +36,8 @@ const useDownloadPpt = () => {
   };
 
   const handleRandomName = () => {
-    const rName = genRandomName;
+    const rName = genRandomName();
+    setPptName(rName);
   };
   useEffect(() => {
     if (validSumbit) {
@@ -45,14 +46,18 @@ const useDownloadPpt = () => {
   }, [validSumbit, onOpen]);
 
   const disclosureState = { isOpen, onOpen, onClose };
+  const handlers = {
+    handleSetName,
+    handleRandomName,
+    handleDownload,
+  };
 
   return {
     disclosureState,
     downloadStatus,
     url,
-    handleSetName,
+    handlers,
     pptName,
-    handleDowload,
   };
 };
 

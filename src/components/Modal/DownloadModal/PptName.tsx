@@ -2,12 +2,16 @@ import { Button, Flex, Input, Text } from '@chakra-ui/react';
 import React from 'react';
 
 type Props = {
-  handleSetName: (name: string) => void;
+  handlers: {
+    handleDownload: () => void;
+    handleSetName: (name: string) => void;
+    handleRandomName: () => void;
+  };
   pptName: string | false;
-  handleDownload: () => void;
 };
 
-function PptName({ handleSetName, pptName, handleDownload }: Props) {
+function PptName({ handlers, pptName }: Props) {
+  const { handleDownload, handleRandomName, handleSetName } = handlers;
   return (
     <>
       <Text mb="1rem" fontSize="1.3rem">
@@ -22,7 +26,12 @@ function PptName({ handleSetName, pptName, handleDownload }: Props) {
         placeholder="Template name..."
         mb="1rem"
       />
-      <Button mb="0.5rem" size="lg" colorScheme="blackAlpha">
+      <Button
+        mb="0.5rem"
+        size="lg"
+        colorScheme="blackAlpha"
+        onClick={handleRandomName}
+      >
         Random Name
       </Button>
       <Button
