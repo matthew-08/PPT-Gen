@@ -48,6 +48,7 @@ const useDownloadPpt = () => {
     url,
     handleSetName,
     pptName,
+    handleDowload,
   };
 };
 

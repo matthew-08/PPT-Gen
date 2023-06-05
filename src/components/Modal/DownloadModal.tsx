@@ -6,12 +6,24 @@ import useDownloadPpt from '../../hooks/useDownloadPpt';
 import PptName from './DownloadModal/PptName';
 
 function DownloadModal() {
-  const { disclosureState, downloadStatus, url, pptName, handleSetName } =
-    useDownloadPpt();
+  const {
+    disclosureState,
+    downloadStatus,
+    url,
+    pptName,
+    handleSetName,
+    handleDowload,
+  } = useDownloadPpt();
 
   let modalContent;
   if (!downloadStatus.started) {
-    modalContent = <PptName handleSetName={handleSetName} pptName={pptName} />;
+    modalContent = (
+      <PptName
+        handleSetName={handleSetName}
+        pptName={pptName}
+        handleDownload={handleDowload}
+      />
+    );
   }
   if (pptName && downloadStatus.started) {
     modalContent = (
@@ -51,7 +63,9 @@ function DownloadModal() {
 
   return (
     <SlotModal modalHeader="Download" disclosureState={disclosureState}>
-      <Flex>{modalContent}</Flex>
+      <Flex flexDir="column" minH="200px">
+        {modalContent}
+      </Flex>
     </SlotModal>
   );
 }

@@ -4,19 +4,36 @@ import React from 'react';
 type Props = {
   handleSetName: (name: string) => void;
   pptName: string | false;
+  handleDownload: () => void;
 };
 
-function PptName({ handleSetName, pptName }: Props) {
+function PptName({ handleSetName, pptName, handleDownload }: Props) {
   return (
     <>
-      <Text mb="1rem">Enter a name for your PPT template:</Text>
+      <Text mb="1rem" fontSize="1.3rem">
+        Enter a name for your PPT template:
+      </Text>
       <Input
         value={pptName || ''}
         onChange={(e) => handleSetName(e.target.value)}
         maxLength={20}
+        size="lg"
+        padding="1.2rem"
+        placeholder="Template name..."
+        mb="1rem"
       />
-      <Button>Random Name</Button>
-      <Button disabled={!pptName}>Submit</Button>
+      <Button mb="0.5rem" size="lg" colorScheme="blackAlpha">
+        Random Name
+      </Button>
+      <Button
+        disabled={!pptName}
+        mb="0.5rem"
+        size="lg"
+        colorScheme="purple"
+        onClick={handleDownload}
+      >
+        Submit
+      </Button>
     </>
   );
 }
