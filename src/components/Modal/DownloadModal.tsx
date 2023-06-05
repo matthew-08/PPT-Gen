@@ -5,6 +5,7 @@ import SlotModal from '../global/SlotModal';
 import useDownloadPpt from '../../hooks/useDownloadPpt';
 import PptName from './DownloadModal/PptName';
 import PreparingPpt from './DownloadModal/PreparingPpt';
+import DownloadComplete from './DownloadModal/DownloadComplete';
 
 function DownloadModal() {
   const {
@@ -16,7 +17,7 @@ function DownloadModal() {
     handleDowload,
   } = useDownloadPpt();
 
-  let modalContent: JSX.Element;
+  let modalContent;
   if (!downloadStatus.started) {
     modalContent = (
       <PptName
@@ -26,39 +27,16 @@ function DownloadModal() {
       />
     );
   }
-  if (pptName && downloadStatus.started) {
+  if (downloadStatus.started && pptName) {
     modalContent = <PreparingPpt />;
   }
-  if (downloadStatus.completed) {
-    modalContent = downloadStatus.completed && (
-      <>
-        <Text textAlign="center" fontSize="1.4rem">
-          Your template is complete! Click below to download.
-        </Text>
-        <Button
-          mt="1.5rem"
-          mb="1rem"
-          as="a"
-          href={url}
-          download="TEMP23t3.pptx"
-          padding="1.7rem"
-          colorScheme="purple"
-          _hover={{
-            color: 'white',
-          }}
-          fontSize="1.5rem"
-        >
-          Download
-        </Button>
-      </>
-    );
+  if (downloadStatus.completed && pptName) {
+    modalContent = <DownloadComplete name={pptName} url={url} />;
   }
 
   return (
     <SlotModal modalHeader="Download" disclosureState={disclosureState}>
-      <Flex flexDir="column" minH="200px">
-        {modalContent}
-      </Flex>
+      <Flex flexDir="column">{modalContent}</Flex>
     </SlotModal>
   );
 }

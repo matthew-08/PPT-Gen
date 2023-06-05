@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useDisclosure } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { attemptDownload } from '../features/downloadSlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import useSelectedTemplate from './useSelectedTemplate';
+import genRandomName from '../utils/genRandonName';
 
 const useDownloadPpt = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -33,6 +33,10 @@ const useDownloadPpt = () => {
   };
   const handleSetName = (name: string) => {
     setPptName(name);
+  };
+
+  const handleRandomName = () => {
+    const rName = genRandomName;
   };
   useEffect(() => {
     if (validSumbit) {
