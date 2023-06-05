@@ -6,8 +6,6 @@ import SlidesController from '../components/Templates/SlidesController';
 import { useAppDispatch } from '../store/hooks';
 import { fetchAllTemplates } from '../features/templateSlice';
 import TCardContainer from '../components/Templates/TCardContainer';
-import useDownloadPpt from '../hooks/useDownloadPpt';
-import SlotModal from '../components/global/SlotModal';
 import DownloadModal from '../components/Modal/DownloadModal';
 
 function Home() {
