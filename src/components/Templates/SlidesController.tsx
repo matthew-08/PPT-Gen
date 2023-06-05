@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
-import { Flex, Button, Text } from '@chakra-ui/react';
-import { useRef } from 'react';
+import { Flex, Button, Text, ButtonGroup } from '@chakra-ui/react';
+import { DeleteIcon, DownloadIcon } from '@chakra-ui/icons';
 import useSelectedTemplate from '../../hooks/useSelectedTemplate';
 import useAppForm from '../../hooks/useAppForm';
 // eslint-disable-next-line import/no-named-as-default
@@ -41,17 +41,28 @@ function SlidesController() {
           return <SlideRow slide={slide} slideIndex={index} key={index} />;
         })}
       </Flex>
-      <Button
-        m="auto"
-        mt="1rem"
-        mb="2rem"
-        padding="2rem"
-        fontSize="1.5rem"
-        colorScheme="blue"
-        onClick={() => handleSetSubmitStatus(true)}
-      >
-        Submit
-      </Button>
+      <ButtonGroup m="auto" mb="2rem">
+        <Button
+          mt="1rem"
+          padding="2rem"
+          fontSize="1.5rem"
+          leftIcon={<DownloadIcon />}
+          colorScheme="green"
+          onClick={() => handleSetSubmitStatus(true)}
+        >
+          Submit
+        </Button>
+        <Button
+          mt="1rem"
+          padding="2rem"
+          fontSize="1.5rem"
+          colorScheme="red"
+          leftIcon={<DeleteIcon />}
+          onClick={() => handleSetSubmitStatus(true)}
+        >
+          Clear
+        </Button>
+      </ButtonGroup>
     </>
   );
 }

@@ -39,6 +39,7 @@ const useAppFormStatus = () => {
     handleSetAutoFillStatus,
     autoFillStatus,
     handleSubmitSlide,
+    handleClearAllSlides,
   };
 };
 
