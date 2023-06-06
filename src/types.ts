@@ -66,3 +66,5 @@ export type ServerError = {
   instance: string;
   message: string;
 };
+
+export type CreateUserPayload = { accessToken: string; id: number };

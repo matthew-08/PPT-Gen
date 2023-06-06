@@ -2,4 +2,8 @@ const getToken = () => {
   return localStorage.getItem('token');
 };
 
-export { getToken };
+const setToken = (token: string) => {
+  return localStorage.setItem('token');
+};
+
+export { getToken, setToken };

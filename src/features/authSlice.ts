@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { FulfilledActionFromAsyncThunk } from '@reduxjs/toolkit/dist/matchers';
-import { CreateSessionInput } from '../types';
+import { CreateSessionInput, CreateUserPayload } from '../types';
 import apiFetch from '../utils/apiFetch';
 import { UserRegisterInput } from '../schemas/register.schema';
 
@@ -71,8 +71,13 @@ const authSlice = createSlice({
     });
     builder.addCase(
       attemptCreateUser.fulfilled,
-      (state, action: PayloadAction<string>) => {
-        const { payload } = action;
+      (state, action: PayloadAction<CreateUserPayload>) => {
+        state.authStatus = {
+          error: null,
+          loading: false,
+          loggedIn: true,
+        };
+        state.id = action.payload.id;
       }
     );
   },
