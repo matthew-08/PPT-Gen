@@ -58,6 +58,12 @@ type AuthState = {
   };
 };
 
+const validAuthStatus = {
+  loggedIn: true,
+  loading: false,
+  error: null,
+};
+
 const initialState: AuthState = {
   authStatus: {
     loggedIn: false,
@@ -82,11 +88,7 @@ const authSlice = createSlice({
     builder.addCase(
       attemptCreateUser.fulfilled,
       (state, action: PayloadAction<CreateUserPayload>) => {
-        state.authStatus = {
-          error: null,
-          loading: false,
-          loggedIn: true,
-        };
+        state.authStatus = validAuthStatus;
         const { id, accessToken } = action.payload;
         state.id = id;
         setToken(accessToken);
@@ -95,9 +97,21 @@ const authSlice = createSlice({
     builder.addCase(
       attemptRefreshSession.fulfilled,
       (state, action: PayloadAction<{ id: number }>) => {
-        console.log(action.payload);
+        const { id } = action.payload;
+        if (id) {
+          state.authStatus = validAuthStatus;
+          state.id = id;
+        }
       }
     );
+    builder.addCase(attemptRefreshSession.rejected, (state, action) => {
+      state.authStatus = {
+        error: null,
+        loading: false,
+        loggedIn: false,
+      };
+      state.id = null;
+    });
   },
 });
 
