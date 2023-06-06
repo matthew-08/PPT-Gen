@@ -1,3 +1,4 @@
+import { attemptRefreshSession } from '../features/authSlice';
 import { useAppDispatch } from '../store/hooks';
 import useAuth from './useAuth';
 
@@ -9,7 +10,13 @@ const useRefreshSession = () => {
     },
   } = useAuth();
 
-  const handleRefreshSession = () => {};
+  const handleRefreshSession = () => {
+    if (!loggedIn) {
+      dispatch(attemptRefreshSession());
+    }
+  };
+
+  return { handleRefreshSession };
 };
 
 export default useRefreshSession;

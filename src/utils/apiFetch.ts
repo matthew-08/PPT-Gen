@@ -14,7 +14,7 @@ const apiFetch = async ({ method, route, data }: Input) => {
     ...(isPost && { body: JSON.stringify(data) }),
     headers: {
       ...(isPost && { 'Content-Type': 'application/json' }),
-      Authorization: getToken() || '',
+      Authorization: `Bearer ${getToken() || ''}`,
     },
     method,
   };
