@@ -16,7 +16,8 @@ function Register() {
           <Flex
             flexDir="column"
             background="white"
-            padding="2.5rem"
+            padding={['1rem', '2.5rem']}
+            maxW={['350px', '1000px']}
             borderRadius="10px"
           >
             <Heading fontSize="5xl" mb="1rem">

@@ -17,8 +17,9 @@ function NavMenu() {
     <Menu>
       <IconButton
         aria-label="button"
+        width="50px"
         as={MenuButton}
-        icon={<HamburgerIcon />}
+        icon={<HamburgerIcon width="50px" />}
       />
       <MenuList>
         <MenuItem>Download</MenuItem>

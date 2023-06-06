@@ -52,7 +52,7 @@ function RegisterForm() {
       flexDir="column"
       as="form"
       gap="1rem"
-      minW="500px"
+      minW={['325px', '500px']}
       maxW="500px"
       onSubmit={handleSubmit(handleUserSubmit)}
     >

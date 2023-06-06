@@ -31,7 +31,7 @@ function Navbar() {
       background="purple.700"
     >
       <Flex align="center">
-        <Heading fontSize="6xl" color="purple.50" fontWeight="bold">
+        <Heading fontSize={['5xl', '6xl']} color="purple.50" fontWeight="bold">
           PPTGen
         </Heading>
         <PptIcon />

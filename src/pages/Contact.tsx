@@ -20,12 +20,11 @@ function Contact() {
           gap="1rem"
           borderRadius="10px"
           padding="2rem"
-          mt="1rem"
           flexDir="column"
           align="center"
           justify="center"
           background="whiteAlpha.500"
-          marginTop="10rem"
+          marginTop={['4rem', '10rem']}
         >
           <IconButton
             aria-label="github"
