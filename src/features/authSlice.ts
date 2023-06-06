@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { FulfilledActionFromAsyncThunk } from '@reduxjs/toolkit/dist/matchers';
 import { CreateSessionInput, CreateUserPayload } from '../types';
 import apiFetch from '../utils/apiFetch';
 import { UserRegisterInput } from '../schemas/register.schema';
@@ -23,16 +22,28 @@ export const attemptCreateSession = createAsyncThunk(
 export const attemptCreateUser = createAsyncThunk(
   'template/createUser',
   async (data: UserRegisterInput, { rejectWithValue }) => {
-    console.log('in thunk');
     const res = await apiFetch({
       method: 'POST',
       route: '/api/user',
       data,
     });
-    console.log(res);
     if (!res.ok) {
       const json = await res.json();
       return rejectWithValue(json.message);
+    }
+    return res.json();
+  }
+);
+
+export const attemptRefreshSession = createAsyncThunk(
+  'template/refreshSession',
+  async (_, { abort }) => {
+    const res = await apiFetch({
+      method: 'GET',
+      route: '/api/session',
+    });
+    if (!res.ok) {
+      return abort();
     }
     return res.json();
   }
@@ -65,10 +76,8 @@ const authSlice = createSlice({
       state.authStatus.loading = true;
     });
     builder.addCase(attemptCreateSession.rejected, (state, action) => {
-      console.log(action);
       const { authStatus } = state;
       authStatus.loading = false;
-      console.log(action.payload);
     });
     builder.addCase(
       attemptCreateUser.fulfilled,
@@ -81,6 +90,12 @@ const authSlice = createSlice({
         const { id, accessToken } = action.payload;
         state.id = id;
         setToken(accessToken);
+      }
+    );
+    builder.addCase(
+      attemptRefreshSession.fulfilled,
+      (state, action: PayloadAction<{ id: number }>) => {
+        console.log(action.payload);
       }
     );
   },
