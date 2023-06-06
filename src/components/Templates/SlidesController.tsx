@@ -36,6 +36,7 @@ function SlidesController() {
         padding="1rem"
         maxH="800px"
         overflow="auto"
+        className="slide-container"
       >
         {slides.map((slide, index) => {
           return <SlideRow slide={slide} slideIndex={index} key={index} />;

@@ -24,7 +24,7 @@ function Navbar() {
     <Flex
       as="header"
       width="100%"
-      px="3rem"
+      px={['1rem', '3rem']}
       py="1rem"
       justify="space-between"
       align="center"

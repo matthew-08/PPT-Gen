@@ -15,14 +15,16 @@ function Contact() {
         <Flex
           as="section"
           minH="200px"
-          minWidth="300px"
+          minWidth="370px"
           m="auto"
+          gap="1rem"
           borderRadius="10px"
-          padding="1rem"
+          padding="2rem"
           mt="1rem"
           flexDir="column"
           align="center"
           justify="center"
+          background="whiteAlpha.500"
           marginTop="10rem"
         >
           <IconButton
@@ -36,14 +38,18 @@ function Contact() {
             mb="1rem"
           />
           <IconButton
-            aria-label="github"
+            aria-label="LinkedIn"
             icon={<AiFillLinkedin size="100px" color="#553C9A" />}
             background="none"
+            as="a"
+            href="https://www.linkedin.com/in/matthewjcsby"
             width="fit-content"
             padding="3rem"
           />
           <IconButton
-            aria-label="github"
+            aria-label="Twitter"
+            as="a"
+            href="https://github.com/matthew-08"
             icon={<AiFillTwitterSquare size="100px" color="#553C9A" />}
             background="none"
             width="fit-content"
