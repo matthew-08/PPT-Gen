@@ -10,7 +10,6 @@ function Register() {
           as="section"
           minW="100%"
           py="4rem"
-          justify="center"
           flexDir="column"
           align="center"
         >

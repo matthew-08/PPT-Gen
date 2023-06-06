@@ -12,6 +12,8 @@ const useAuth = () => {
     return dispatch(attemptCreateSession(data)).then((r) => {
       if (r.meta.requestStatus === 'rejected') {
         setError(true);
+      } else {
+        console.log('test');
       }
     });
   };

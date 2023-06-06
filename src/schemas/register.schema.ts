@@ -17,7 +17,7 @@ const RegisterFormSchema = z
     ({ password, confirmPassword }) => {
       return password === confirmPassword;
     },
-    { message: 'Passwords do not match' }
+    { message: 'Passwords do not match', path: ['confirmPassword'] }
   );
 
 export type UserRegisterInput = z.infer<typeof RegisterFormSchema>;

@@ -31,10 +31,8 @@ export const attemptCreateUser = createAsyncThunk(
     console.log(res);
     if (!res.ok) {
       const json = await res.json();
-      console.log(json);
       return rejectWithValue(json.message);
     }
-    console.log(res.json());
     return res.json();
   }
 );

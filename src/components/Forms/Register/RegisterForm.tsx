@@ -13,7 +13,7 @@ export type FormData = {
 };
 
 function RegisterForm() {
-  const { handleAttemptRegister, hasError } = useRegister();
+  const { handleAttemptRegister, hasError, setHasError } = useRegister();
   const { handleSubmit, inputObjects, setError } = useCustomForm<FormData>(
     [
       {
@@ -36,9 +36,13 @@ function RegisterForm() {
   );
 
   useEffect(() => {
-    setError('email', {
-      message: 'Email already exists',
-    });
+    if (hasError) {
+      setError('email', {
+        message: 'Email already exists',
+      });
+      setHasError(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasError]);
 
   const handleUserSubmit = (data: FormData) => handleAttemptRegister(data);
