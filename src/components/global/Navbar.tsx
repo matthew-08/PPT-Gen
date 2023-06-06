@@ -7,6 +7,7 @@ import {
   useMediaQuery,
 } from '@chakra-ui/react';
 import { BiUserCircle } from 'react-icons/bi';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CustomList from './CustomList';
 import SlotModal from './SlotModal';
 import SignInForm from '../Forms/SignIn/SignInForm';
@@ -29,6 +30,7 @@ function Navbar() {
       <Heading fontSize="6xl" color="purple.50" fontWeight="bold">
         PPTGen
       </Heading>
+      <FontAwesomeIcon icon={['fab', 'face-anguished']} />
       <Flex as="nav" align="center">
         {isSmallerThan800 ? (
           <NavMenu />
