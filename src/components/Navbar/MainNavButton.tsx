@@ -1,12 +1,18 @@
 import React from 'react';
 import { ButtonGroup, Button } from '@chakra-ui/react';
 import { BiUserCircle } from 'react-icons/bi';
+import useAuth from '../../hooks/useAuth';
 
 type Props = {
   onOpen: () => void;
 };
 
 function MainNavButton({ onOpen }: Props) {
+  const {
+    userInfo: {
+      authStatus: { loggedIn },
+    },
+  } = useAuth();
   return (
     <ButtonGroup>
       <Button
