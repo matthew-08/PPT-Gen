@@ -4,6 +4,7 @@ import { FulfilledActionFromAsyncThunk } from '@reduxjs/toolkit/dist/matchers';
 import { CreateSessionInput, CreateUserPayload } from '../types';
 import apiFetch from '../utils/apiFetch';
 import { UserRegisterInput } from '../schemas/register.schema';
+import { setToken } from '../utils/tokenUtil';
 
 export const attemptCreateSession = createAsyncThunk(
   'template/createSession',
@@ -77,7 +78,9 @@ const authSlice = createSlice({
           loading: false,
           loggedIn: true,
         };
-        state.id = action.payload.id;
+        const { id, accessToken } = action.payload;
+        state.id = id;
+        setToken(accessToken);
       }
     );
   },
