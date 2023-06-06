@@ -60,3 +60,9 @@ export type CreateSessionInput = {
   email: string;
   password: string;
 };
+
+export type ServerError = {
+  errorType: string;
+  instance: string;
+  message: string;
+};
