@@ -1,17 +1,19 @@
 import {
   Button,
   ButtonGroup,
+  Circle,
   Flex,
+  Image,
   Heading,
   useDisclosure,
   useMediaQuery,
 } from '@chakra-ui/react';
 import { BiUserCircle } from 'react-icons/bi';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CustomList from './CustomList';
 import SlotModal from './SlotModal';
 import SignInForm from '../Forms/SignIn/SignInForm';
 import NavMenu from './NavMenu';
+import { APP_IMAGES } from '../../utils/images';
 
 function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -30,7 +32,14 @@ function Navbar() {
       <Heading fontSize="6xl" color="purple.50" fontWeight="bold">
         PPTGen
       </Heading>
-      <FontAwesomeIcon icon={['fab', 'face-anguished']} />
+      <Circle size="100" padding="1rem">
+        <Image
+          src={APP_IMAGES.pptIcon}
+          width="100%"
+          height="100%"
+          filter="invert(100%) sepia(0%) saturate(7496%) hue-rotate(182deg) brightness(100%) contrast(100%);"
+        />
+      </Circle>
       <Flex as="nav" align="center">
         {isSmallerThan800 ? (
           <NavMenu />
