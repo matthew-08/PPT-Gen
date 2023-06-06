@@ -15,6 +15,7 @@ import SignInForm from '../Forms/SignIn/SignInForm';
 import NavMenu from './NavMenu';
 import { APP_IMAGES } from '../../utils/images';
 import PptIcon from './PptIcon';
+import MainNavButton from '../Navbar/MainNavButton';
 
 function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -48,20 +49,7 @@ function Navbar() {
                 ['Contact', '/contact'],
               ]}
             />
-            <ButtonGroup>
-              <Button
-                size="lg"
-                padding="1.5rem"
-                fontSize="1.5rem"
-                onClick={onOpen}
-                _hover={{
-                  color: '#553C9A',
-                }}
-                rightIcon={<BiUserCircle size={30} />}
-              >
-                Sign In
-              </Button>
-            </ButtonGroup>
+            <MainNavButton onOpen={onOpen} />
           </>
         )}
       </Flex>
