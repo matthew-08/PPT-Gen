@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Flex, Text, Button } from '@chakra-ui/react';
+import { useEffect } from 'react';
 import { FormInput } from '../FormInput';
 import { RegisterFormSchema } from '../../../schemas/register.schema';
 import useCustomForm from '../../../hooks/useCustomForm';
@@ -12,8 +13,8 @@ export type FormData = {
 };
 
 function RegisterForm() {
-  const { handleAttemptRegister } = useRegister();
-  const { handleSubmit, inputObjects } = useCustomForm<FormData>(
+  const { handleAttemptRegister, hasError } = useRegister();
+  const { handleSubmit, inputObjects, setError } = useCustomForm<FormData>(
     [
       {
         fieldName: 'email',
@@ -33,6 +34,12 @@ function RegisterForm() {
     ],
     RegisterFormSchema
   );
+
+  useEffect(() => {
+    setError('email', {
+      message: 'Email already exists',
+    });
+  }, [hasError]);
 
   const handleUserSubmit = (data: FormData) => handleAttemptRegister(data);
 
