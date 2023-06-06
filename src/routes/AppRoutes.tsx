@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import Home from '../pages/Home';
 import Register from '../pages/Register';
 import About from '../pages/About';

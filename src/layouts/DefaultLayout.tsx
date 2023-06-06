@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react';
+import { Fade, Flex } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 import Navbar from '../components/global/Navbar';
 import Footer from '../components/global/Footer';
@@ -13,9 +13,12 @@ function DefaultLayout({ children }: { children: ReactNode }) {
       flexGrow={1}
     >
       <Navbar />
-      <Flex as="section" flexDir="column" height="100%">
-        {children}
-      </Flex>
+      <Fade in>
+        <Flex as="section" flexDir="column" height="100%">
+          {children}
+        </Flex>
+      </Fade>
+
       <Footer />
     </Flex>
   );

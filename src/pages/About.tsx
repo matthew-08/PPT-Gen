@@ -1,4 +1,4 @@
-import { Flex, Heading, Text, Image } from '@chakra-ui/react';
+import { Flex, Heading, Text, Image, Fade } from '@chakra-ui/react';
 import DefaultLayout from '../layouts/DefaultLayout';
 import AboutHeader from '../components/About/AboutHeader';
 import TextBox from '../components/About/TextBox';

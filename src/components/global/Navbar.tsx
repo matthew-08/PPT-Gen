@@ -14,6 +14,7 @@ import SlotModal from './SlotModal';
 import SignInForm from '../Forms/SignIn/SignInForm';
 import NavMenu from './NavMenu';
 import { APP_IMAGES } from '../../utils/images';
+import PptIcon from './PptIcon';
 
 function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -29,17 +30,12 @@ function Navbar() {
       align="center"
       background="purple.700"
     >
-      <Heading fontSize="6xl" color="purple.50" fontWeight="bold">
-        PPTGen
-      </Heading>
-      <Circle size="100" padding="1rem">
-        <Image
-          src={APP_IMAGES.pptIcon}
-          width="100%"
-          height="100%"
-          filter="invert(100%) sepia(0%) saturate(7496%) hue-rotate(182deg) brightness(100%) contrast(100%);"
-        />
-      </Circle>
+      <Flex align="center">
+        <Heading fontSize="6xl" color="purple.50" fontWeight="bold">
+          PPTGen
+        </Heading>
+        <PptIcon />
+      </Flex>
       <Flex as="nav" align="center">
         {isSmallerThan800 ? (
           <NavMenu />

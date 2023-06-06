@@ -4,7 +4,7 @@ import { APP_IMAGES } from '../../utils/images';
 
 function PptIcon() {
   return (
-    <Circle size="100" padding="1rem">
+    <Circle size={20} padding="1rem">
       <Image
         src={APP_IMAGES.pptIcon}
         width="100%"
