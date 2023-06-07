@@ -34,6 +34,7 @@ function Contact() {
             background="none"
             width="fit-content"
             padding="2rem"
+            py="2.5rem"
             mb="1rem"
           />
           <IconButton

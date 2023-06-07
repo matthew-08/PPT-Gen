@@ -35,7 +35,7 @@ function MainNavButton({ onOpen }: Props) {
         <Button
           size="lg"
           fontSize="1.5rem"
-          onClick={() => navigate('/contact')}
+          onClick={() => navigate('/dashboard')}
           leftIcon={<Image src={APP_IMAGES.presentation} width="20px" />}
         >
           My Templates

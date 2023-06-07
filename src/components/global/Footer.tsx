@@ -8,6 +8,9 @@ function Footer() {
       <Flex
         as="a"
         align="center"
+        _hover={{
+          color: '#553C9A',
+        }}
         gap="1rem"
         cursor="click"
         href="https://github.com/matthew-08/ttt-ppt-gen-backend"
