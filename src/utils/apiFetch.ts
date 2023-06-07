@@ -1,6 +1,6 @@
 import { getToken } from './tokenUtil';
 
-type Endpoints = 'template' | 'session' | 'user';
+type Endpoints = 'templates' | 'sessions' | 'users';
 
 type Input = {
   route: `/api/${Endpoints}`;
