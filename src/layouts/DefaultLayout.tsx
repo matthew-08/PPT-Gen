@@ -1,7 +1,7 @@
 import { Fade, Flex } from '@chakra-ui/react';
 import { ReactNode } from 'react';
-import Navbar from '../components/global/Navbar';
 import Footer from '../components/global/Footer';
+import Navbar from '../components/Navbar/Navbar';
 
 function DefaultLayout({ children }: { children: ReactNode }) {
   return (

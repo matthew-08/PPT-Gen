@@ -7,6 +7,7 @@ import About from '../pages/About';
 import Contact from '../pages/Contact';
 import useRefreshSession from '../hooks/useRefreshSession';
 import Dashboard from '../pages/Dashboard';
+import ProtectRoute from './ProtectRoute';
 
 function AppRoutes() {
   const { handleRefreshSession } = useRefreshSession();
@@ -19,7 +20,9 @@ function AppRoutes() {
       <Route path="/register" element={<Register />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
-      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/dashboard" element={<ProtectRoute />}>
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Route>
     </Routes>
   );
 }

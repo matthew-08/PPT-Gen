@@ -10,12 +10,12 @@ import {
 } from '@chakra-ui/react';
 import { BiUserCircle } from 'react-icons/bi';
 import CustomList from './CustomList';
-import SlotModal from './SlotModal';
+import SlotModal from '../global/SlotModal';
 import SignInForm from '../Forms/SignIn/SignInForm';
 import NavMenu from './NavMenu';
 import { APP_IMAGES } from '../../utils/images';
-import PptIcon from './PptIcon';
-import MainNavButton from '../Navbar/MainNavButton';
+import PptIcon from '../global/PptIcon';
+import MainNavButton from './MainNavButton';
 
 function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
