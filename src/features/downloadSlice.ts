@@ -1,16 +1,15 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { SlideState } from '../types';
+import apiFetch from '../utils/apiFetch';
 
 export const attemptDownload = createAsyncThunk(
   'download/attempt',
   async (data: { templateInput: SlideState[]; templateId: number }) => {
-    const response = await fetch('http://localhost:3005/api/template', {
+    const response = await apiFetch({
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
+      route: '/api/templates',
+      data,
     });
     const buffer = await response.arrayBuffer();
     const ok = new Blob([buffer]);

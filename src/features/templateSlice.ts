@@ -13,7 +13,7 @@ import { onChangeClearStatus, onChangeSubmitStatus } from './appFormSlice';
 export const fetchAllTemplates = createAsyncThunk(
   'template/allTemplates',
   async () => {
-    const response = await fetch('http://localhost:3005/api/template').then(
+    const response = await fetch('http://localhost:3005/api/templates').then(
       (res) => res.json()
     );
     return formatTemplateGet(response);

@@ -11,7 +11,7 @@ export const attemptCreateSession = createAsyncThunk(
     const res = await apiFetch({
       method: 'POST',
       data,
-      route: '/api/session',
+      route: '/api/sessions',
     }).then((r) => r.json());
     if (res.message) {
       return rejectWithValue(res.message);
@@ -24,7 +24,7 @@ export const attemptCreateUser = createAsyncThunk(
   async (data: UserRegisterInput, { rejectWithValue }) => {
     const res = await apiFetch({
       method: 'POST',
-      route: '/api/user',
+      route: '/api/users',
       data,
     });
     if (!res.ok) {
@@ -40,7 +40,7 @@ export const attemptRefreshSession = createAsyncThunk(
   async (_, { abort }) => {
     const res = await apiFetch({
       method: 'GET',
-      route: '/api/session',
+      route: '/api/sessions',
     });
     if (!res.ok) {
       return abort();
