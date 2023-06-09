@@ -1,11 +1,19 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useAppSelector } from '../store/hooks';
+import apiFetch from '../utils/apiFetch';
 import useAuth from './useAuth';
+import useSelectedTemplate from './useSelectedTemplate';
 
 type Status = 'loading' | 'error' | 'complete' | 'idle';
 const useSaveUserTemplate = () => {
   const { userInfo } = useAuth();
-  const dispatch = useDispatch();
+  const { submittedSlides: slideState } = useAppSelector(
+    (state) => state.templateReducer
+  );
+  const { selectedTemplate } = useSelectedTemplate();
+  const { name: templateName } = useAppSelector(
+    (state) => state.downloadReducer
+  );
   const [status, setStatus] = useState<Status>('idle');
 
   const handleSaveUserTemplate = async () => {
@@ -13,9 +21,18 @@ const useSaveUserTemplate = () => {
       setStatus('error');
     }
     setStatus(() => 'loading');
-    await setTimeout(() => {
-      setStatus('complete');
-    }, 2000);
+    const arrayOfSlides = Object.values(slideState);
+    await apiFetch({
+      method: 'POST',
+      route: `/api/users/${userInfo.id}/templates`,
+      data: {
+        templateId: selectedTemplate.templateId,
+        templateInputs: arrayOfSlides,
+        name: templateName,
+      },
+    })
+      .then((res) => res.json())
+      .then((r) => console.log(r));
   };
 
   return { handleSaveUserTemplate, status };

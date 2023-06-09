@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useDisclosure } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { attemptDownload } from '../features/downloadSlice';
+import { attemptDownload, onChangeName } from '../features/downloadSlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import useSelectedTemplate from './useSelectedTemplate';
 import genRandomName from '../utils/genRandonName';
@@ -9,14 +9,15 @@ import useAppFormStatus from './useAppForm';
 
 const useDownloadPpt = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   const dispatch = useAppDispatch();
+
   const [pptName, setPptName] = useState<false | string>('');
-  const validSumbit = useAppSelector(
-    (state) => state.templateReducer.selectedTemplate.validSubmit
-  );
-  const slideState = useAppSelector(
-    (state) => state.templateReducer.submittedSlides
-  );
+
+  const {
+    selectedTemplate: { validSubmit },
+    submittedSlides: slideState,
+  } = useAppSelector((state) => state.templateReducer);
   const { selectedTemplate } = useSelectedTemplate();
 
   const { downloadStatus, url } = useAppSelector(
@@ -46,14 +47,16 @@ const useDownloadPpt = () => {
 
   const handleClose = () => {
     handleSetSubmitStatus(false);
-    console.log('closing');
     onClose();
   };
   useEffect(() => {
-    if (validSumbit) {
+    if (validSubmit) {
       onOpen();
     }
-  }, [validSumbit, onOpen]);
+    if (pptName) {
+      dispatch(onChangeName(pptName));
+    }
+  }, [validSubmit, onOpen, pptName]);
 
   const disclosureState = { isOpen, onOpen, onClose: handleClose };
   const handlers = {

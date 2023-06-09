@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { SlideState } from '../types';
 import apiFetch from '../utils/apiFetch';
 
@@ -26,6 +26,7 @@ type DownloadSlice = {
     cancelled: boolean;
   };
   url: string;
+  name: string;
 };
 
 const initialState: DownloadSlice = {
@@ -36,10 +37,15 @@ const initialState: DownloadSlice = {
     cancelled: false,
   },
   url: '',
+  name: '',
 };
 const downloadSlice = createSlice({
   name: 'download',
-  reducers: {},
+  reducers: {
+    onChangeName(state, { payload }: PayloadAction<string>) {
+      state.name = payload;
+    },
+  },
   initialState,
   extraReducers: (builder) => {
     builder.addCase(attemptDownload.pending, (state) => {
@@ -54,5 +60,7 @@ const downloadSlice = createSlice({
     });
   },
 });
+
+export const { onChangeName } = downloadSlice.actions;
 
 export default downloadSlice.reducer;
