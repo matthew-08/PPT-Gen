@@ -1,6 +1,12 @@
-import { DownloadIcon, PlusSquareIcon } from '@chakra-ui/icons';
+import {
+  CheckCircleIcon,
+  DownloadIcon,
+  PlusSquareIcon,
+} from '@chakra-ui/icons';
 import { Text, Button } from '@chakra-ui/react';
+import { useEffect } from 'react';
 import useAuth from '../../../hooks/useAuth';
+import useSaveUserTemplate from '../../../hooks/useSaveUserTemplate';
 
 type Props = {
   url: string;
@@ -13,6 +19,11 @@ function DownloadComplete({ name, url }: Props) {
       authStatus: { loggedIn },
     },
   } = useAuth();
+
+  const { handleSaveUserTemplate, status } = useSaveUserTemplate();
+  useEffect(() => {
+    console.log(status);
+  }, [status]);
   return (
     <>
       <Text textAlign="center" fontSize="1.4rem">
@@ -35,20 +46,21 @@ function DownloadComplete({ name, url }: Props) {
         Download
       </Button>
       <Button
-        disabled={!loggedIn}
+        disabled={!loggedIn || status === 'complete'}
         padding="1.7rem"
         variant="outline"
-        colorScheme="purple"
-        leftIcon={<PlusSquareIcon />}
+        onClick={status === 'complete' ? () => null : handleSaveUserTemplate}
+        colorScheme={status === 'complete' ? 'green' : 'purple'}
+        isLoading={status === 'loading'}
+        leftIcon={
+          status === 'complete' ? <CheckCircleIcon /> : <PlusSquareIcon />
+        }
         fontSize="1.5rem"
         mb="0.5rem"
-        _hover={{
-          color: 'gray',
-        }}
       >
-        Save to collection
+        {status === 'idle' ? 'Save to collection' : 'Added to your collection'}
       </Button>
-      {loggedIn && (
+      {!loggedIn && (
         <Text m="auto" mb="1rem">
           * Create an account to save your templates.
         </Text>
