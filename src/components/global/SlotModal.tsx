@@ -10,13 +10,10 @@ import {
   Flex,
 } from '@chakra-ui/react';
 import { ReactNode } from 'react';
+import { DisclosureState } from '../../types';
 
 type Props = {
-  disclosureState: {
-    [K in keyof UseDisclosureReturn as K extends 'isOpen' | 'onOpen' | 'onClose'
-      ? K
-      : never]: UseDisclosureReturn[K];
-  };
+  disclosureState: DisclosureState;
   modalHeader: string;
   children: ReactNode;
   options?: {

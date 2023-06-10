@@ -68,3 +68,9 @@ export type ServerError = {
 };
 
 export type CreateUserPayload = { accessToken: string; id: number };
+
+export type DisclosureState = {
+  [K in keyof UseDisclosureReturn as K extends 'isOpen' | 'onOpen' | 'onClose'
+    ? K
+    : never]: UseDisclosureReturn[K];
+};

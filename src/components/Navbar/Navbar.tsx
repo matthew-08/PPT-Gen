@@ -16,6 +16,7 @@ import NavMenu from './NavMenu';
 import { APP_IMAGES } from '../../utils/images';
 import PptIcon from '../global/PptIcon';
 import MainNavButton from './MainNavButton';
+import SignInModal from '../Modal/SignInModal/SignInModal';
 
 function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -53,12 +54,13 @@ function Navbar() {
           </>
         )}
       </Flex>
-      <SlotModal
-        disclosureState={{ isOpen, onClose, onOpen }}
-        modalHeader="Sign In"
-      >
-        <SignInForm />
-      </SlotModal>
+      <SignInModal
+        disclosureState={{
+          isOpen,
+          onClose,
+          onOpen,
+        }}
+      />
     </Flex>
   );
 }

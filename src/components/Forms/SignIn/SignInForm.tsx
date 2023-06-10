@@ -15,7 +15,11 @@ export type FormData = {
 };
 
 function SignInForm() {
-  const { userInfo, handleCreateSession, errorState } = useAuth();
+  const {
+    userInfo: { authStatus },
+    handleCreateSession,
+    errorState,
+  } = useAuth();
   const { handleSubmit, inputObjects, setError } = useCustomForm(
     [
       {
@@ -81,6 +85,7 @@ function SignInForm() {
         <Button
           variant="solid"
           colorScheme="purple"
+          isLoading={authStatus.loading}
           size="lg"
           width="100%"
           type="submit"
