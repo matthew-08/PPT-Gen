@@ -17,7 +17,7 @@ export const attemptCreateSession = createAsyncThunk(
       console.log(res);
       return rejectWithValue(res.message);
     }
-    console.log(res);
+    return res;
   }
 );
 
@@ -90,7 +90,15 @@ const authSlice = createSlice({
         loggedIn: false,
       };
     });
-    builder.addCase(attemptCreateSession.fulfilled, (state) => {});
+    builder.addCase(
+      attemptCreateSession.fulfilled,
+      (state, action: PayloadAction<CreateUserPayload>) => {
+        state.authStatus = validAuthStatus;
+        const { id, accessToken } = action.payload;
+        state.id = id;
+        setToken(accessToken);
+      }
+    );
     builder.addCase(
       attemptCreateUser.fulfilled,
       (state, action: PayloadAction<CreateUserPayload>) => {
