@@ -1,7 +1,8 @@
 import React from 'react';
-import { ButtonGroup, Button, Text, Image } from '@chakra-ui/react';
+import { ButtonGroup, Button, Text, Image, IconButton } from '@chakra-ui/react';
 import { BiUserCircle } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
+import { MdLogout } from 'react-icons/md';
 import useAuth from '../../hooks/useAuth';
 import { APP_IMAGES } from '../../utils/images';
 
@@ -32,14 +33,17 @@ function MainNavButton({ onOpen }: Props) {
           Sign In
         </Button>
       ) : (
-        <Button
-          size="lg"
-          fontSize="1.5rem"
-          onClick={() => navigate('/dashboard')}
-          leftIcon={<Image src={APP_IMAGES.presentation} width="20px" />}
-        >
-          My Templates
-        </Button>
+        <ButtonGroup>
+          <Button
+            size="lg"
+            fontSize="1.5rem"
+            onClick={() => navigate('/dashboard')}
+            leftIcon={<Image src={APP_IMAGES.presentation} width="20px" />}
+          >
+            My Templates
+          </Button>
+          <IconButton size="lg" icon={<MdLogout />} />
+        </ButtonGroup>
       )}
     </ButtonGroup>
   );

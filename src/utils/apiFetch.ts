@@ -3,8 +3,8 @@ import { getToken } from './tokenUtil';
 type Endpoints = 'templates' | 'sessions' | 'users';
 
 type Input = {
-  route: `/api/${Endpoints}` | `/api/${Endpoints}/${number}/${Endpoints}`;
-  method: 'POST' | 'GET' | 'PUT';
+  route: `/api/${Endpoints}` | `/api/${Endpoints}/${string}/${Endpoints}`;
+  method: 'POST' | 'GET' | 'PUT' | 'DELETE';
   data?: Record<any, any>;
 };
 

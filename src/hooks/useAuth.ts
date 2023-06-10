@@ -16,6 +16,10 @@ const useAuth = () => {
     });
   };
 
+  const handleTerminateSession = () => {
+    return dispatch();
+  };
+
   const handleSetErrorState = (b: boolean) => {
     return setError(b);
   };

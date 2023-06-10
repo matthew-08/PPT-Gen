@@ -3,10 +3,10 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CreateSessionInput, CreateUserPayload } from '../types';
 import apiFetch from '../utils/apiFetch';
 import { UserRegisterInput } from '../schemas/register.schema';
-import { setToken } from '../utils/tokenUtil';
+import { removeToken, setToken } from '../utils/tokenUtil';
 
 export const attemptCreateSession = createAsyncThunk(
-  'template/createSession',
+  'auth/createSession',
   async (data: CreateSessionInput, { rejectWithValue }) => {
     const res = await apiFetch({
       method: 'POST',
@@ -22,7 +22,7 @@ export const attemptCreateSession = createAsyncThunk(
 );
 
 export const attemptCreateUser = createAsyncThunk(
-  'template/createUser',
+  'auth/createUser',
   async (data: UserRegisterInput, { rejectWithValue }) => {
     const res = await apiFetch({
       method: 'POST',
@@ -38,7 +38,7 @@ export const attemptCreateUser = createAsyncThunk(
 );
 
 export const attemptRefreshSession = createAsyncThunk(
-  'template/refreshSession',
+  'auth/refreshSession',
   async (_, { abort }) => {
     const res = await apiFetch({
       method: 'GET',
@@ -78,7 +78,17 @@ const initialState: AuthState = {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    onTerminateSession(state) {
+      state.id = null;
+      state.authStatus = {
+        loading: false,
+        loggedIn: false,
+        error: null,
+      };
+      removeToken();
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(attemptCreateSession.pending, (state) => {
       state.authStatus.loading = true;
