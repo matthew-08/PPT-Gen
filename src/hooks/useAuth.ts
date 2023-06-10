@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
-import { attemptCreateSession } from '../features/authSlice';
+import {
+  attemptCreateSession,
+  onTerminateSession,
+} from '../features/authSlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { CreateSessionInput } from '../types';
 
@@ -17,7 +20,7 @@ const useAuth = () => {
   };
 
   const handleTerminateSession = () => {
-    return dispatch();
+    return dispatch(onTerminateSession());
   };
 
   const handleSetErrorState = (b: boolean) => {
@@ -32,7 +35,7 @@ const useAuth = () => {
     handleSetErrorState,
   };
 
-  return { userInfo, handleCreateSession, errorState };
+  return { userInfo, handleCreateSession, handleTerminateSession, errorState };
 };
 
 export default useAuth;

@@ -139,4 +139,6 @@ const authSlice = createSlice({
   },
 });
 
+export const { onTerminateSession } = authSlice.actions;
+
 export default authSlice.reducer;

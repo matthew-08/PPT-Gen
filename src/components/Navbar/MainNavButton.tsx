@@ -1,10 +1,18 @@
 import React from 'react';
-import { ButtonGroup, Button, Text, Image, IconButton } from '@chakra-ui/react';
+import {
+  ButtonGroup,
+  Button,
+  Text,
+  Image,
+  IconButton,
+  useDisclosure,
+} from '@chakra-ui/react';
 import { BiUserCircle } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
 import { MdLogout } from 'react-icons/md';
 import useAuth from '../../hooks/useAuth';
 import { APP_IMAGES } from '../../utils/images';
+import { LogoutModal } from '../Modal/LogoutModal/LogoutModal';
 
 type Props = {
   onOpen: () => void;
@@ -15,8 +23,10 @@ function MainNavButton({ onOpen }: Props) {
     userInfo: {
       authStatus: { loggedIn },
     },
+    handleTerminateSession,
   } = useAuth();
   const navigate = useNavigate();
+  const { isOpen, onOpen: logoutOnOpen, onClose } = useDisclosure();
   return (
     <ButtonGroup>
       {!loggedIn ? (
@@ -42,9 +52,21 @@ function MainNavButton({ onOpen }: Props) {
           >
             My Templates
           </Button>
-          <IconButton size="lg" icon={<MdLogout />} />
+          <IconButton
+            aria-label="logout"
+            onClick={logoutOnOpen}
+            size="lg"
+            icon={<MdLogout />}
+          />
         </ButtonGroup>
       )}
+      <LogoutModal
+        disclosureState={{
+          isOpen,
+          onClose,
+          onOpen: logoutOnOpen,
+        }}
+      />
     </ButtonGroup>
   );
 }
