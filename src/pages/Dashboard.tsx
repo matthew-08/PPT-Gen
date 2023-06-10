@@ -1,11 +1,13 @@
-import { Heading } from '@chakra-ui/react';
-import React from 'react';
+import { Flex, Heading } from '@chakra-ui/react';
 import DefaultLayout from '../layouts/DefaultLayout';
 
 function Dashboard() {
   return (
     <DefaultLayout>
-      <Heading>Dashboard</Heading>
+      <Heading m="auto" mt="2rem">
+        My Templates
+      </Heading>
+      <Flex />
     </DefaultLayout>
   );
 }

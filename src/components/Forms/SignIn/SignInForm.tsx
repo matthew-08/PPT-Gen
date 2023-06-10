@@ -3,6 +3,7 @@ import { Flex, Text, ModalFooter, Button } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { EmailIcon } from '@chakra-ui/icons';
+import { domainToASCII } from 'url';
 import { SignInFormSchema } from '../../../schemas/signin.schema';
 import { FormInput } from '../FormInput';
 import useCustomForm from '../../../hooks/useCustomForm';
@@ -86,13 +87,7 @@ function SignInForm() {
         >
           Sign In
         </Button>
-        <Button
-          variant="outline"
-          colorScheme="purple"
-          size="lg"
-          width="100%"
-          type="submit"
-        >
+        <Button variant="outline" colorScheme="purple" size="lg" width="100%">
           Cancel
         </Button>
       </ModalFooter>

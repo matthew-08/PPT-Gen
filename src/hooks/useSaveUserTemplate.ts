@@ -22,17 +22,20 @@ const useSaveUserTemplate = () => {
     }
     setStatus(() => 'loading');
     const arrayOfSlides = Object.values(slideState);
-    await apiFetch({
+    const res = await apiFetch({
       method: 'POST',
       route: `/api/users/${userInfo.id}/templates`,
       data: {
         templateId: selectedTemplate.templateId,
-        templateInputs: arrayOfSlides,
+        templateInput: arrayOfSlides,
         name: templateName,
       },
-    })
-      .then((res) => res.json())
-      .then((r) => console.log(r));
+    });
+    if (!res.ok) {
+      setStatus('error');
+    } else {
+      setStatus('complete');
+    }
   };
 
   return { handleSaveUserTemplate, status };

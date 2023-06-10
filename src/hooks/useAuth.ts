@@ -15,6 +15,7 @@ const useAuth = () => {
       }
     });
   };
+
   const handleSetErrorState = (b: boolean) => {
     return setError(b);
   };

@@ -1,11 +1,6 @@
-import { Flex, Heading, IconButton, Text } from '@chakra-ui/react';
-import React from 'react';
+import { Flex, IconButton, Text } from '@chakra-ui/react';
 import { DiGithubFull } from 'react-icons/di';
-import {
-  AiFillLinkedin,
-  AiFillTwitterCircle,
-  AiFillTwitterSquare,
-} from 'react-icons/ai';
+import { AiFillLinkedin, AiFillTwitterSquare } from 'react-icons/ai';
 import DefaultLayout from '../layouts/DefaultLayout';
 
 function Contact() {

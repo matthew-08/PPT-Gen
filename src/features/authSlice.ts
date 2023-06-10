@@ -14,8 +14,10 @@ export const attemptCreateSession = createAsyncThunk(
       route: '/api/sessions',
     }).then((r) => r.json());
     if (res.message) {
+      console.log(res);
       return rejectWithValue(res.message);
     }
+    console.log(res);
   }
 );
 
@@ -82,9 +84,13 @@ const authSlice = createSlice({
       state.authStatus.loading = true;
     });
     builder.addCase(attemptCreateSession.rejected, (state, action) => {
-      const { authStatus } = state;
-      authStatus.loading = false;
+      state.authStatus = {
+        loading: false,
+        error: null,
+        loggedIn: false,
+      };
     });
+    builder.addCase(attemptCreateSession.fulfilled, (state) => {});
     builder.addCase(
       attemptCreateUser.fulfilled,
       (state, action: PayloadAction<CreateUserPayload>) => {
