@@ -74,3 +74,15 @@ export type DisclosureState = {
     ? K
     : never]: UseDisclosureReturn[K];
 };
+
+export type UserTemplate = {
+  templateInfo: {
+    img: string;
+    id: number;
+    name: string;
+  };
+  name: string | null;
+  createdOn: string | null;
+  timesGenerated: number | null;
+  id: number;
+};

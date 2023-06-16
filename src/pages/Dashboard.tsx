@@ -5,7 +5,7 @@ import DefaultLayout from '../layouts/DefaultLayout';
 function Dashboard() {
   return (
     <DefaultLayout>
-      <Flex justify="center" flexDir="column">
+      <Flex justify="center" flexDir="column" align="center">
         <Heading m="auto" mt="2rem">
           My Templates
         </Heading>

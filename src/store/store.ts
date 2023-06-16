@@ -3,6 +3,7 @@ import templateReducer from '../features/templateSlice';
 import appFormStatusReducer from '../features/appFormSlice';
 import downloadReducer from '../features/downloadSlice';
 import authReducer from '../features/authSlice';
+import userTemplateReducer from '../features/userTemplateSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     appFormStatusReducer,
     downloadReducer,
     authReducer,
+    userTemplateReducer,
   },
 });
 
