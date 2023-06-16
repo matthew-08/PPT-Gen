@@ -1,12 +1,12 @@
 /* eslint-disable react/no-array-index-key */
 import { Flex, Text, useMediaQuery } from '@chakra-ui/react';
 import { memo } from 'react';
-import { SlideFields } from '../../../types';
+import { EditFieldOptions, SlideFields } from '../../../types';
 import RowInput from './RowInput';
 import useSlideRow from '../../../hooks/useSlideRow';
 
 type Props = {
-  slide: SlideFields;
+  slide: SlideFields | EditFieldOptions[];
   slideIndex: number;
 };
 
@@ -30,7 +30,7 @@ export const SlideRow = memo(function SlideRow({ slide, slideIndex }: Props) {
         return (
           <RowInput
             slideIndex={slideIndex}
-            field={field}
+            field={typeof field !== 'string' ? field.fieldType : field}
             hookForm={hookForm}
             key={index}
           />

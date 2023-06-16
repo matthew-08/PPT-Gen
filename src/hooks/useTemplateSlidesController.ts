@@ -8,12 +8,10 @@ const useTemplateSlidesController = () => {
   } = useAuth();
   const { isOpen, onClose, onOpen } = useDisclosure();
   const handleFetchTemplateSlides = async (templateId: number) => {
-    await apiFetch({
+    const slides = await apiFetch({
       method: 'GET',
       route: `/api/users/${userId}/templates/${templateId}/slides`,
-    })
-      .then((r) => r.json())
-      .then((r) => console.log(r));
+    }).then((r) => r.json());
   };
   const handleEditTemplate = async (templateId: number) => {
     handleFetchTemplateSlides(templateId);

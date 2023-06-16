@@ -3,6 +3,11 @@ import { ReactNode } from 'react';
 
 export type FieldOptions = 'question' | 'answer' | 'additional';
 
+export type EditFieldOptions = {
+  fieldType: FieldOptions;
+  fieldId: number;
+};
+
 export type SlideState = {
   question: string;
   answer?: string;
@@ -85,4 +90,21 @@ export type UserTemplate = {
   createdOn: string | null;
   timesGenerated: number | null;
   id: number;
+};
+
+export type UserField = {
+  content: string;
+  fieldType: {
+    id: number;
+    type: FieldOptions;
+  };
+  id: number;
+  slideId: number;
+};
+
+export type UserSlide = {
+  id: number;
+  slideNumber: number;
+  templateId: number;
+  fields: UserField[];
 };

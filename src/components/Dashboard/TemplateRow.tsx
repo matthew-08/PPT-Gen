@@ -42,11 +42,11 @@ export function TemplateRow({ userTemplate }: Props) {
             icon={<EditIcon />}
             size="lg"
             aria-label="edit button"
-            onClick={() => handlers.handleFetchTemplateSlides(templateInfo.id)}
+            onClick={() => handlers.handleEditTemplate(templateInfo.id)}
           />
         </ButtonGroup>
       </Td>
-      {modalState.isOpen && <EditTemplateModal />}
+      {modalState.isOpen && <EditTemplateModal modalState={modalState} />}
     </Tr>
   );
 }

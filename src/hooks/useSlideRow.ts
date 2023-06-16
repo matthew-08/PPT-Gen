@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
+import { FieldErrors, useForm, UseFormRegister } from 'react-hook-form';
 import {
-  FieldErrors,
-  useForm,
-  UseFormRegister,
-  SubmitErrorHandler,
-} from 'react-hook-form';
-import { SlideFields, SlideRowState, SlideState } from '../types';
+  EditFieldOptions,
+  SlideFields,
+  SlideRowState,
+  SlideState,
+} from '../types';
 import useAppFormStatus from './useAppForm';
 
 export type HookForm = {
@@ -13,7 +13,11 @@ export type HookForm = {
   errors: FieldErrors<SlideRowState>;
 };
 
-const useSlideRow = (slideFields: SlideFields, slideIndex: number) => {
+const useSlideRow = (
+  slideFields: SlideFields | EditFieldOptions[],
+  slideIndex: number,
+  editOptions?: {}
+) => {
   const { submitStatus, autoFillStatus, clearFieldsStatus, handlers } =
     useAppFormStatus();
 
@@ -21,8 +25,6 @@ const useSlideRow = (slideFields: SlideFields, slideIndex: number) => {
     handleSubmit: hFormSubmit,
     register,
     setValue,
-    resetField,
-    getValues,
     reset,
     formState: { errors },
   } = useForm<SlideRowState>({
@@ -34,8 +36,6 @@ const useSlideRow = (slideFields: SlideFields, slideIndex: number) => {
   };
 
   const handleAutoFill = () => {
-    console.log('mapping slideFields');
-    console.log(slideFields);
     slideFields.map((slide) => {
       return setValue(slide, `${slide} - ${slideIndex + 1}`);
     });
@@ -69,7 +69,6 @@ const useSlideRow = (slideFields: SlideFields, slideIndex: number) => {
       handleSubmit();
     }
     if (autoFillStatus) {
-      console.log('auto fill');
       handleAutoFill();
     }
     if (clearFieldsStatus) {
