@@ -19,6 +19,7 @@ import { format } from 'date-fns';
 import { BiTrash } from 'react-icons/bi';
 import { EditIcon } from '@chakra-ui/icons';
 import useUserTemplateController from '../../hooks/useUserTemplateController';
+import { TemplateRow } from './TemplateRow';
 
 function TemplateContainer() {
   const { handlers, templates } = useUserTemplateController();
@@ -48,24 +49,7 @@ function TemplateContainer() {
         </Tr>
         <Tbody>
           {templates.map((t) => {
-            return (
-              <Tr key={t.id} fontSize="1.5rem">
-                <Td align="center">
-                  <Flex flexDir="column" align="center">
-                    <Image src={t.templateInfo.img} maxW="200px" />{' '}
-                    <Text mt="0.5rem">{t.name}</Text>
-                  </Flex>
-                </Td>
-                <Td>{format(Number(t.createdOn), 'yyyy-MM-dd')}</Td>
-                <Td>{t.timesGenerated}</Td>
-                <Td>
-                  <ButtonGroup>
-                    <IconButton icon={<BiTrash />} size="lg" />
-                    <IconButton icon={<EditIcon />} size="lg" />
-                  </ButtonGroup>
-                </Td>
-              </Tr>
-            );
+            return <TemplateRow key={t.id} userTemplate={t} />;
           })}
         </Tbody>
       </Table>

@@ -7,11 +7,13 @@ import {
   Image,
   ButtonGroup,
   IconButton,
+  useDisclosure,
 } from '@chakra-ui/react';
 import { format } from 'date-fns';
 import { BiTrash } from 'react-icons/bi';
 import { EditIcon } from '@chakra-ui/icons';
 import { UserTemplate } from '../../types';
+import useTemplateSlidesController from '../../hooks/useTemplateSlidesController';
 
 type Props = {
   userTemplate: UserTemplate;
@@ -19,6 +21,9 @@ type Props = {
 
 export function TemplateRow({ userTemplate }: Props) {
   const { createdOn, id, name, templateInfo, timesGenerated } = userTemplate;
+
+  const { handlers } = useTemplateSlidesController();
+
   return (
     <Tr key={id} fontSize="1.5rem">
       <Td align="center">
@@ -32,7 +37,12 @@ export function TemplateRow({ userTemplate }: Props) {
       <Td>
         <ButtonGroup>
           <IconButton icon={<BiTrash />} size="lg" aria-label="trash button" />
-          <IconButton icon={<EditIcon />} size="lg" aria-label="edit button" />
+          <IconButton
+            icon={<EditIcon />}
+            size="lg"
+            aria-label="edit button"
+            onClick={() => handlers.handleFetchTemplateSlides(templateInfo.id)}
+          />
         </ButtonGroup>
       </Td>
     </Tr>
