@@ -12,7 +12,7 @@ type Props = {
 
 export const SlideRow = memo(function SlideRow({ slide, slideIndex }: Props) {
   const [isSmallerThan800] = useMediaQuery('(max-width: 800px)');
-  const { hookForm, disabled } = useSlideRow(slide, slideIndex);
+  const { hookForm } = useSlideRow(slide, slideIndex);
 
   return (
     <Flex
@@ -29,7 +29,6 @@ export const SlideRow = memo(function SlideRow({ slide, slideIndex }: Props) {
       {slide.map((field, index) => {
         return (
           <RowInput
-            disabled={disabled}
             slideIndex={slideIndex}
             field={field}
             hookForm={hookForm}

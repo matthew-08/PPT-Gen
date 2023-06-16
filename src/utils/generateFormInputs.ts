@@ -23,7 +23,7 @@ const generateFormInputs = <FormData extends FieldValues>(
       register,
       isInvalid,
       pHolderTxt: i.placeholder,
-      errorMsg: errors[i.fieldName]?.message,
+      errorMsg: errors[i.fieldName]?.message || undefined,
     };
   });
 };
