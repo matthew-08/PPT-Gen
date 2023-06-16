@@ -1,6 +1,12 @@
 import React from 'react';
 
-function EditTemplateModal() {
+type Props = {
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+};
+
+function EditTemplateModal({ isOpen, onClose, onOpen }: Props) {
   return <div>EditTemplateModal</div>;
 }
 

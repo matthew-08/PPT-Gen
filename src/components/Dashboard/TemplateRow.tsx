@@ -14,6 +14,7 @@ import { BiTrash } from 'react-icons/bi';
 import { EditIcon } from '@chakra-ui/icons';
 import { UserTemplate } from '../../types';
 import useTemplateSlidesController from '../../hooks/useTemplateSlidesController';
+import EditTemplateModal from '../Modal/EditTemplateModal/EditTemplateModal';
 
 type Props = {
   userTemplate: UserTemplate;
@@ -22,7 +23,7 @@ type Props = {
 export function TemplateRow({ userTemplate }: Props) {
   const { createdOn, id, name, templateInfo, timesGenerated } = userTemplate;
 
-  const { handlers } = useTemplateSlidesController();
+  const { handlers, modalState } = useTemplateSlidesController();
 
   return (
     <Tr key={id} fontSize="1.5rem">
@@ -45,6 +46,7 @@ export function TemplateRow({ userTemplate }: Props) {
           />
         </ButtonGroup>
       </Td>
+      {modalState.isOpen && <EditTemplateModal />}
     </Tr>
   );
 }
