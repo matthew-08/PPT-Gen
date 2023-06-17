@@ -47,6 +47,7 @@ function EditTemplateModal({ modalState, slides }: Props) {
                   slide={s.fields}
                   slideIndex={i}
                   isUserSlide
+                  userSlideId={s.id}
                 />
               );
             })}

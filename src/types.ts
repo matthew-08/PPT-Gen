@@ -111,3 +111,14 @@ export type UserSlide = {
   templateId: number;
   fields: UserField[];
 };
+
+export type PatchUserTemplateInput = {
+  templateId: number;
+  updatedSlides: {
+    id: number;
+    fields: {
+      id: number;
+      content: string;
+    }[];
+  }[];
+};

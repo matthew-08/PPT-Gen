@@ -19,17 +19,19 @@ const useSlideRow = (
   slideIndex: number,
   editOptions?: {
     isUserField: boolean;
+    slideId: number | null;
   }
 ) => {
   const { submitStatus, autoFillStatus, clearFieldsStatus, handlers } =
     useAppFormStatus();
+  const [hasBeenEdited, setHasBeenEdited] = useState<boolean>(false);
 
   const {
     handleSubmit: hFormSubmit,
     register,
     setValue,
     reset,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<SlideRowState>({
     shouldFocusError: false,
   });
@@ -40,18 +42,21 @@ const useSlideRow = (
 
   useEffect(() => {
     if (editOptions?.isUserField) {
-      console.log('TEST');
       slideFields.map((f) => {
         if (typeof f !== 'string') {
           setValue(f.fieldType.type, f.content);
         }
+        return f;
       });
     }
   }, [slideFields]);
 
   const handleAutoFill = () => {
     slideFields.map((slide) => {
-      return setValue(slide, `${slide} - ${slideIndex + 1}`);
+      if (typeof slide === 'string') {
+        return setValue(slide, `${slide} - ${slideIndex + 1}`);
+      }
+      return slide;
     });
   };
 
@@ -90,6 +95,12 @@ const useSlideRow = (
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [submitStatus, autoFillStatus, clearFieldsStatus]);
+
+  useEffect(() => {
+    if (isDirty) {
+      setHasBeenEdited(true);
+    }
+  }, [isDirty]);
 
   return { hookForm, handleAutoFill };
 };

@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 /* eslint-disable react/no-array-index-key */
 import { Flex, Text, useMediaQuery } from '@chakra-ui/react';
 import { memo } from 'react';
@@ -9,16 +10,19 @@ type Props = {
   slide: SlideFields | UserField[];
   slideIndex: number;
   isUserSlide?: boolean;
+  userSlideId?: number;
 };
 
 export const SlideRow = memo(function SlideRow({
   slide,
   slideIndex,
   isUserSlide,
+  userSlideId,
 }: Props) {
   const [isSmallerThan800] = useMediaQuery('(max-width: 800px)');
   const { hookForm } = useSlideRow(slide, slideIndex, {
-    isUserField: true,
+    isUserField: Boolean(isUserSlide),
+    slideId: userSlideId || null,
   });
 
   return (

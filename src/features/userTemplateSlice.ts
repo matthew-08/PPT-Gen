@@ -2,7 +2,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 // eslint-disable-next-line import/no-cycle
 import { RootState } from '../store/store';
-import { UserTemplate } from '../types';
+import { PatchUserTemplateInput, UserTemplate } from '../types';
 import apiFetch from '../utils/apiFetch';
 
 type UserTemplatesState = {
@@ -32,6 +32,23 @@ export const fetchAllUserTemplates = createAsyncThunk<
   }
   return (await res.json()) as UserTemplate[];
 });
+
+export const patchUserTemplate = createAsyncThunk<
+  void,
+  PatchUserTemplateInput,
+  {
+    state: RootState;
+  }
+>(
+  '/userTemplates/patchTemplates',
+  async ({ templateId, updatedSlides }, { getState }) => {
+    const userId = getState().authReducer.id;
+    apiFetch({
+      method: 'PATCH',
+      route: `/api/users/${userId}/templates/${templateId}/slides`,
+    });
+  }
+);
 
 const initialState: UserTemplatesState = {
   status: {
