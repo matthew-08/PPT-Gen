@@ -1,4 +1,6 @@
 import { useDisclosure } from '@chakra-ui/react';
+import { useState } from 'react';
+import { UserSlide } from '../types';
 import apiFetch from '../utils/apiFetch';
 import useAuth from './useAuth';
 
@@ -7,11 +9,14 @@ const useTemplateSlidesController = () => {
     userInfo: { id: userId },
   } = useAuth();
   const { isOpen, onClose, onOpen } = useDisclosure();
+  const [slides, setSlides] = useState<UserSlide[]>([]);
+
   const handleFetchTemplateSlides = async (templateId: number) => {
-    const slides = await apiFetch({
+    const slidesRes = (await apiFetch({
       method: 'GET',
       route: `/api/users/${userId}/templates/${templateId}/slides`,
-    }).then((r) => r.json());
+    }).then((r) => r.json())) as UserSlide[];
+    setSlides(slidesRes);
   };
   const handleEditTemplate = async (templateId: number) => {
     handleFetchTemplateSlides(templateId);
@@ -28,6 +33,7 @@ const useTemplateSlidesController = () => {
       onClose,
       onOpen,
     },
+    slides,
   };
 };
 

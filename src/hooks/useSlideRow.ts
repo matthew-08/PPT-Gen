@@ -5,6 +5,7 @@ import {
   SlideFields,
   SlideRowState,
   SlideState,
+  UserField,
 } from '../types';
 import useAppFormStatus from './useAppForm';
 
@@ -14,9 +15,11 @@ export type HookForm = {
 };
 
 const useSlideRow = (
-  slideFields: SlideFields | EditFieldOptions[],
+  slideFields: SlideFields | UserField[],
   slideIndex: number,
-  editOptions?: {}
+  editOptions?: {
+    isUserField: boolean;
+  }
 ) => {
   const { submitStatus, autoFillStatus, clearFieldsStatus, handlers } =
     useAppFormStatus();
@@ -34,6 +37,17 @@ const useSlideRow = (
     register,
     errors,
   };
+
+  useEffect(() => {
+    if (editOptions?.isUserField) {
+      console.log('TEST');
+      slideFields.map((f) => {
+        if (typeof f !== 'string') {
+          setValue(f.fieldType.type, f.content);
+        }
+      });
+    }
+  }, [slideFields]);
 
   const handleAutoFill = () => {
     slideFields.map((slide) => {

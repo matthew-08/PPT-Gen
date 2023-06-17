@@ -23,7 +23,7 @@ type Props = {
 export function TemplateRow({ userTemplate }: Props) {
   const { createdOn, id, name, templateInfo, timesGenerated } = userTemplate;
 
-  const { handlers, modalState } = useTemplateSlidesController();
+  const { handlers, modalState, slides } = useTemplateSlidesController();
 
   return (
     <Tr key={id} fontSize="1.5rem">
@@ -46,7 +46,9 @@ export function TemplateRow({ userTemplate }: Props) {
           />
         </ButtonGroup>
       </Td>
-      {modalState.isOpen && <EditTemplateModal modalState={modalState} />}
+      {modalState.isOpen && (
+        <EditTemplateModal modalState={modalState} slides={slides} />
+      )}
     </Tr>
   );
 }

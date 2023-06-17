@@ -4,7 +4,10 @@ import { ReactNode } from 'react';
 export type FieldOptions = 'question' | 'answer' | 'additional';
 
 export type EditFieldOptions = {
-  fieldType: FieldOptions;
+  fieldType: {
+    type: FieldOptions;
+    id: number;
+  };
   fieldId: number;
 };
 

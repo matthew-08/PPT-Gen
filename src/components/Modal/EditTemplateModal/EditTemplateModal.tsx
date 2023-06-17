@@ -6,9 +6,12 @@ import {
   ModalFooter,
   Button,
   Text,
+  Flex,
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react';
+import { UserSlide } from '../../../types';
+import SlideRow from '../../Templates/SlideRow/SlideRow';
 
 type Props = {
   modalState: {
@@ -16,12 +19,13 @@ type Props = {
     onOpen: () => void;
     onClose: () => void;
   };
+  slides: UserSlide[];
 };
 
-function EditTemplateModal({ modalState }: Props) {
+function EditTemplateModal({ modalState, slides }: Props) {
   const { isOpen, onClose, onOpen } = modalState;
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} size="6xl">
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Modal Title</ModalHeader>
@@ -31,10 +35,21 @@ function EditTemplateModal({ modalState }: Props) {
             flexDir="column"
             m="auto"
             padding="1rem"
-            maxH="800px"
+            maxH="600px"
             overflow="auto"
             className="slide-container"
-          />
+          >
+            {slides.map((s, i) => {
+              return (
+                <SlideRow
+                  key={s.id}
+                  slide={s.fields}
+                  slideIndex={i}
+                  isUserField
+                />
+              );
+            })}
+          </Flex>
         </ModalBody>
 
         <ModalFooter>

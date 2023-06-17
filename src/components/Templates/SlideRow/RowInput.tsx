@@ -13,7 +13,7 @@ type Props = {
 const RowInput = memo(function RowInput({ field, hookForm }: Props) {
   const { errors, register } = hookForm;
   const isInvalid = field in errors;
-
+  console.log(field);
   return (
     <Input
       ml="1rem"
