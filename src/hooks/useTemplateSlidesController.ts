@@ -2,6 +2,7 @@ import { useDisclosure } from '@chakra-ui/react';
 import { useState } from 'react';
 import { UserSlide } from '../types';
 import apiFetch from '../utils/apiFetch';
+import sortUserSlidesResponse from '../utils/sortSlides';
 import useAuth from './useAuth';
 
 const useTemplateSlidesController = () => {
@@ -16,7 +17,8 @@ const useTemplateSlidesController = () => {
       method: 'GET',
       route: `/api/users/${userId}/templates/${templateId}/slides`,
     }).then((r) => r.json())) as UserSlide[];
-    setSlides(slidesRes);
+    const sortedSlides = sortUserSlidesResponse(slidesRes);
+    setSlides(sortedSlides);
   };
   const handleEditTemplate = async (templateId: number) => {
     handleFetchTemplateSlides(templateId);
