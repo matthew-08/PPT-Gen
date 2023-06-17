@@ -11,6 +11,7 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react';
 import { UserSlide } from '../../../types';
+// eslint-disable-next-line import/no-named-as-default
 import SlideRow from '../../Templates/SlideRow/SlideRow';
 
 type Props = {
@@ -45,7 +46,7 @@ function EditTemplateModal({ modalState, slides }: Props) {
                   key={s.id}
                   slide={s.fields}
                   slideIndex={i}
-                  isUserField
+                  isUserSlide
                 />
               );
             })}
