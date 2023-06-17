@@ -1,12 +1,6 @@
 import { useEffect, useState } from 'react';
 import { FieldErrors, useForm, UseFormRegister } from 'react-hook-form';
-import {
-  EditFieldOptions,
-  SlideFields,
-  SlideRowState,
-  SlideState,
-  UserField,
-} from '../types';
+import { SlideFields, SlideRowState, SlideState, UserField } from '../types';
 import useAppFormStatus from './useAppForm';
 
 export type HookForm = {
@@ -22,8 +16,13 @@ const useSlideRow = (
     slideId: number | null;
   }
 ) => {
-  const { submitStatus, autoFillStatus, clearFieldsStatus, handlers } =
-    useAppFormStatus();
+  const {
+    submitStatus,
+    autoFillStatus,
+    clearFieldsStatus,
+    editSubmitStatus,
+    handlers,
+  } = useAppFormStatus();
   const [hasBeenEdited, setHasBeenEdited] = useState<boolean>(false);
 
   const {
@@ -92,6 +91,12 @@ const useSlideRow = (
     }
     if (clearFieldsStatus) {
       handleClearFields();
+    }
+    if (editSubmitStatus) {
+      console.log('EDIT IN SLIDE ROW');
+      if (hasBeenEdited) {
+        console.log('SLIDE HAS BEEN EDITED READY FOR SUBMISSIOn');
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [submitStatus, autoFillStatus, clearFieldsStatus]);

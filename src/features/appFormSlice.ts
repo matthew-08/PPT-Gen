@@ -7,6 +7,7 @@ type SubmitState = {
   slideRows: SlideState[];
   autoFillStatus: boolean;
   clearFieldsStatus: boolean;
+  editSubmitStatus: boolean;
 };
 
 const initialState: SubmitState = {
@@ -14,6 +15,7 @@ const initialState: SubmitState = {
   slideRows: [],
   autoFillStatus: false,
   clearFieldsStatus: false,
+  editSubmitStatus: false,
 };
 
 const appFormSlice = createSlice({
@@ -32,6 +34,9 @@ const appFormSlice = createSlice({
       state.clearFieldsStatus = payload;
       state.autoFillStatus = false;
     },
+    onChangeEditTemplateStatus(state, { payload }: PayloadAction<boolean>) {
+      state.editSubmitStatus = true;
+    },
   },
   extraReducers: (builder) => {},
 });
@@ -42,4 +47,5 @@ export const {
   onChangeSubmitStatus,
   onChangeAutoFillStatus,
   onChangeClearStatus,
+  onChangeEditTemplateStatus,
 } = appFormSlice.actions;

@@ -42,7 +42,7 @@ export function TemplateRow({ userTemplate }: Props) {
             icon={<EditIcon />}
             size="lg"
             aria-label="edit button"
-            onClick={() => handlers.handleEditTemplate(templateInfo.id)}
+            onClick={() => handlers.handleEditTemplate(id)}
           />
         </ButtonGroup>
       </Td>
