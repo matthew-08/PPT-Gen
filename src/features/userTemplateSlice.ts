@@ -17,7 +17,7 @@ type UserTemplatesState = {
   };
   templates: UserTemplate[];
   submittedSlides: AddEditSlidePayload[];
-  currentEditingTemplate: UserTemplate;
+  currentEditingTemplate: UserTemplate | null;
 };
 
 export const fetchAllUserTemplates = createAsyncThunk<
@@ -64,13 +64,17 @@ const initialState: UserTemplatesState = {
   },
   templates: [],
   submittedSlides: [],
+  currentEditingTemplate: null,
 };
 
 const userTemplatesSlice = createSlice({
   name: 'userTemplates',
   initialState,
   reducers: {
-    onSetCurrentEditingTemplate(state, { payload }) {},
+    onSetCurrentEditingTemplate(state, { payload }: PayloadAction<number>) {
+      const selectedTemplate = state.templates.find(({ id }) => id === payload);
+      state.currentEditingTemplate = selectedTemplate as UserTemplate;
+    },
     onSubmitEditSlides(state, { payload }: PayloadAction<AddEditSlidePayload>) {
       state.submittedSlides.push(payload);
     },
@@ -82,6 +86,7 @@ const userTemplatesSlice = createSlice({
   },
 });
 
-export const { onSubmitEditSlides } = userTemplatesSlice.actions;
+export const { onSubmitEditSlides, onSetCurrentEditingTemplate } =
+  userTemplatesSlice.actions;
 
 export default userTemplatesSlice.reducer;

@@ -1,11 +1,14 @@
 import { useDisclosure } from '@chakra-ui/react';
 import { useState } from 'react';
+import { onSetCurrentEditingTemplate } from '../features/userTemplateSlice';
+import { useAppDispatch } from '../store/hooks';
 import { UserSlide } from '../types';
 import apiFetch from '../utils/apiFetch';
 import sortUserSlidesResponse from '../utils/sortSlides';
 import useAuth from './useAuth';
 
 const useTemplateSlidesController = () => {
+  const dispatch = useAppDispatch();
   const {
     userInfo: { id: userId },
   } = useAuth();
@@ -22,6 +25,7 @@ const useTemplateSlidesController = () => {
   };
   const handleEditTemplate = async (templateId: number) => {
     handleFetchTemplateSlides(templateId);
+    dispatch(onSetCurrentEditingTemplate(templateId));
     onOpen();
   };
 
