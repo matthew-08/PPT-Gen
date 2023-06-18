@@ -16,8 +16,8 @@ type UserTemplatesState = {
     error: boolean;
   };
   templates: UserTemplate[];
-  submittedSlides: AddEditSlidePayload[]
-  currentEditingTemplate: UserTemplate
+  submittedSlides: AddEditSlidePayload[];
+  currentEditingTemplate: UserTemplate;
 };
 
 export const fetchAllUserTemplates = createAsyncThunk<
@@ -63,16 +63,16 @@ const initialState: UserTemplatesState = {
     fetched: false,
   },
   templates: [],
-  submittedSlides: []
+  submittedSlides: [],
 };
 
 const userTemplatesSlice = createSlice({
   name: 'userTemplates',
   initialState,
   reducers: {
+    onSetCurrentEditingTemplate(state, { payload }) {},
     onSubmitEditSlides(state, { payload }: PayloadAction<AddEditSlidePayload>) {
       state.submittedSlides.push(payload);
-      if(state.submittedSlides.length === state.templates)
     },
   },
   extraReducers: (builder) => {
