@@ -8,6 +8,7 @@ import {
 } from '../features/appFormSlice';
 import { AddEditSlidePayload, AddSlidePayload } from '../types';
 import { onAddSlide } from '../features/templateSlice';
+import { onSubmitEditSlides } from '../features/userTemplateSlice';
 
 const useAppFormStatus = () => {
   const dispatch = useDispatch();
@@ -36,12 +37,12 @@ const useAppFormStatus = () => {
     dispatch(onChangeClearStatus(true));
   };
 
-  const handleSetEditSubmitStatus = () => {
-    dispatch(onChangeEditTemplateStatus(true));
+  const handleSetEditSubmitStatus = (a: boolean) => {
+    dispatch(onChangeEditTemplateStatus(a));
   };
 
   const handleSubmitEditSlide = (slide: AddEditSlidePayload) => {
-    console.log(slide);
+    dispatch(onSubmitEditSlides(slide));
   };
 
   const handlers = {

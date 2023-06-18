@@ -76,6 +76,9 @@ const useSlideRow = (
     };
     const onInvalid = () => {
       handlers.handleSetSubmitStatus(false);
+      if (editOptions?.isUserField) {
+        handlers.handleSetEditSubmitStatus(false);
+      }
     };
     hFormSubmit(onValid, onInvalid)();
   };

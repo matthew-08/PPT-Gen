@@ -60,7 +60,10 @@ function EditTemplateModal({ modalState, slides }: Props) {
           <Button colorScheme="blue" mr={3} onClick={onClose}>
             Close
           </Button>
-          <Button variant="ghost" onClick={handlers.handleSetEditSubmitStatus}>
+          <Button
+            variant="ghost"
+            onClick={() => handlers.handleSetEditSubmitStatus(true)}
+          >
             Submit
           </Button>
         </ModalFooter>

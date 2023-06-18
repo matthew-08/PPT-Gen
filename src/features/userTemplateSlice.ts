@@ -77,6 +77,13 @@ const userTemplatesSlice = createSlice({
     },
     onSubmitEditSlides(state, { payload }: PayloadAction<AddEditSlidePayload>) {
       state.submittedSlides.push(payload);
+      if (
+        state.currentEditingTemplate &&
+        state.currentEditingTemplate.templateInfo.slideAmount ===
+          state.submittedSlides.length
+      ) {
+        console.log('TIME TO SUBMIT');
+      }
     },
   },
   extraReducers: (builder) => {
