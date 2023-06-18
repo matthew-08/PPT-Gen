@@ -18,6 +18,12 @@ type UserTemplatesState = {
   templates: UserTemplate[];
   submittedSlides: AddEditSlidePayload[];
   currentEditingTemplate: UserTemplate | null;
+  submitStatus: {
+    ready: boolean;
+    loading: boolean;
+    complete: boolean;
+  };
+  slidesToSumbit: AddEditSlidePayload[];
 };
 
 export const fetchAllUserTemplates = createAsyncThunk<
@@ -65,6 +71,12 @@ const initialState: UserTemplatesState = {
   templates: [],
   submittedSlides: [],
   currentEditingTemplate: null,
+  submitStatus: {
+    ready: false,
+    loading: false,
+    complete: false,
+  },
+  slidesToSumbit: [],
 };
 
 const userTemplatesSlice = createSlice({
@@ -82,7 +94,11 @@ const userTemplatesSlice = createSlice({
         state.currentEditingTemplate.templateInfo.slideAmount ===
           state.submittedSlides.length
       ) {
-        console.log('TIME TO SUBMIT');
+        const slidesToSubmit = state.submittedSlides.filter(
+          ({ hasBeenEdited }) => hasBeenEdited
+        );
+        state.slidesToSumbit = slidesToSubmit;
+        state.submitStatus.ready = true;
       }
     },
   },

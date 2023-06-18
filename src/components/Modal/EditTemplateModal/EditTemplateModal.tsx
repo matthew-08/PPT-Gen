@@ -11,6 +11,7 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react';
 import useAppFormStatus from '../../../hooks/useAppForm';
+import useSubmitEdit from '../../../hooks/useSubmitEdit';
 import { UserSlide } from '../../../types';
 // eslint-disable-next-line import/no-named-as-default
 import SlideRow from '../../Templates/SlideRow/SlideRow';
@@ -27,6 +28,7 @@ type Props = {
 function EditTemplateModal({ modalState, slides }: Props) {
   const { isOpen, onClose, onOpen } = modalState;
   const { handlers } = useAppFormStatus();
+  const { submitStatus } = useSubmitEdit();
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="6xl">
       <ModalOverlay />
