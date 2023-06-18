@@ -2,7 +2,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 // eslint-disable-next-line import/no-cycle
 import { RootState } from '../store/store';
-import { PatchUserTemplateInput, UserTemplate } from '../types';
+import {
+  AddEditSlidePayload,
+  PatchUserTemplateInput,
+  UserTemplate,
+} from '../types';
 import apiFetch from '../utils/apiFetch';
 
 type UserTemplatesState = {
@@ -12,6 +16,8 @@ type UserTemplatesState = {
     error: boolean;
   };
   templates: UserTemplate[];
+  submittedSlides: AddEditSlidePayload[]
+  currentEditingTemplate: UserTemplate
 };
 
 export const fetchAllUserTemplates = createAsyncThunk<
@@ -57,17 +63,25 @@ const initialState: UserTemplatesState = {
     fetched: false,
   },
   templates: [],
+  submittedSlides: []
 };
 
 const userTemplatesSlice = createSlice({
   name: 'userTemplates',
   initialState,
-  reducers: {},
+  reducers: {
+    onSubmitEditSlides(state, { payload }: PayloadAction<AddEditSlidePayload>) {
+      state.submittedSlides.push(payload);
+      if(state.submittedSlides.length === state.templates)
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchAllUserTemplates.fulfilled, (state, action) => {
       state.templates = action.payload;
     });
   },
 });
+
+export const { onSubmitEditSlides } = userTemplatesSlice.actions;
 
 export default userTemplatesSlice.reducer;

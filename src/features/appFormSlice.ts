@@ -35,7 +35,7 @@ const appFormSlice = createSlice({
       state.autoFillStatus = false;
     },
     onChangeEditTemplateStatus(state, { payload }: PayloadAction<boolean>) {
-      state.editSubmitStatus = true;
+      state.editSubmitStatus = payload;
     },
   },
   extraReducers: (builder) => {},

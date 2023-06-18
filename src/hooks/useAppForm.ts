@@ -6,7 +6,7 @@ import {
   onChangeEditTemplateStatus,
   onChangeSubmitStatus,
 } from '../features/appFormSlice';
-import { AddSlidePayload } from '../types';
+import { AddEditSlidePayload, AddSlidePayload } from '../types';
 import { onAddSlide } from '../features/templateSlice';
 
 const useAppFormStatus = () => {
@@ -40,6 +40,10 @@ const useAppFormStatus = () => {
     dispatch(onChangeEditTemplateStatus(true));
   };
 
+  const handleSubmitEditSlide = (slide: AddEditSlidePayload) => {
+    console.log(slide);
+  };
+
   const handlers = {
     handleAddSlide,
     handleClearAllSlides,
@@ -47,6 +51,7 @@ const useAppFormStatus = () => {
     handleSubmitSlide,
     handleSetSubmitStatus,
     handleSetEditSubmitStatus,
+    handleSubmitEditSlide,
   };
   return {
     submitStatus,

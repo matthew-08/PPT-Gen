@@ -88,6 +88,7 @@ export type UserTemplate = {
     img: string;
     id: number;
     name: string;
+    slideAmount: number;
   };
   name: string | null;
   createdOn: string | null;
@@ -122,3 +123,7 @@ export type PatchUserTemplateInput = {
     }[];
   }[];
 };
+
+export interface AddEditSlidePayload extends AddSlidePayload {
+  hasBeenEdited: boolean;
+}

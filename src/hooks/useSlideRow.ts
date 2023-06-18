@@ -60,11 +60,20 @@ const useSlideRow = (
   };
 
   const handleSubmit = async () => {
-    const onValid = (slideState: SlideState) =>
-      handlers.handleSubmitSlide({
-        slideState,
-        slideIndex,
-      });
+    const onValid = (slideState: SlideState) => {
+      if (editSubmitStatus) {
+        handlers.handleSubmitEditSlide({
+          hasBeenEdited,
+          slideIndex,
+          slideState,
+        });
+      } else {
+        handlers.handleSubmitSlide({
+          slideState,
+          slideIndex,
+        });
+      }
+    };
     const onInvalid = () => {
       handlers.handleSetSubmitStatus(false);
     };
@@ -93,13 +102,10 @@ const useSlideRow = (
       handleClearFields();
     }
     if (editSubmitStatus) {
-      console.log('EDIT IN SLIDE ROW');
-      if (hasBeenEdited) {
-        console.log('SLIDE HAS BEEN EDITED READY FOR SUBMISSIOn');
-      }
+      handleSubmit();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [submitStatus, autoFillStatus, clearFieldsStatus]);
+  }, [submitStatus, autoFillStatus, clearFieldsStatus, editSubmitStatus]);
 
   useEffect(() => {
     if (isDirty) {

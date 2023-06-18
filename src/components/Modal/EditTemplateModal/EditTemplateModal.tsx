@@ -10,6 +10,7 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react';
+import useAppFormStatus from '../../../hooks/useAppForm';
 import { UserSlide } from '../../../types';
 // eslint-disable-next-line import/no-named-as-default
 import SlideRow from '../../Templates/SlideRow/SlideRow';
@@ -25,6 +26,7 @@ type Props = {
 
 function EditTemplateModal({ modalState, slides }: Props) {
   const { isOpen, onClose, onOpen } = modalState;
+  const { handlers } = useAppFormStatus();
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="6xl">
       <ModalOverlay />
@@ -58,7 +60,9 @@ function EditTemplateModal({ modalState, slides }: Props) {
           <Button colorScheme="blue" mr={3} onClick={onClose}>
             Close
           </Button>
-          <Button variant="ghost">Secondary Action</Button>
+          <Button variant="ghost" onClick={handlers.handleSetEditSubmitStatus}>
+            Submit
+          </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

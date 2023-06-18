@@ -12,11 +12,11 @@ type Input = {
 };
 
 const apiFetch = async ({ method, route, data }: Input) => {
-  const isPost = method === 'POST';
+  const isPostOrPatch = method === 'POST';
   const options = {
-    ...(isPost && { body: JSON.stringify(data) }),
+    ...(isPostOrPatch && { body: JSON.stringify(data) }),
     headers: {
-      ...(isPost && { 'Content-Type': 'application/json' }),
+      ...(isPostOrPatch && { 'Content-Type': 'application/json' }),
       Authorization: `Bearer ${getToken() || ''}`,
     },
     method,
