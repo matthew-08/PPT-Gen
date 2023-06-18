@@ -65,7 +65,15 @@ const useSlideRow = (
         handlers.handleSubmitEditSlide({
           hasBeenEdited,
           slideIndex,
-          slideState,
+          slideState: slideFields.map((field) => {
+            if (typeof field !== 'string') {
+              return {
+                ...field,
+                content: slideState[field.fieldType.type],
+              };
+            }
+          }) as UserField[],
+          slideId: editOptions?.slideId as number,
         });
       } else {
         handlers.handleSubmitSlide({

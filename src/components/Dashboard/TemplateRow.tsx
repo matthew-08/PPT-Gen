@@ -47,7 +47,11 @@ export function TemplateRow({ userTemplate }: Props) {
         </ButtonGroup>
       </Td>
       {modalState.isOpen && (
-        <EditTemplateModal modalState={modalState} slides={slides} />
+        <EditTemplateModal
+          modalState={modalState}
+          slides={slides}
+          templateName={name || ''}
+        />
       )}
     </Tr>
   );

@@ -12,7 +12,7 @@ type Input = {
 };
 
 const apiFetch = async ({ method, route, data }: Input) => {
-  const isPostOrPatch = method === 'POST';
+  const isPostOrPatch = method === 'POST' || method === 'PATCH';
   const options = {
     ...(isPostOrPatch && { body: JSON.stringify(data) }),
     headers: {

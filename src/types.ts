@@ -124,6 +124,9 @@ export type PatchUserTemplateInput = {
   }[];
 };
 
-export interface AddEditSlidePayload extends AddSlidePayload {
+export interface AddEditSlidePayload {
+  slideIndex: number;
+  slideState: UserField[];
+  slideId: number;
   hasBeenEdited: boolean;
 }

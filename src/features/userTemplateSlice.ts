@@ -23,7 +23,7 @@ type UserTemplatesState = {
     loading: boolean;
     complete: boolean;
   };
-  slidesToSumbit: AddEditSlidePayload[];
+  slidesToSubmit: AddEditSlidePayload[];
 };
 
 export const fetchAllUserTemplates = createAsyncThunk<
@@ -53,12 +53,16 @@ export const patchUserTemplate = createAsyncThunk<
   }
 >(
   '/userTemplates/patchTemplates',
-  async ({ templateId, updatedSlides }, { getState }) => {
+  async (input, { getState, rejectWithValue }) => {
     const userId = getState().authReducer.id;
-    apiFetch({
+    const res = await apiFetch({
       method: 'PATCH',
-      route: `/api/users/${userId}/templates/${templateId}/slides`,
+      route: `/api/users/${userId}/templates/${input.templateId}/slides`,
+      data: input,
     });
+    if (!res.ok) {
+      rejectWithValue(null);
+    }
   }
 );
 
@@ -76,7 +80,7 @@ const initialState: UserTemplatesState = {
     loading: false,
     complete: false,
   },
-  slidesToSumbit: [],
+  slidesToSubmit: [],
 };
 
 const userTemplatesSlice = createSlice({
@@ -97,19 +101,39 @@ const userTemplatesSlice = createSlice({
         const slidesToSubmit = state.submittedSlides.filter(
           ({ hasBeenEdited }) => hasBeenEdited
         );
-        state.slidesToSumbit = slidesToSubmit;
+        state.slidesToSubmit = slidesToSubmit;
         state.submitStatus.ready = true;
       }
+    },
+    onCloseEditModal(state, { payload }) {
+      const { templates } = state;
+      state = {
+        ...initialState,
+        templates,
+      };
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAllUserTemplates.fulfilled, (state, action) => {
       state.templates = action.payload;
     });
+    builder.addCase(patchUserTemplate.pending, (state, action) => {
+      state.submitStatus.loading = true;
+    });
+    builder.addCase(patchUserTemplate.fulfilled, (state, action) => {
+      state.submitStatus = {
+        loading: false,
+        complete: true,
+        ready: false,
+      };
+    });
   },
 });
 
-export const { onSubmitEditSlides, onSetCurrentEditingTemplate } =
-  userTemplatesSlice.actions;
+export const {
+  onSubmitEditSlides,
+  onSetCurrentEditingTemplate,
+  onCloseEditModal,
+} = userTemplatesSlice.actions;
 
 export default userTemplatesSlice.reducer;
