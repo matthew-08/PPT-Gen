@@ -105,12 +105,15 @@ const userTemplatesSlice = createSlice({
         state.submitStatus.ready = true;
       }
     },
-    onCloseEditModal(state, { payload }) {
-      const { templates } = state;
-      state = {
-        ...initialState,
-        templates,
+    onCloseEditModal(state) {
+      state.currentEditingTemplate = null;
+      state.submittedSlides = [];
+      state.submitStatus = {
+        complete: false,
+        loading: false,
+        ready: false,
       };
+      state.slidesToSubmit = [];
     },
   },
   extraReducers: (builder) => {
@@ -121,6 +124,7 @@ const userTemplatesSlice = createSlice({
       state.submitStatus.loading = true;
     });
     builder.addCase(patchUserTemplate.fulfilled, (state, action) => {
+      console.log('test');
       state.submitStatus = {
         loading: false,
         complete: true,

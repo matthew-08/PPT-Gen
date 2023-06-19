@@ -14,6 +14,7 @@ import {
   AlertDialogOverlay,
   LinkOverlay,
 } from '@chakra-ui/react';
+import { v4 as uuid } from 'uuid';
 import useAppFormStatus from '../../../hooks/useAppForm';
 import useSubmitEdit from '../../../hooks/useSubmitEdit';
 import { UserSlide } from '../../../types';

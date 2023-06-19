@@ -19,6 +19,7 @@ type Props = {
   options?: {
     disableOverlayClick: boolean;
     disableCloseButton: boolean;
+    size?: string;
   };
 };
 
@@ -30,6 +31,7 @@ function SlotModal({ disclosureState, modalHeader, children, options }: Props) {
       onClose={onClose}
       closeOnOverlayClick={options?.disableOverlayClick || true}
       motionPreset="slideInBottom"
+      size={options?.size || 'md'}
     >
       <ModalOverlay />
       <ModalContent borderRadius="20px">

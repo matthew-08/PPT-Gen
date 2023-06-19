@@ -1,7 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useDisclosure } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { attemptDownload, onChangeName } from '../features/downloadSlice';
+import {
+  attemptDownload,
+  onChangeDownloadStatus,
+  onChangeName,
+} from '../features/downloadSlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import useSelectedTemplate from './useSelectedTemplate';
 import genRandomName from '../utils/genRandonName';
@@ -24,7 +28,7 @@ const useDownloadPpt = () => {
     (state) => state.downloadReducer
   );
   const {
-    handlers: { handleSetSubmitStatus },
+    handlers: { handleSetSubmitStatus, handleClearAllSlides },
   } = useAppFormStatus();
 
   const handleDownload = async () => {
@@ -46,7 +50,18 @@ const useDownloadPpt = () => {
   };
 
   const handleClose = () => {
+    if (downloadStatus.completed) {
+      handleClearAllSlides();
+    }
     handleSetSubmitStatus(false);
+    dispatch(
+      onChangeDownloadStatus({
+        cancelled: false,
+        completed: false,
+        failed: false,
+        started: false,
+      })
+    );
     onClose();
   };
   useEffect(() => {

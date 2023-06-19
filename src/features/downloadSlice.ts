@@ -18,13 +18,15 @@ export const attemptDownload = createAsyncThunk(
   }
 );
 
+type DownloadStatus = {
+  started: boolean;
+  completed: boolean;
+  failed: boolean;
+  cancelled: boolean;
+};
+
 type DownloadSlice = {
-  downloadStatus: {
-    started: boolean;
-    completed: boolean;
-    failed: boolean;
-    cancelled: boolean;
-  };
+  downloadStatus: DownloadStatus;
   url: string;
   name: string;
 };
@@ -45,6 +47,9 @@ const downloadSlice = createSlice({
     onChangeName(state, { payload }: PayloadAction<string>) {
       state.name = payload;
     },
+    onChangeDownloadStatus(state, { payload }: PayloadAction<DownloadStatus>) {
+      state.downloadStatus = payload;
+    },
   },
   initialState,
   extraReducers: (builder) => {
@@ -61,6 +66,6 @@ const downloadSlice = createSlice({
   },
 });
 
-export const { onChangeName } = downloadSlice.actions;
+export const { onChangeName, onChangeDownloadStatus } = downloadSlice.actions;
 
 export default downloadSlice.reducer;

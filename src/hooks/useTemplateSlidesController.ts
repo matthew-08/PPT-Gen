@@ -1,10 +1,14 @@
 import { useDisclosure } from '@chakra-ui/react';
 import { useState } from 'react';
-import { onSetCurrentEditingTemplate } from '../features/userTemplateSlice';
+import {
+  onCloseEditModal,
+  onSetCurrentEditingTemplate,
+} from '../features/userTemplateSlice';
 import { useAppDispatch } from '../store/hooks';
 import { UserSlide } from '../types';
 import apiFetch from '../utils/apiFetch';
 import sortUserSlidesResponse from '../utils/sortSlides';
+import useAppFormStatus from './useAppForm';
 import useAuth from './useAuth';
 
 const useTemplateSlidesController = () => {
@@ -14,7 +18,9 @@ const useTemplateSlidesController = () => {
   } = useAuth();
   const { isOpen, onClose, onOpen } = useDisclosure();
   const [slides, setSlides] = useState<UserSlide[]>([]);
-
+  const {
+    handlers: { handleSetEditSubmitStatus },
+  } = useAppFormStatus();
   const handleFetchTemplateSlides = async (templateId: number) => {
     const slidesRes = (await apiFetch({
       method: 'GET',
@@ -29,6 +35,12 @@ const useTemplateSlidesController = () => {
     onOpen();
   };
 
+  const handleCloseModal = () => {
+    dispatch(onCloseEditModal());
+    handleSetEditSubmitStatus(false);
+    onClose();
+  };
+
   return {
     handlers: {
       handleFetchTemplateSlides,
@@ -36,7 +48,7 @@ const useTemplateSlidesController = () => {
     },
     modalState: {
       isOpen,
-      onClose,
+      onClose: handleCloseModal,
       onOpen,
     },
     slides,

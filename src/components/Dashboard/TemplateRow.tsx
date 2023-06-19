@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Tr,
   Td,
@@ -7,7 +6,6 @@ import {
   Image,
   ButtonGroup,
   IconButton,
-  useDisclosure,
 } from '@chakra-ui/react';
 import { format } from 'date-fns';
 import { BiTrash } from 'react-icons/bi';
@@ -15,6 +13,8 @@ import { EditIcon } from '@chakra-ui/icons';
 import { UserTemplate } from '../../types';
 import useTemplateSlidesController from '../../hooks/useTemplateSlidesController';
 import EditTemplateModal from '../Modal/EditTemplateModal/EditTemplateModal';
+import useDeleteTemplate from '../../hooks/useDeleteTemplate';
+import DeleteTemplateModal from '../Modal/DeleteTemplateModal/DeleteTemplateModal';
 
 type Props = {
   userTemplate: UserTemplate;
@@ -23,7 +23,13 @@ type Props = {
 export function TemplateRow({ userTemplate }: Props) {
   const { createdOn, id, name, templateInfo, timesGenerated } = userTemplate;
 
-  const { handlers, modalState, slides } = useTemplateSlidesController();
+  const {
+    handlers,
+    modalState: editModalState,
+    slides,
+  } = useTemplateSlidesController();
+
+  const { deleteModalState, handlers: deleteHandlers } = useDeleteTemplate();
 
   return (
     <Tr key={id} fontSize="1.5rem">
@@ -37,7 +43,12 @@ export function TemplateRow({ userTemplate }: Props) {
       <Td>{timesGenerated}</Td>
       <Td>
         <ButtonGroup>
-          <IconButton icon={<BiTrash />} size="lg" aria-label="trash button" />
+          <IconButton
+            icon={<BiTrash />}
+            size="lg"
+            aria-label="trash button"
+            onClick={() => deleteHandlers.handleOpenModal()}
+          />
           <IconButton
             icon={<EditIcon />}
             size="lg"
@@ -46,12 +57,15 @@ export function TemplateRow({ userTemplate }: Props) {
           />
         </ButtonGroup>
       </Td>
-      {modalState.isOpen && (
+      {editModalState.isOpen && (
         <EditTemplateModal
-          modalState={modalState}
+          modalState={editModalState}
           slides={slides}
           templateName={name || ''}
         />
+      )}
+      {deleteModalState.isOpen && (
+        <DeleteTemplateModal modalState={deleteModalState} />
       )}
     </Tr>
   );

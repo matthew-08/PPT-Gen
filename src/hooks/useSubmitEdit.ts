@@ -38,11 +38,15 @@ const useSubmitEdit = () => {
   };
 
   useEffect(() => {
+    console.log('COMPLETE', submitStatus.complete);
+  }, [submitStatus]);
+  useEffect(() => {
     if (submitStatus.ready) {
+      console.log(submitStatus.ready);
       console.log('SUBMITTING');
       handleSubmitEdit();
     }
-  }, [submitStatus.ready]);
+  }, [submitStatus]);
   return {
     submitStatus,
   };
