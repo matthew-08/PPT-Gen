@@ -5,9 +5,10 @@ import SlotModal from '../../global/SlotModal';
 
 type Props = {
   modalState: DisclosureState;
+  handleDeleteTemplate: (templateId: number) => void;
 };
 
-function DeleteTemplateModal({ modalState }: Props) {
+function DeleteTemplateModal({ modalState, handleDeleteTemplate }: Props) {
   return (
     <SlotModal disclosureState={modalState} modalHeader="Delete">
       <Text textAlign="center" color="red.400">
