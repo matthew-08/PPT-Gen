@@ -40,7 +40,7 @@ export const fetchAllUserTemplates = createAsyncThunk<
     route: `/api/users/${userId}/templates`,
   });
   if (!res.ok) {
-    console.log('test');
+    rejectWithValue(null);
   }
   return (await res.json()) as UserTemplate[];
 });
@@ -127,7 +127,6 @@ const userTemplatesSlice = createSlice({
       state.submitStatus.loading = true;
     });
     builder.addCase(patchUserTemplate.fulfilled, (state, action) => {
-      console.log('test');
       state.submitStatus = {
         loading: false,
         complete: true,

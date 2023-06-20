@@ -1,5 +1,3 @@
-import { string } from 'zod';
-
 const getToken = () => {
   return localStorage.getItem('token');
 };

@@ -15,7 +15,6 @@ const useRegister = () => {
       if (res.meta.requestStatus === 'rejected') {
         setHasError(true);
       } else if (res.meta.requestStatus === 'fulfilled') {
-        console.log(res.payload);
         navigate('/');
       }
     });

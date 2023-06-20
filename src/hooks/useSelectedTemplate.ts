@@ -1,5 +1,5 @@
 import { useAppSelector } from '../store/hooks';
-import { FieldOptions, Template } from '../types';
+import { FieldOptions } from '../types';
 
 const useSelectedTemplate = () => {
   const selectedTemplate = useAppSelector(

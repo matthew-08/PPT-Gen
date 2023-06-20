@@ -85,8 +85,6 @@ const templateSlice = createSlice({
       const keys = Object.keys(state.submittedSlides);
       if (keys.length === state.selectedTemplate.slideAmount) {
         state.selectedTemplate.validSubmit = true;
-      } else {
-        console.log('INVALID SUBMIT');
       }
     },
   },

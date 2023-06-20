@@ -23,8 +23,6 @@ const useCustomForm = <FormData extends Record<any, any>>(
     resolver: zodResolver(zodSchema),
   });
 
-  console.log(errors);
-
   const fieldHasError = (k: keyof FormData) => k in errors;
   const inputObjects = generateFormInputs<FormData>({
     inputInfo,

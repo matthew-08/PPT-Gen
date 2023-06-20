@@ -14,7 +14,6 @@ export const attemptCreateSession = createAsyncThunk(
       route: '/api/sessions',
     }).then((r) => r.json());
     if (res.message) {
-      console.log(res);
       return rejectWithValue(res.message);
     }
     return res;

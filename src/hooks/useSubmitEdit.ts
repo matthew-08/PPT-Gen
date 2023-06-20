@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { patchUserTemplate } from '../features/userTemplateSlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { AddEditSlidePayload, PatchUserTemplateInput } from '../types';
+import { AddEditSlidePayload } from '../types';
 
 const preparePatchUserTemplate = (data: {
   templateId: number;
@@ -38,12 +38,7 @@ const useSubmitEdit = () => {
   };
 
   useEffect(() => {
-    console.log('COMPLETE', submitStatus.complete);
-  }, [submitStatus]);
-  useEffect(() => {
     if (submitStatus.ready) {
-      console.log(submitStatus.ready);
-      console.log('SUBMITTING');
       handleSubmitEdit();
     }
   }, [submitStatus]);

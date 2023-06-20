@@ -21,9 +21,7 @@ function DownloadComplete({ name, url }: Props) {
   } = useAuth();
 
   const { handleSaveUserTemplate, status } = useSaveUserTemplate();
-  useEffect(() => {
-    console.log(status);
-  }, [status]);
+
   return (
     <>
       <Text textAlign="center" fontSize="1.4rem">
