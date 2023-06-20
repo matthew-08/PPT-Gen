@@ -1,9 +1,16 @@
 import { useDisclosure } from '@chakra-ui/react';
+import { useState } from 'react';
+import { onDeleleteTemplate } from '../features/userTemplateSlice';
+import { useAppDispatch } from '../store/hooks';
 import apiFetch from '../utils/apiFetch';
 import useAuth from './useAuth';
 
 const useDeleteTemplate = () => {
+  const dispatch = useAppDispatch();
   const { isOpen, onClose, onOpen } = useDisclosure();
+  const [loadingStatus, setLoadingStatus] = useState<'loading' | 'idle'>(
+    'idle'
+  );
   const {
     userInfo: { id: userId },
   } = useAuth();
@@ -12,7 +19,8 @@ const useDeleteTemplate = () => {
   };
 
   const handleDeleteTemplate = async (templateId: number) => {
-    await apiFetch({
+    setLoadingStatus('loading');
+    const res = await apiFetch({
       method: 'DELETE',
       route: `/api/users/${userId}/templates/${templateId}`,
       data: {
@@ -20,6 +28,11 @@ const useDeleteTemplate = () => {
         templateId,
       },
     });
+    if (res) {
+      dispatch(onDeleleteTemplate(templateId));
+      setLoadingStatus('idle');
+      onClose();
+    }
   };
 
   return {
@@ -32,6 +45,7 @@ const useDeleteTemplate = () => {
       handleOpenModal,
       handleDeleteTemplate,
     },
+    loadingStatus,
   };
 };
 

@@ -29,7 +29,11 @@ export function TemplateRow({ userTemplate }: Props) {
     slides,
   } = useTemplateSlidesController();
 
-  const { deleteModalState, handlers: deleteHandlers } = useDeleteTemplate();
+  const {
+    deleteModalState,
+    handlers: deleteHandlers,
+    loadingStatus,
+  } = useDeleteTemplate();
 
   return (
     <Tr key={id} fontSize="1.5rem">
@@ -65,7 +69,12 @@ export function TemplateRow({ userTemplate }: Props) {
         />
       )}
       {deleteModalState.isOpen && (
-        <DeleteTemplateModal modalState={deleteModalState} />
+        <DeleteTemplateModal
+          modalState={deleteModalState}
+          loadingStatus={loadingStatus}
+          handleDeleteTemplate={deleteHandlers.handleDeleteTemplate}
+          templateId={id}
+        />
       )}
     </Tr>
   );

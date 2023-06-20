@@ -26,7 +26,9 @@ const useTemplateSlidesController = () => {
       method: 'GET',
       route: `/api/users/${userId}/templates/${templateId}/slides`,
     }).then((r) => r.json())) as UserSlide[];
+
     const sortedSlides = sortUserSlidesResponse(slidesRes);
+
     setSlides(sortedSlides);
   };
   const handleEditTemplate = async (templateId: number) => {

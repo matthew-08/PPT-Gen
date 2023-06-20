@@ -20,7 +20,7 @@ const RowInput = memo(function RowInput({ field, hookForm }: Props) {
       fontSize="1.4rem"
       borderColor={isInvalid ? 'red.400' : ''}
       padding="1.5rem"
-      maxLength={30}
+      maxLength={50}
       background="white"
       {...register(field, { required: true })}
       placeholder={field.charAt(0).toUpperCase() + field.slice(1)}

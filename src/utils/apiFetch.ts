@@ -1,5 +1,7 @@
 import { getToken } from './tokenUtil';
 
+const api = import.meta.env.VITE_API_URL || 'http://localhost:3005';
+
 type Endpoints = 'templates' | 'sessions' | 'users';
 
 type Input = {
@@ -12,16 +14,17 @@ type Input = {
 };
 
 const apiFetch = async ({ method, route, data }: Input) => {
-  const isPostOrPatch = method === 'POST' || method === 'PATCH';
+  const includeBody =
+    method === 'POST' || method === 'PATCH' || method === 'DELETE';
   const options = {
-    ...(isPostOrPatch && { body: JSON.stringify(data) }),
+    ...(includeBody && { body: JSON.stringify(data) }),
     headers: {
-      ...(isPostOrPatch && { 'Content-Type': 'application/json' }),
+      ...(includeBody && { 'Content-Type': 'application/json' }),
       Authorization: `Bearer ${getToken() || ''}`,
     },
     method,
   };
-  return fetch(`http://localhost:3005${route}`, options);
+  return fetch(`${api}${route}`, options);
 };
 
 export default apiFetch;

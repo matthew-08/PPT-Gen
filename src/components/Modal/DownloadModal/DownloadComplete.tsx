@@ -46,7 +46,7 @@ function DownloadComplete({ name, url }: Props) {
         Download
       </Button>
       <Button
-        disabled={!loggedIn || status === 'complete'}
+        isDisabled={!loggedIn}
         padding="1.7rem"
         variant="outline"
         onClick={status === 'complete' ? () => null : handleSaveUserTemplate}

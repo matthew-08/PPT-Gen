@@ -6,9 +6,16 @@ import SlotModal from '../../global/SlotModal';
 type Props = {
   modalState: DisclosureState;
   handleDeleteTemplate: (templateId: number) => void;
+  templateId: number;
+  loadingStatus: 'idle' | 'loading';
 };
 
-function DeleteTemplateModal({ modalState, handleDeleteTemplate }: Props) {
+function DeleteTemplateModal({
+  modalState,
+  handleDeleteTemplate,
+  templateId,
+  loadingStatus,
+}: Props) {
   return (
     <SlotModal disclosureState={modalState} modalHeader="Delete">
       <Text textAlign="center" color="red.400">
@@ -19,7 +26,12 @@ function DeleteTemplateModal({ modalState, handleDeleteTemplate }: Props) {
         <Button size="lg" onClick={modalState.onClose}>
           On close
         </Button>
-        <Button size="lg" colorScheme="red">
+        <Button
+          size="lg"
+          isLoading={loadingStatus === 'loading'}
+          colorScheme="red"
+          onClick={() => handleDeleteTemplate(templateId)}
+        >
           Confirm
         </Button>
       </ButtonGroup>

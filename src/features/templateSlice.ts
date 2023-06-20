@@ -7,16 +7,18 @@ import {
   TemplateState,
   AddSlidePayload,
 } from '../types';
+import apiFetch from '../utils/apiFetch';
 import { formatTemplateGet } from '../utils/formatResponse';
 import { onChangeClearStatus, onChangeSubmitStatus } from './appFormSlice';
 
 export const fetchAllTemplates = createAsyncThunk(
   'template/allTemplates',
   async () => {
-    const response = await fetch('http://localhost:3005/api/templates').then(
-      (res) => res.json()
-    );
-    return formatTemplateGet(response);
+    const res = await apiFetch({
+      method: 'GET',
+      route: '/api/templates',
+    }).then((r) => r.json());
+    return formatTemplateGet(res);
   }
 );
 

@@ -115,6 +115,9 @@ const userTemplatesSlice = createSlice({
       };
       state.slidesToSubmit = [];
     },
+    onDeleleteTemplate(state, { payload }: PayloadAction<number>) {
+      state.templates = state.templates.filter((t) => t.id !== payload);
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAllUserTemplates.fulfilled, (state, action) => {
@@ -138,6 +141,7 @@ export const {
   onSubmitEditSlides,
   onSetCurrentEditingTemplate,
   onCloseEditModal,
+  onDeleleteTemplate,
 } = userTemplatesSlice.actions;
 
 export default userTemplatesSlice.reducer;
