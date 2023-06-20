@@ -1,6 +1,7 @@
 import { UseDisclosureReturn } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 
+// SLIDE FIELDS
 export type FieldOptions = 'question' | 'answer' | 'additional';
 
 export type EditFieldOptions = {
@@ -11,6 +12,9 @@ export type EditFieldOptions = {
   fieldId: number;
 };
 
+export type SlideFields = FieldOptions[];
+
+// SLIDES
 export type SlideState = {
   question: string;
   answer?: string;
@@ -28,12 +32,7 @@ export type SlideRowState = {
   question: string;
 };
 
-export type SlideFields = FieldOptions[];
-
-export type UserState = {
-  userId: number;
-};
-
+// TEMPLATES
 export type Template = {
   templateId: number;
   slideAmount: number;
@@ -54,6 +53,8 @@ export type TemplateServerResponse = {
   templateFields: { type: FieldOptions }[];
 }[];
 
+// SLOT MODAL
+
 export type SlotModalProps = {
   disclosureState: {
     [K in keyof UseDisclosureReturn as K extends 'isOpen' | 'onOpen' | 'onClose'
@@ -64,10 +65,7 @@ export type SlotModalProps = {
   children: ReactNode;
 };
 
-export type CreateSessionInput = {
-  email: string;
-  password: string;
-};
+// SERVER ERROR
 
 export type ServerError = {
   errorType: string;
@@ -75,14 +73,14 @@ export type ServerError = {
   message: string;
 };
 
-export type CreateUserPayload = { accessToken: string; id: number };
-
+// CHAKRA DISCLOSURE
 export type DisclosureState = {
   [K in keyof UseDisclosureReturn as K extends 'isOpen' | 'onOpen' | 'onClose'
     ? K
     : never]: UseDisclosureReturn[K];
 };
 
+// USER SLIDE EDITS
 export type UserTemplate = {
   templateInfo: {
     img: string;
@@ -95,7 +93,6 @@ export type UserTemplate = {
   timesGenerated: number | null;
   id: number;
 };
-
 export type UserField = {
   content: string;
   fieldType: {
@@ -112,7 +109,6 @@ export type UserSlide = {
   templateId: number;
   fields: UserField[];
 };
-
 export type PatchUserTemplateInput = {
   templateId: number;
   updatedSlides: {
@@ -130,3 +126,15 @@ export interface AddEditSlidePayload {
   slideId: number;
   hasBeenEdited: boolean;
 }
+
+// AUTH
+export type UserState = {
+  userId: number;
+};
+
+export type CreateSessionInput = {
+  email: string;
+  password: string;
+};
+
+export type CreateUserPayload = { accessToken: string; id: number };
